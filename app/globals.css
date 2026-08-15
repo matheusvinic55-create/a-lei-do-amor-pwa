@@ -1534,7 +1534,7 @@ body {
   min-height: 58px;
   margin: 0 auto;
   padding: 0;
-  position: fixed;
+  position: absolute;
   top: max(20px, calc(env(safe-area-inset-top) + 14px));
   left: 0;
   right: 0;
