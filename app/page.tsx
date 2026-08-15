@@ -542,10 +542,7 @@ function CharacterNote({
         aria-describedby={descriptionId}
       >
         <header className="character-note-header">
-          <div>
-            <p>{person.actor}</p>
-            <span><i aria-hidden="true">✦</i> Sem spoilers</span>
-          </div>
+          <p>{person.actor}</p>
           <button
             className="character-note-close"
             type="button"
@@ -557,14 +554,23 @@ function CharacterNote({
           </button>
         </header>
 
-        <div className="character-note-rule" aria-hidden="true" />
+        <div className="character-note-rule" aria-hidden="true">
+          <span />
+          <svg className="character-note-train" viewBox="0 0 96 38" fill="none">
+            <path d="M4 28.5h9l4-5.5h11V11h24v17.5h11.5L69 23h8l6 5.5h9" />
+            <path d="M22 11V6h17v5M27 6V2.5h7V6M52 15h11v13.5M55 15V9h6v6" />
+            <path d="M13 28.5h67M17 33.5h64M5 33.5h7M85 33.5h7" />
+            <circle cx="25" cy="30" r="5.5" />
+            <circle cx="68" cy="30" r="5.5" />
+            <circle cx="45" cy="30" r="3.5" />
+            <path d="M78 23l8-5v10.5M18 18h10M36 17h9M36 22h9" />
+            <path d="M57 7c1.5-2 3.8-2 5.2 0M66 6c1.7-2.5 4.4-2.5 6.1 0" />
+          </svg>
+          <span />
+        </div>
         <p className="character-note-kicker">Um bilhete sobre</p>
         <h2 id={titleId}>{person.character}</h2>
         <p className="character-note-context" id={descriptionId}>{person.context}</p>
-        <footer>
-          <span aria-hidden="true">—</span>
-          Apenas o ponto de partida da personagem.
-        </footer>
       </article>
     </div>,
     document.body,
@@ -588,7 +594,7 @@ function CastCard({
         className="cast-card-link"
         type="button"
         aria-haspopup="dialog"
-        aria-label={`Conheça ${person.character}, personagem de ${person.actor}, sem spoilers`}
+        aria-label={`Conheça ${person.character}, personagem de ${person.actor}`}
         onClick={(event) => onSelect(person, event.currentTarget)}
       >
         <div className="cast-portrait">
