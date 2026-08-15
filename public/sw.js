@@ -1,9 +1,10 @@
-const CACHE_NAME = "a-lei-do-amor-v3";
+const CACHE_NAME = "a-lei-do-amor-v4";
 const CORE_ASSETS = [
   "/",
   "/manifest.webmanifest",
   "/favicon.svg",
   "/app-icon.svg",
+  "/home-hero-background.webp",
   "/apple-touch-icon.png",
   "/icon-192.png",
   "/icon-512.png",

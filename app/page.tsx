@@ -238,14 +238,15 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
     <>
       <section className="hero-section">
         <div className="hero-visual" aria-hidden="true">
-          <div className="hero-beam hero-beam--one" />
-          <div className="hero-beam hero-beam--two" />
-          <div className="hero-orbit hero-orbit--one" />
-          <div className="hero-orbit hero-orbit--two" />
-          <div className="hero-city-grid" />
-          <div className="hero-skyline">
-            <span /><span /><span /><span /><span /><span />
-          </div>
+          <Image
+            className="hero-background"
+            src="/home-hero-background.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            unoptimized
+          />
         </div>
 
         <div className="hero-copy">

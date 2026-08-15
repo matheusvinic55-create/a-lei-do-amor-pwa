@@ -2010,8 +2010,8 @@ body {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(7,8,11,.08) 0%, rgba(7,8,11,.04) 34%, rgba(8,9,13,.84) 100%),
-    linear-gradient(90deg, rgba(9,10,14,.56) 0%, transparent 58%, rgba(8,9,12,.17) 100%);
+    linear-gradient(180deg, rgba(7,8,11,.04) 0%, rgba(7,8,11,.02) 35%, rgba(8,9,13,.76) 100%),
+    linear-gradient(90deg, rgba(9,10,14,.28) 0%, transparent 62%, rgba(8,9,12,.08) 100%);
 }
 
 .hero-visual {
@@ -2019,41 +2019,17 @@ body {
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 82% 18%, rgba(255,255,255,.97) 0 1px, transparent 3px),
-    radial-gradient(circle at 69% 28%, rgba(255,255,255,.55) 0 2px, transparent 7px),
-    radial-gradient(circle at 91% 42%, rgba(220,223,229,.36) 0 4px, transparent 17px),
-    radial-gradient(circle at 29% 33%, rgba(255,255,255,.25) 0 2px, transparent 11px),
-    radial-gradient(ellipse at 68% 21%, rgba(207,211,218,.55), transparent 11%),
-    radial-gradient(ellipse at 38% 14%, rgba(118,124,136,.56), transparent 27%),
-    linear-gradient(135deg, #626873 0%, #343842 28%, #15171d 62%, #08090c 100%);
-  transform: scale(1.015);
+  background: #0d1422;
 }
 
-.hero-visual::before {
-  content: "";
-  position: absolute;
-  width: 88vw;
-  height: 112vh;
-  right: -38vw;
-  top: -48vh;
-  border: 2px solid rgba(255,255,255,.28);
-  border-radius: 48%;
-  box-shadow:
-    0 0 0 8vw rgba(255,255,255,.035),
-    0 0 0 17vw rgba(255,255,255,.025),
-    0 0 110px rgba(255,255,255,.12);
-  transform: rotate(-24deg);
-}
-
-.hero-visual::after {
-  content: "";
+.hero-background {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(116deg, transparent 0 44%, rgba(255,255,255,.2) 45%, transparent 53%),
-    repeating-linear-gradient(104deg, transparent 0 13%, rgba(255,255,255,.035) 13.2% 13.5%, transparent 13.7% 22%);
-  mix-blend-mode: screen;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: saturate(.9) contrast(1.04);
 }
 
 .hero-beam {
