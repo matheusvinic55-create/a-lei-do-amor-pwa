@@ -1905,7 +1905,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  height: clamp(275px, 38vh, 420px);
+  height: clamp(310px, 43vh, 470px);
   overflow: hidden;
   pointer-events: none;
   opacity: .9;
@@ -1920,7 +1920,7 @@ body {
 }
 
 .opening-tree-sketches {
-  opacity: .3;
+  opacity: .32;
   filter: grayscale(1) invert(1) brightness(1.35) contrast(1.08);
   mix-blend-mode: screen;
 }

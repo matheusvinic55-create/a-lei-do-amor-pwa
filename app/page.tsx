@@ -183,11 +183,11 @@ export default function Home() {
                 <image
                   className="opening-tree-sketches"
                   href="/menu-tree-sketches.webp"
-                  x="-8"
-                  y="45"
-                  width="436"
-                  height="310"
-                  preserveAspectRatio="xMidYMid meet"
+                  x="-18"
+                  y="-8"
+                  width="456"
+                  height="400"
+                  preserveAspectRatio="xMidYMax slice"
                 />
 
                 <g className="opening-threads opening-threads--front">
