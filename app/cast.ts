@@ -76,7 +76,7 @@ const featuredCharacters = [
   "sebastiao-bezerra-tiao",
   "tiago-leitao",
   "leticia-siqueira-bezerra",
-  "marina",
+  "salete",
   "ciro-noronha",
 ] as const;
 
@@ -89,4 +89,3 @@ export const mainCast = featuredCharacters.map((slug) =>
 export const supportingCast = castMembers.filter(
   (person) => !featuredSet.has(person.slug),
 );
-
