@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { mainCast, supportingCast, type CastMember } from "./cast";
 
 type TabId = "inicio" | "sinopse" | "resumos" | "trilha" | "elenco";
@@ -435,13 +436,13 @@ function Elenco() {
       </details>
 
       {selectedCharacter && (
-        <CharacterProfile person={selectedCharacter} onClose={closeProfile} />
+        <CharacterNote person={selectedCharacter} onClose={closeProfile} />
       )}
     </section>
   );
 }
 
-function CharacterProfile({
+function CharacterNote({
   person,
   onClose,
 }: {
@@ -493,78 +494,53 @@ function CharacterProfile({
     };
   }, [onClose]);
 
-  const titleId = `character-profile-${person.slug}`;
+  const titleId = `character-note-${person.slug}`;
   const descriptionId = `${titleId}-context`;
 
-  return (
-    <div className="character-profile-layer">
+  return createPortal(
+    <div className="character-note-layer">
       <button
-        className="character-profile-scrim"
+        className="character-note-scrim"
         type="button"
-        aria-label="Fechar perfil da personagem"
+        aria-label="Fechar bilhete da personagem"
         onClick={onClose}
       />
 
-      <section
-        className="character-profile"
+      <article
+        className="character-note"
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
       >
-        <header className="character-profile-toolbar">
+        <header className="character-note-header">
+          <div>
+            <p>{person.actor}</p>
+            <span><i aria-hidden="true">✦</i> Sem spoilers</span>
+          </div>
           <button
-            className="character-profile-back"
+            className="character-note-close"
             type="button"
             ref={closeRef}
+            aria-label="Fechar e voltar ao elenco"
             onClick={onClose}
           >
-            <span aria-hidden="true">←</span>
-            Voltar ao elenco
+            <span aria-hidden="true">×</span>
           </button>
-          <span className="character-profile-status">
-            <i aria-hidden="true">✦</i> Sem spoilers
-          </span>
         </header>
 
-        <div className="character-profile-scroll">
-          <div className="character-profile-portrait">
-            <Image
-              src={person.image}
-              alt={`${person.character}, interpretado por ${person.actor}, em A Lei do Amor`}
-              width={900}
-              height={675}
-              sizes="(max-width: 760px) 100vw, 52vw"
-              decoding="async"
-              priority
-              unoptimized
-            />
-            <span className="character-profile-glow" aria-hidden="true" />
-          </div>
-
-          <div className="character-profile-copy">
-            <p className="character-profile-actor">{person.actor}</p>
-            <h2 id={titleId}>{person.character}</h2>
-            <p className="character-profile-kicker">Contexto inicial da personagem</p>
-
-            <div className="character-profile-context" id={descriptionId}>
-              <span>Quem é</span>
-              <p>{person.context}</p>
-            </div>
-
-            <p className="character-profile-note">
-              Esta apresentação mostra apenas o ponto de partida da personagem.
-              Os acontecimentos e revelações da novela ficam preservados.
-            </p>
-
-            <button className="character-profile-return" type="button" onClick={onClose}>
-              Voltar ao elenco <span aria-hidden="true">→</span>
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+        <div className="character-note-rule" aria-hidden="true" />
+        <p className="character-note-kicker">Um bilhete sobre</p>
+        <h2 id={titleId}>{person.character}</h2>
+        <p className="character-note-context" id={descriptionId}>{person.context}</p>
+        <footer>
+          <span aria-hidden="true">—</span>
+          Apenas o ponto de partida da personagem.
+        </footer>
+      </article>
+    </div>,
+    document.body,
   );
 }
 
