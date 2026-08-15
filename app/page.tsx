@@ -160,6 +160,52 @@ export default function Home() {
             <div className="drawer-rule drawer-rule--footer" />
             <p className="drawer-signature">O tempo passa. O amor permanece.</p>
 
+            <div className="drawer-opening-art" aria-hidden="true">
+              <svg viewBox="0 0 420 380" preserveAspectRatio="xMidYMax slice">
+                <defs>
+                  <linearGradient id="thread-orange" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stopColor="#ff9a45" />
+                    <stop offset=".52" stopColor="#ed632f" />
+                    <stop offset="1" stopColor="#ba3028" />
+                  </linearGradient>
+                  <linearGradient id="thread-red" x1="1" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="#ff7b36" />
+                    <stop offset="1" stopColor="#a9232b" />
+                  </linearGradient>
+                </defs>
+
+                <g className="opening-threads opening-threads--behind">
+                  <path d="M-28 302 C48 260 91 276 139 215 S241 116 448 152" />
+                  <path d="M-12 350 C78 294 126 330 184 258 S293 154 446 190" />
+                  <path d="M16 390 C74 310 130 346 175 273 S270 103 410 118" />
+                </g>
+
+                <g className="opening-trunks">
+                  <path className="opening-trunk opening-trunk--wide" d="M74 398 C66 340 82 291 70 235 C59 185 77 137 60 70" />
+                  <path className="opening-trunk" d="M70 236 C42 206 29 168 -5 143" />
+                  <path className="opening-trunk" d="M69 201 C103 166 107 124 139 88" />
+                  <path className="opening-trunk-detail" d="M74 396 C76 329 68 293 76 242 C82 198 66 151 67 76" />
+                  <path className="opening-trunk-detail" d="M68 233 C43 200 28 173 0 151" />
+
+                  <path className="opening-trunk opening-trunk--wide" d="M276 402 C268 342 286 296 275 241 C265 190 284 151 270 91" />
+                  <path className="opening-trunk" d="M276 231 C311 199 332 158 373 130" />
+                  <path className="opening-trunk" d="M272 184 C243 154 232 120 210 86" />
+                  <path className="opening-trunk-detail" d="M277 400 C281 340 273 296 281 246 C289 198 273 154 277 96" />
+                  <path className="opening-trunk-detail" d="M278 226 C309 193 333 160 366 137" />
+
+                  <path className="opening-trunk opening-trunk--slim" d="M176 402 C169 344 181 303 174 258 C167 220 179 184 170 145" />
+                  <path className="opening-trunk opening-trunk--slim" d="M175 260 C150 235 140 207 119 187" />
+                </g>
+
+                <g className="opening-threads opening-threads--front">
+                  <path d="M-30 315 C34 304 58 293 81 269 C99 250 91 232 68 234 C43 236 45 258 73 272 C112 291 153 244 185 219 S278 166 450 220" />
+                  <path d="M-18 344 C77 360 119 309 155 286 C194 261 225 278 259 247 C298 211 337 185 443 204" />
+                  <path d="M-25 369 C50 337 103 370 143 323 C181 278 201 214 246 190 C286 168 324 179 445 238" />
+                  <path d="M119 388 C151 330 190 322 222 284 C252 249 256 222 276 205 C296 188 312 194 323 211 C337 234 309 252 285 240 C258 225 254 199 271 176 C296 143 344 137 430 164" />
+                </g>
+              </svg>
+            </div>
+
             {installPrompt && (
               <button className="drawer-install" type="button" onClick={installApp}>
                 Instalar A Lei do Amor
