@@ -180,22 +180,15 @@ export default function Home() {
                   <path d="M16 390 C74 310 130 346 175 273 S270 103 410 118" />
                 </g>
 
-                <g className="opening-trunks">
-                  <path className="opening-trunk opening-trunk--wide" d="M74 398 C66 340 82 291 70 235 C59 185 77 137 60 70" />
-                  <path className="opening-trunk" d="M70 236 C42 206 29 168 -5 143" />
-                  <path className="opening-trunk" d="M69 201 C103 166 107 124 139 88" />
-                  <path className="opening-trunk-detail" d="M74 396 C76 329 68 293 76 242 C82 198 66 151 67 76" />
-                  <path className="opening-trunk-detail" d="M68 233 C43 200 28 173 0 151" />
-
-                  <path className="opening-trunk opening-trunk--wide" d="M276 402 C268 342 286 296 275 241 C265 190 284 151 270 91" />
-                  <path className="opening-trunk" d="M276 231 C311 199 332 158 373 130" />
-                  <path className="opening-trunk" d="M272 184 C243 154 232 120 210 86" />
-                  <path className="opening-trunk-detail" d="M277 400 C281 340 273 296 281 246 C289 198 273 154 277 96" />
-                  <path className="opening-trunk-detail" d="M278 226 C309 193 333 160 366 137" />
-
-                  <path className="opening-trunk opening-trunk--slim" d="M176 402 C169 344 181 303 174 258 C167 220 179 184 170 145" />
-                  <path className="opening-trunk opening-trunk--slim" d="M175 260 C150 235 140 207 119 187" />
-                </g>
+                <image
+                  className="opening-tree-sketches"
+                  href="/menu-tree-sketches.webp"
+                  x="-8"
+                  y="45"
+                  width="436"
+                  height="310"
+                  preserveAspectRatio="xMidYMid meet"
+                />
 
                 <g className="opening-threads opening-threads--front">
                   <path d="M-30 315 C34 304 58 293 81 269 C99 250 91 232 68 234 C43 236 45 258 73 272 C112 291 153 244 185 219 S278 166 450 220" />

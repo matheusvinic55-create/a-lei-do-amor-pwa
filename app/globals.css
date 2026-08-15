@@ -1919,28 +1919,10 @@ body {
   display: block;
 }
 
-.opening-trunk {
-  fill: none;
-  stroke: rgba(127,132,142,.28);
-  stroke-width: 15;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.opening-trunk--wide {
-  stroke-width: 22;
-}
-
-.opening-trunk--slim {
-  stroke-width: 10;
-  stroke: rgba(127,132,142,.2);
-}
-
-.opening-trunk-detail {
-  fill: none;
-  stroke: rgba(236,238,242,.12);
-  stroke-width: 1.4;
-  stroke-linecap: round;
+.opening-tree-sketches {
+  opacity: .3;
+  filter: grayscale(1) invert(1) brightness(1.35) contrast(1.08);
+  mix-blend-mode: screen;
 }
 
 .opening-threads {
