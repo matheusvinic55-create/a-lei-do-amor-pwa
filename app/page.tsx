@@ -361,6 +361,19 @@ function Trilha() {
 }
 
 function Elenco() {
+  const [selectedCharacter, setSelectedCharacter] = useState<CastMember | null>(null);
+  const profileTriggerRef = useRef<HTMLButtonElement | null>(null);
+
+  const openProfile = (person: CastMember, trigger: HTMLButtonElement) => {
+    profileTriggerRef.current = trigger;
+    setSelectedCharacter(person);
+  };
+
+  const closeProfile = () => {
+    setSelectedCharacter(null);
+    window.requestAnimationFrame(() => profileTriggerRef.current?.focus());
+  };
+
   return (
     <section className="section-page cast-page">
       <SectionHeading
@@ -380,7 +393,12 @@ function Elenco() {
 
       <div className="cast-grid cast-grid--main">
         {mainCast.map((person, index) => (
-          <CastCard person={person} index={index} key={person.slug} />
+          <CastCard
+            person={person}
+            index={index}
+            key={person.slug}
+            onSelect={openProfile}
+          />
         ))}
       </div>
 
@@ -405,24 +423,148 @@ function Elenco() {
                 person={person}
                 index={index + mainCast.length}
                 key={person.slug}
+                onSelect={openProfile}
               />
             ))}
           </div>
 
           <p className="cast-credit">
-            Retratos do elenco: {" "}
-            <a
-              href="https://gshow.globo.com/novelas/a-lei-do-amor/personagem/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Gshow / Globo
-            </a>
-            .
+            Retratos do elenco: <span>Gshow / Globo</span>.
           </p>
         </div>
       </details>
+
+      {selectedCharacter && (
+        <CharacterProfile person={selectedCharacter} onClose={closeProfile} />
+      )}
     </section>
+  );
+}
+
+function CharacterProfile({
+  person,
+  onClose,
+}: {
+  person: CastMember;
+  onClose: () => void;
+}) {
+  const panelRef = useRef<HTMLElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    closeRef.current?.focus({ preventScroll: true });
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusableElements = panelRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusableElements?.length) return;
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  const titleId = `character-profile-${person.slug}`;
+  const descriptionId = `${titleId}-context`;
+
+  return (
+    <div className="character-profile-layer">
+      <button
+        className="character-profile-scrim"
+        type="button"
+        aria-label="Fechar perfil da personagem"
+        onClick={onClose}
+      />
+
+      <section
+        className="character-profile"
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+      >
+        <header className="character-profile-toolbar">
+          <button
+            className="character-profile-back"
+            type="button"
+            ref={closeRef}
+            onClick={onClose}
+          >
+            <span aria-hidden="true">←</span>
+            Voltar ao elenco
+          </button>
+          <span className="character-profile-status">
+            <i aria-hidden="true">✦</i> Sem spoilers
+          </span>
+        </header>
+
+        <div className="character-profile-scroll">
+          <div className="character-profile-portrait">
+            <Image
+              src={person.image}
+              alt={`${person.character}, interpretado por ${person.actor}, em A Lei do Amor`}
+              width={900}
+              height={675}
+              sizes="(max-width: 760px) 100vw, 52vw"
+              decoding="async"
+              priority
+              unoptimized
+            />
+            <span className="character-profile-glow" aria-hidden="true" />
+          </div>
+
+          <div className="character-profile-copy">
+            <p className="character-profile-actor">{person.actor}</p>
+            <h2 id={titleId}>{person.character}</h2>
+            <p className="character-profile-kicker">Contexto inicial da personagem</p>
+
+            <div className="character-profile-context" id={descriptionId}>
+              <span>Quem é</span>
+              <p>{person.context}</p>
+            </div>
+
+            <p className="character-profile-note">
+              Esta apresentação mostra apenas o ponto de partida da personagem.
+              Os acontecimentos e revelações da novela ficam preservados.
+            </p>
+
+            <button className="character-profile-return" type="button" onClick={onClose}>
+              Voltar ao elenco <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -430,19 +572,21 @@ function CastCard({
   person,
   index,
   compact = false,
+  onSelect,
 }: {
   person: CastMember;
   index: number;
   compact?: boolean;
+  onSelect: (person: CastMember, trigger: HTMLButtonElement) => void;
 }) {
   return (
     <article className={compact ? "cast-card cast-card--compact" : "cast-card"}>
-      <a
+      <button
         className="cast-card-link"
-        href={person.profile}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={`Conheça ${person.character}, personagem de ${person.actor}, no Gshow`}
+        type="button"
+        aria-haspopup="dialog"
+        aria-label={`Conheça ${person.character}, personagem de ${person.actor}, sem spoilers`}
+        onClick={(event) => onSelect(person, event.currentTarget)}
       >
         <div className="cast-portrait">
           <Image
@@ -464,7 +608,7 @@ function CastCard({
             Conheça a personagem <i aria-hidden="true">↗</i>
           </span>
         </div>
-      </a>
+      </button>
     </article>
   );
 }
