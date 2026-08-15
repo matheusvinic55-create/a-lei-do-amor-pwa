@@ -11,19 +11,21 @@ type BeforeInstallPromptEvent = Event & {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 };
 
-const tabs: Array<{ id: TabId; label: string; shortLabel: string }> = [
-  { id: "inicio", label: "Início", shortLabel: "Início" },
-  { id: "sinopse", label: "Sinopse", shortLabel: "Sinopse" },
-  { id: "resumos", label: "Resumos", shortLabel: "Resumos" },
-  { id: "trilha", label: "Trilha Sonora", shortLabel: "Trilha" },
-  { id: "elenco", label: "Elenco", shortLabel: "Elenco" },
+const tabs: Array<{ id: TabId; label: string; index: string }> = [
+  { id: "inicio", label: "Início", index: "01" },
+  { id: "sinopse", label: "Sinopse", index: "02" },
+  { id: "resumos", label: "Resumos", index: "03" },
+  { id: "trilha", label: "Trilha sonora", index: "04" },
+  { id: "elenco", label: "Elenco", index: "05" },
 ];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>("inicio");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [installPrompt, setInstallPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
-  const navRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const registerServiceWorker = () => {
@@ -46,22 +48,34 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      menuButtonRef.current?.focus();
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
+
   const selectTab = (tab: TabId) => {
     setActiveTab(tab);
+    setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    const currentIndex = tabs.findIndex((tab) => tab.id === activeTab);
-    const direction = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
-
-    if (!direction) return;
-    event.preventDefault();
-    const nextIndex = (currentIndex + direction + tabs.length) % tabs.length;
-    selectTab(tabs[nextIndex].id);
-    navRef.current
-      ?.querySelector<HTMLButtonElement>(`[data-tab="${tabs[nextIndex].id}"]`)
-      ?.focus();
   };
 
   const installApp = async () => {
@@ -75,47 +89,98 @@ export default function Home() {
     <div className="app-shell">
       <div className="ambient-lights" aria-hidden="true" />
 
-      <header className="site-header">
-        <button className="mini-brand" onClick={() => selectTab("inicio")} aria-label="Ir para o início">
-          <span className="brand-spark">✦</span>
+      <header className={activeTab === "inicio" ? "site-header" : "site-header site-header--inner"}>
+        <button
+          className="mini-brand"
+          onClick={() => selectTab("inicio")}
+          aria-label="Ir para o início"
+        >
+          <span className="brand-spark" aria-hidden="true">✦</span>
           <span>
-            <strong>A LEI</strong>
-            <small>DO AMOR</small>
+            <strong>A LEI DO AMOR</strong>
+            <small>ROMANCE · CIDADE · DESTINO</small>
           </span>
         </button>
 
-        <nav className="tab-nav" role="tablist" aria-label="Seções da novela" ref={navRef}>
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              className={activeTab === tab.id ? "tab-button active" : "tab-button"}
-              role="tab"
-              aria-selected={activeTab === tab.id}
-              aria-controls={`panel-${tab.id}`}
-              id={`tab-${tab.id}`}
-              data-tab={tab.id}
-              tabIndex={activeTab === tab.id ? 0 : -1}
-              onClick={() => selectTab(tab.id)}
-              onKeyDown={handleTabKeyDown}
-            >
-              <span className="full-label">{tab.label}</span>
-              <span className="short-label">{tab.shortLabel}</span>
-            </button>
-          ))}
-        </nav>
-
-        {installPrompt && (
-          <button className="install-button" onClick={installApp}>
-            Instalar app
-          </button>
-        )}
+        <button
+          className="menu-trigger"
+          type="button"
+          ref={menuButtonRef}
+          aria-haspopup="dialog"
+          aria-expanded={menuOpen}
+          aria-label="Abrir menu"
+          onClick={() => setMenuOpen(true)}
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
       </header>
 
+      {menuOpen && (
+        <div className="menu-layer">
+          <button
+            className="menu-scrim"
+            type="button"
+            aria-label="Fechar menu"
+            onClick={() => setMenuOpen(false)}
+          />
+
+          <aside className="menu-drawer" role="dialog" aria-modal="true" aria-label="Menu principal">
+            <div className="drawer-header">
+              <div className="drawer-brand">
+                <span aria-hidden="true">✦</span>
+                <strong>A LEI DO AMOR</strong>
+              </div>
+              <button
+                className="drawer-close"
+                type="button"
+                ref={closeButtonRef}
+                aria-label="Fechar menu"
+                onClick={() => {
+                  setMenuOpen(false);
+                  menuButtonRef.current?.focus();
+                }}
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <div className="drawer-rule" />
+            <p className="drawer-kicker">Escolha um caminho</p>
+
+            <nav className="drawer-nav" aria-label="Seções da novela">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  className={activeTab === tab.id ? "drawer-link drawer-link--active" : "drawer-link"}
+                  type="button"
+                  aria-current={activeTab === tab.id ? "page" : undefined}
+                  onClick={() => selectTab(tab.id)}
+                >
+                  <span className="drawer-dot" aria-hidden="true" />
+                  <span>{tab.label}</span>
+                  <small>{tab.index}</small>
+                  <i aria-hidden="true">→</i>
+                </button>
+              ))}
+            </nav>
+
+            <div className="drawer-rule drawer-rule--footer" />
+            <p className="drawer-signature">O tempo passa. O amor permanece.</p>
+
+            {installPrompt && (
+              <button className="drawer-install" type="button" onClick={installApp}>
+                Instalar A Lei do Amor
+              </button>
+            )}
+          </aside>
+        </div>
+      )}
+
       <main
-        className="content-stage"
+        className={activeTab === "inicio" ? "content-stage content-stage--home" : "content-stage"}
         id={`panel-${activeTab}`}
-        role="tabpanel"
-        aria-labelledby={`tab-${activeTab}`}
+        tabIndex={-1}
         key={activeTab}
       >
         {activeTab === "inicio" && <Inicio onNavigate={selectTab} />}
@@ -134,52 +199,48 @@ export default function Home() {
 }
 
 function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
+  const continueStory = () => {
+    document.getElementById("historia")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       <section className="hero-section">
+        <div className="hero-visual" aria-hidden="true">
+          <div className="hero-beam hero-beam--one" />
+          <div className="hero-beam hero-beam--two" />
+          <div className="hero-orbit hero-orbit--one" />
+          <div className="hero-orbit hero-orbit--two" />
+          <div className="hero-city-grid" />
+          <div className="hero-skyline">
+            <span /><span /><span /><span /><span /><span />
+          </div>
+        </div>
+
         <div className="hero-copy">
-          <p className="eyebrow"><span /> Romance · Cidade · Destino</p>
+          <p className="eyebrow"><span /> Um amor atravessa o tempo</p>
           <h1 className="hero-title">
             <span>A LEI</span>
             <em>do</em>
             <span>AMOR</span>
           </h1>
-          <p className="hero-tagline">Um amor urbano, elegante e luminoso.</p>
           <p className="hero-intro">
-            Entre reflexos, reencontros e segredos, o amor atravessa o tempo
-            e ilumina até os caminhos mais improváveis.
+            Entre reflexos, reencontros e segredos, dois corações descobrem
+            que algumas histórias nunca deixam de brilhar.
           </p>
           <div className="hero-actions">
-            <button className="primary-action" onClick={() => onNavigate("sinopse")}>
-              Conheça a história <span>→</span>
-            </button>
-            <button className="text-action" onClick={() => onNavigate("elenco")}>
-              Ver elenco
+            <button className="primary-action" onClick={continueStory}>
+              Entrar nesta história <span>↓</span>
             </button>
           </div>
         </div>
 
-        <div className="urban-art" aria-hidden="true">
-          <div className="halo halo-one" />
-          <div className="halo halo-two" />
-          <div className="love-orbit"><span>✦</span></div>
-          <div className="city-grid" />
-          <div className="skyline">
-            <span className="building b1" />
-            <span className="building b2" />
-            <span className="building b3" />
-            <span className="building b4" />
-            <span className="building b5" />
-          </div>
-          <div className="reflection" />
-        </div>
-
-        <div className="scroll-cue" aria-hidden="true">
-          <span>Explore</span><i />
-        </div>
+        <button className="hero-side-link" type="button" onClick={() => onNavigate("sinopse")}>
+          <span>Sinopse</span><i aria-hidden="true">›</i>
+        </button>
       </section>
 
-      <section className="home-editorial">
+      <section className="home-editorial" id="historia">
         <div className="editorial-number">20</div>
         <div>
           <p className="section-kicker">Duas décadas. Um mesmo sentimento.</p>
@@ -190,6 +251,9 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
           mas nunca verdadeiramente encerradas. Quando a cidade volta a cruzar
           seus caminhos, passado e presente se refletem como luzes no vidro.
         </p>
+        <button className="editorial-link" type="button" onClick={() => onNavigate("sinopse")}>
+          Conheça a trama <span aria-hidden="true">→</span>
+        </button>
       </section>
     </>
   );
@@ -199,7 +263,7 @@ function Sinopse() {
   return (
     <section className="section-page synopsis-page">
       <SectionHeading
-        index="01"
+        index="02"
         kicker="A história"
         title="O tempo separa. O amor reencontra."
         description="Uma trama sobre escolhas, poder e a força de um sentimento que se recusa a desaparecer."
@@ -241,7 +305,7 @@ function Resumos() {
   return (
     <section className="section-page">
       <SectionHeading
-        index="02"
+        index="03"
         kicker="Capítulo a capítulo"
         title="Resumos"
         description="Acompanhe os encontros, revelações e reviravoltas que movem esta história."
@@ -270,7 +334,7 @@ function Trilha() {
   return (
     <section className="section-page">
       <SectionHeading
-        index="03"
+        index="04"
         kicker="Música & emoção"
         title="Trilha Sonora"
         description="Canções que transformam encontros em memória e dão ritmo ao coração da cidade."
@@ -300,7 +364,7 @@ function Elenco() {
   return (
     <section className="section-page cast-page">
       <SectionHeading
-        index="04"
+        index="05"
         kicker="Personagens"
         title="Elenco"
         description="Rostos, histórias e sentimentos que dão vida ao universo de A Lei do Amor — agora reunidos em imagens da própria trama."
