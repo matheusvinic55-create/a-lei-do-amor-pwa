@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { mainCast, supportingCast, type CastMember } from "./cast";
 
 type TabId = "inicio" | "sinopse" | "resumos" | "trilha" | "elenco";
 
@@ -15,15 +17,6 @@ const tabs: Array<{ id: TabId; label: string; shortLabel: string }> = [
   { id: "resumos", label: "Resumos", shortLabel: "Resumos" },
   { id: "trilha", label: "Trilha Sonora", shortLabel: "Trilha" },
   { id: "elenco", label: "Elenco", shortLabel: "Elenco" },
-];
-
-const cast = [
-  { character: "Helô", actor: "Cláudia Abreu", initials: "CA", tone: "pearl" },
-  { character: "Pedro", actor: "Reynaldo Gianecchini", initials: "RG", tone: "graphite" },
-  { character: "Magnólia", actor: "Vera Holtz", initials: "VH", tone: "silver" },
-  { character: "Fausto", actor: "Tarcísio Meira", initials: "TM", tone: "midnight" },
-  { character: "Letícia", actor: "Isabella Santoni", initials: "IS", tone: "mist" },
-  { character: "Tiago", actor: "Humberto Carrão", initials: "HC", tone: "steel" },
 ];
 
 export default function Home() {
@@ -305,31 +298,110 @@ function Trilha() {
 
 function Elenco() {
   return (
-    <section className="section-page">
+    <section className="section-page cast-page">
       <SectionHeading
         index="04"
         kicker="Personagens"
         title="Elenco"
-        description="Rostos, histórias e sentimentos que dão vida ao universo de A Lei do Amor."
+        description="Rostos, histórias e sentimentos que dão vida ao universo de A Lei do Amor — agora reunidos em imagens da própria trama."
       />
 
-      <div className="cast-grid">
-        {cast.map((person, index) => (
-          <article className="cast-card" key={person.character}>
-            <div className={`cast-portrait ${person.tone}`}>
-              <span className="portrait-shine" />
-              <span className="portrait-initials">{person.initials}</span>
-              <small>{String(index + 1).padStart(2, "0")}</small>
-            </div>
-            <div className="cast-info">
-              <p>{person.actor}</p>
-              <h2>{person.character}</h2>
-              <span>Conheça a personagem <i>→</i></span>
-            </div>
-          </article>
+      <div className="cast-shelf-heading">
+        <div>
+          <p className="section-kicker">Núcleo principal</p>
+          <h2>Os rostos no centro da história</h2>
+        </div>
+        <span>{mainCast.length} personagens em destaque</span>
+      </div>
+
+      <div className="cast-grid cast-grid--main">
+        {mainCast.map((person, index) => (
+          <CastCard person={person} index={index} key={person.slug} />
         ))}
       </div>
+
+      <details className="cast-drawer">
+        <summary>
+          <div className="drawer-title">
+            <p className="section-kicker">Elenco completo</p>
+            <strong>Ver todos os outros personagens</strong>
+            <small>Abra a gaveta para conhecer cada rosto da trama.</small>
+          </div>
+          <div className="drawer-action" aria-hidden="true">
+            <span>{supportingCast.length}</span>
+            <i>⌄</i>
+          </div>
+        </summary>
+
+        <div className="drawer-body">
+          <div className="cast-grid cast-grid--supporting">
+            {supportingCast.map((person, index) => (
+              <CastCard
+                compact
+                person={person}
+                index={index + mainCast.length}
+                key={person.slug}
+              />
+            ))}
+          </div>
+
+          <p className="cast-credit">
+            Retratos do elenco: {" "}
+            <a
+              href="https://gshow.globo.com/novelas/a-lei-do-amor/personagem/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Gshow / Globo
+            </a>
+            .
+          </p>
+        </div>
+      </details>
     </section>
+  );
+}
+
+function CastCard({
+  person,
+  index,
+  compact = false,
+}: {
+  person: CastMember;
+  index: number;
+  compact?: boolean;
+}) {
+  return (
+    <article className={compact ? "cast-card cast-card--compact" : "cast-card"}>
+      <a
+        className="cast-card-link"
+        href={person.profile}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Conheça ${person.character}, personagem de ${person.actor}, no Gshow`}
+      >
+        <div className="cast-portrait">
+          <Image
+            src={person.image}
+            alt={`${person.character}, interpretado por ${person.actor}, em A Lei do Amor`}
+            width={340}
+            height={190}
+            loading={compact || index > 3 ? "lazy" : "eager"}
+            decoding="async"
+            unoptimized
+          />
+          <span className="portrait-shine" aria-hidden="true" />
+          <small>{String(index + 1).padStart(2, "0")}</small>
+        </div>
+        <div className="cast-info">
+          <p>{person.actor}</p>
+          <h2>{person.character}</h2>
+          <span>
+            Conheça a personagem <i aria-hidden="true">↗</i>
+          </span>
+        </div>
+      </a>
+    </article>
   );
 }
 
