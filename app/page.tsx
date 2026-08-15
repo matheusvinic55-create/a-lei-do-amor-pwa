@@ -554,7 +554,23 @@ function CharacterNote({
           </button>
         </header>
 
-        <div className="character-note-rule" aria-hidden="true">
+        <div className="character-note-stitch" aria-hidden="true">
+          <svg viewBox="0 0 360 30" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="note-thread" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stopColor="#b92f2d" />
+                <stop offset=".5" stopColor="#ef6733" />
+                <stop offset="1" stopColor="#f29a46" />
+              </linearGradient>
+            </defs>
+            <path d="M2 17 C30 3 55 29 86 18 C115 8 137 6 166 19 C196 32 218 3 248 10 C276 16 281 29 307 25 C330 21 337 7 358 12" />
+            <path d="M2 22 C35 12 54 25 79 24 C111 23 129 11 158 14 C188 17 211 27 239 23 C269 19 292 8 318 12 C337 15 347 21 358 18" />
+          </svg>
+        </div>
+        <p className="character-note-kicker">Um bilhete sobre</p>
+        <h2 id={titleId}>{person.character}</h2>
+        <p className="character-note-context" id={descriptionId}>{person.context}</p>
+        <div className="character-note-footer-art" aria-hidden="true">
           <span />
           <svg className="character-note-train" viewBox="0 0 96 38" fill="none">
             <path d="M4 28.5h9l4-5.5h11V11h24v17.5h11.5L69 23h8l6 5.5h9" />
@@ -568,9 +584,6 @@ function CharacterNote({
           </svg>
           <span />
         </div>
-        <p className="character-note-kicker">Um bilhete sobre</p>
-        <h2 id={titleId}>{person.character}</h2>
-        <p className="character-note-context" id={descriptionId}>{person.context}</p>
       </article>
     </div>,
     document.body,
