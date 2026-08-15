@@ -223,7 +223,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <span>✦ A Lei do Amor</span>
-        <span>Projeto não oficial inspirado na obra</span>
+        <span>O tempo passa. O amor permanece.</span>
       </footer>
     </div>
   );
@@ -269,8 +269,44 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
       </section>
 
       <section className="home-editorial" id="historia">
-        <div className="editorial-number">20</div>
-        <div>
+        <div className="editorial-railway" aria-hidden="true">
+          <svg viewBox="0 0 720 150" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <symbol id="editorial-train" viewBox="0 0 150 52">
+                <path d="M3 40h13l7-9h17V14h42v26h17l9-9h13l10 9h16" />
+                <path d="M30 14V8h27v6M39 8V3h10v5M82 20h18v20M87 20v-9h10v9" />
+                <path d="M17 40h113M22 47h104M4 47h10M135 47h10" />
+                <circle cx="31" cy="42" r="7" />
+                <circle cx="92" cy="42" r="7" />
+                <circle cx="63" cy="42" r="4.5" />
+                <path d="M127 31l14-8v17M20 24h20M49 22h23M49 29h23" />
+                <path d="M91 9c2-4 6-4 8 0M103 7c2-4 7-4 10 0" />
+              </symbol>
+            </defs>
+
+            <g className="editorial-rails editorial-rails--upper">
+              <path d="M4 60 C166 55 304 65 716 59" />
+              <path d="M4 68 C176 63 322 72 716 67" />
+              <path className="editorial-sleepers" d="M4 72 C176 67 322 76 716 71" />
+            </g>
+            <g className="editorial-rails editorial-rails--lower">
+              <path d="M4 122 C156 116 329 128 716 121" />
+              <path d="M4 130 C174 124 348 136 716 129" />
+              <path className="editorial-sleepers" d="M4 134 C174 128 348 140 716 133" />
+            </g>
+
+            <g className="editorial-train-sketch">
+              <use href="#editorial-train" x="54" y="8" width="166" height="57" />
+              <path className="editorial-smoke" d="M153 10 C164 1 176 16 188 6 C197-1 205 5 211 1" />
+            </g>
+            <g className="editorial-train-sketch" transform="translate(666 73) scale(-1 1)">
+              <use href="#editorial-train" width="166" height="57" />
+              <path className="editorial-smoke" d="M99 3 C111-5 121 10 134 1 C142-5 151 1 158-3" />
+            </g>
+          </svg>
+        </div>
+
+        <div className="editorial-heading">
           <p className="section-kicker">Duas décadas. Um mesmo sentimento.</p>
           <h2>Há amores que o tempo não apaga.</h2>
         </div>
