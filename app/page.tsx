@@ -91,30 +91,21 @@ export default function Home() {
       <div className="ambient-lights" aria-hidden="true" />
 
       <header className={activeTab === "inicio" ? "site-header" : "site-header site-header--inner"}>
-        <button
-          className="mini-brand"
-          onClick={() => selectTab("inicio")}
-          aria-label="Ir para o início"
-        >
-          <span className="brand-spark" aria-hidden="true">✦</span>
-          <span>
-            <strong>A LEI DO AMOR</strong>
-            <small>ROMANCE · CIDADE · DESTINO</small>
-          </span>
-        </button>
-
-        <button
-          className="menu-trigger"
-          type="button"
-          ref={menuButtonRef}
-          aria-haspopup="dialog"
-          aria-expanded={menuOpen}
-          aria-label="Abrir menu"
-          onClick={() => setMenuOpen(true)}
-        >
-          <span aria-hidden="true" />
-          <span aria-hidden="true" />
-        </button>
+        <div className="header-menu-brand">
+          <button
+            className="menu-trigger"
+            type="button"
+            ref={menuButtonRef}
+            aria-haspopup="dialog"
+            aria-expanded={menuOpen}
+            aria-label="Abrir menu"
+            onClick={() => setMenuOpen(true)}
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </button>
+          <strong className="header-menu-label">MENU</strong>
+        </div>
       </header>
 
       {menuOpen && (
@@ -236,9 +227,6 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
           </div>
         </div>
 
-        <button className="hero-side-link" type="button" onClick={() => onNavigate("sinopse")}>
-          <span>Sinopse</span><i aria-hidden="true">›</i>
-        </button>
       </section>
 
       <section className="home-editorial" id="historia">

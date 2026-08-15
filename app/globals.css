@@ -1563,6 +1563,25 @@ body {
   -webkit-backdrop-filter: blur(22px) saturate(135%);
 }
 
+.header-menu-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-menu-label {
+  color: white;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .2em;
+  line-height: 1;
+}
+
+.site-header--inner .header-menu-label {
+  color: var(--ink);
+}
+
 .mini-brand {
   min-width: 0;
   padding: 0;
@@ -2223,6 +2242,10 @@ body {
     display: none;
   }
 
+  .header-menu-label {
+    font-size: 13px;
+  }
+
   .brand-spark {
     width: 48px;
     height: 48px;
@@ -2454,6 +2477,15 @@ body {
   }
 
   .mini-brand strong {
+    font-size: 10px;
+    letter-spacing: .16em;
+  }
+
+  .header-menu-brand {
+    gap: 14px;
+  }
+
+  .header-menu-label {
     font-size: 10px;
     letter-spacing: .16em;
   }
