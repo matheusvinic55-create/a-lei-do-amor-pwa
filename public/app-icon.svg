@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="background" x1="56" y1="28" x2="454" y2="486" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#686D77"/>
+      <stop offset="0.42" stop-color="#282B31"/>
+      <stop offset="1" stop-color="#090A0D"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="156" y1="117" x2="358" y2="399" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.28" stop-color="#C5C8CE"/>
+      <stop offset="0.54" stop-color="#FFFFFF"/>
+      <stop offset="0.78" stop-color="#8E939C"/>
+      <stop offset="1" stop-color="#F8F8F8"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#FFFFFF" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="118" fill="url(#background)"/>
+  <circle cx="256" cy="256" r="172" fill="none" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="3"/>
+  <circle cx="256" cy="256" r="128" fill="url(#glow)" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="2"/>
+  <path d="M256 86l19.5 113.5L377 224l-101.5 24.5L256 362l-19.5-113.5L135 224l101.5-24.5L256 86Z" fill="url(#metal)"/>
+  <circle cx="256" cy="224" r="20" fill="#FFFFFF"/>
+  <path d="M91 395h330" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="2"/>
+  <text x="256" y="428" fill="#FFFFFF" fill-opacity=".86" font-family="Georgia, serif" font-size="34" letter-spacing="10" text-anchor="middle">AMOR</text>
+</svg>
