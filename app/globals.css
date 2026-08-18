@@ -2343,13 +2343,15 @@ body {
 }
 
 .hero-copy .eyebrow {
-  color: rgba(255,255,255,.64);
+  color: rgba(255,255,255,.97);
   font-size: 9px;
   letter-spacing: .25em;
+  text-shadow: 0 1px 10px rgba(0,0,0,.9), 0 1px 2px rgba(0,0,0,.72);
 }
 
 .hero-copy .eyebrow span {
-  background: rgba(255,255,255,.58);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 1px 7px rgba(0,0,0,.5);
 }
 
 .hero-title {
@@ -2360,24 +2362,27 @@ body {
 
 .hero-title > span {
   font-size: clamp(76px, 20vw, 138px);
-  background: linear-gradient(116deg, #ffffff 3%, #d6d8dd 48%, #777c86 73%, #f7f7f8 96%);
+  background: linear-gradient(116deg, #ffffff 3%, #f0f1f3 48%, #b9bdc5 73%, #ffffff 96%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 22px 55px rgba(0,0,0,.16);
+  text-shadow: 0 3px 24px rgba(0,0,0,.7), 0 1px 2px rgba(0,0,0,.48);
 }
 
 .hero-title em {
-  color: #c5c8ce;
+  color: #f3f4f6;
   font-size: 28px;
+  text-shadow: 0 2px 14px rgba(0,0,0,.78);
 }
 
 .hero-intro {
   max-width: 640px;
   margin: 31px 0 0;
-  color: rgba(255,255,255,.76);
+  color: rgba(255,255,255,.97);
   font-size: clamp(15px, 3.8vw, 20px);
+  font-weight: 470;
   line-height: 1.65;
+  text-shadow: 0 2px 14px rgba(0,0,0,.82), 0 1px 2px rgba(0,0,0,.68);
   text-wrap: balance;
 }
 
