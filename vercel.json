@@ -2,6 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "buildCommand": "npm run build:vercel",
+  "rewrites": [
+    {
+      "source": "/home-hero-background.webp",
+      "destination": "/home-hero-background.svg"
+    }
+  ],
   "headers": [
     {
       "source": "/sw.js",
