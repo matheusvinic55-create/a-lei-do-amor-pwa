@@ -2223,8 +2223,8 @@ body {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(7,8,11,.04) 0%, rgba(7,8,11,.02) 35%, rgba(8,9,13,.76) 100%),
-    linear-gradient(90deg, rgba(9,10,14,.28) 0%, transparent 62%, rgba(8,9,12,.08) 100%);
+    linear-gradient(180deg, rgba(7,8,11,.01) 0%, transparent 38%, rgba(8,9,13,.56) 100%),
+    linear-gradient(90deg, rgba(9,10,14,.1) 0%, transparent 68%, rgba(8,9,12,.02) 100%);
 }
 
 .hero-visual {
@@ -2242,7 +2242,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  filter: saturate(.9) contrast(1.04);
+  filter: brightness(1.12) saturate(.98) contrast(1.01);
 }
 
 .hero-beam {
