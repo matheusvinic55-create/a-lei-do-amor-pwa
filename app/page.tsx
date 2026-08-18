@@ -366,30 +366,94 @@ function Sinopse() {
   );
 }
 
+const firstChapters = [
+  {
+    number: "01",
+    date: "3 de outubro de 2016",
+    title: "O primeiro encontro",
+    summary:
+      "Pedro socorre Helô depois de uma provocação de Hércules e Ciro, e os dois se aproximam na quermesse. Enquanto isso, Jorge, revoltado com Fausto, tenta roubar a fábrica e acaba preso. Ao defender o pai, Helô encara Fausto e amplia o conflito entre as famílias.",
+  },
+  {
+    number: "02",
+    date: "4 de outubro de 2016",
+    title: "Um amor em risco",
+    summary:
+      "Pedro apoia Helô diante de Fausto e o romance entre os dois ganha força. Mas Magnólia e Fausto começam a movimentar Gigi para manter a jovem distante de Pedro — e Magnólia encontra em Suzana uma possível aliada para esse plano.",
+  },
+  {
+    number: "03",
+    date: "5 de outubro de 2016",
+    title: "A dor e a estratégia",
+    summary:
+      "Helô viaja a trabalho, enquanto Suzana conhece Pedro e chama a atenção de Magnólia. A perda de Cândida abala Helô profundamente. Em paralelo, as relações de Vitória, Ciro, Hércules e Carmem começam a revelar tensões que atravessam São Dimas.",
+  },
+  {
+    number: "04",
+    date: "6 de outubro de 2016",
+    title: "A primeira armadilha",
+    summary:
+      "Gigi convence Helô a assinar um contrato sem mostrar o documento a Pedro. A aproximação de Suzana desperta insegurança em Helô, enquanto Ciro se aproxima de Vitória. No fim do capítulo, uma nova armação deixa Helô diante de uma cena difícil de explicar.",
+  },
+  {
+    number: "05",
+    date: "7 de outubro de 2016",
+    title: "Vinte anos depois",
+    summary:
+      "Depois da separação, Pedro decide deixar o Brasil. A história então avança duas décadas: Helô e Tião vivem uma relação marcada por desconfianças, e o aniversário de Fausto cria as condições para que Helô e Pedro se reencontrem.",
+  },
+  {
+    number: "06",
+    date: "8 de outubro de 2016",
+    title: "Verdades do passado",
+    summary:
+      "O reencontro de Helô e Pedro é tenso. De volta a São Dimas, Pedro revisita pessoas e lugares que ficaram no passado, enquanto Helô questiona Tião. Fausto procura o filho e, em uma conversa decisiva, revela a Pedro sua participação na separação do casal.",
+  },
+  {
+    number: "07",
+    date: "10 de outubro de 2016",
+    title: "O amor volta à tona",
+    summary:
+      "Pedro confronta Fausto, Magnólia e Suzana pelo que aconteceu no passado. Helô começa a desconfiar das atitudes de Tião, e Pedro revela que os dois foram vítimas de uma armação. Antes que as respostas se acomodem, Fausto e Suzana sofrem um atentado.",
+  },
+] as const;
+
 function Resumos() {
   return (
-    <section className="section-page">
+    <section className="section-page summaries-page">
       <SectionHeading
         index="03"
         kicker="Capítulo a capítulo"
         title="Resumos"
-        description="Acompanhe os encontros, revelações e reviravoltas que movem esta história."
+        description="Os primeiros capítulos de A Lei do Amor, reunidos para acompanhar a história desde o começo."
       />
 
-      <div className="coming-card glass-card summaries-placeholder">
-        <div className="placeholder-icon calendar-icon" aria-hidden="true">
-          <span>EM</span><strong>BREVE</strong>
+      <div className="summaries-intro glass-card">
+        <span className="summaries-intro-number">01–07</span>
+        <div>
+          <p className="section-kicker">Primeira fase</p>
+          <h2>O início de uma história que atravessa o tempo.</h2>
         </div>
-        <div className="coming-copy">
-          <p className="section-kicker">Em preparação</p>
-          <h2>Os resumos dos capítulos serão adicionados em breve.</h2>
-          <p>Esta área já está pronta para receber os capítulos, datas e principais acontecimentos da novela.</p>
-        </div>
-        <div className="chapter-preview" aria-hidden="true">
-          {["Capítulo 01", "Capítulo 02", "Capítulo 03"].map((chapter, index) => (
-            <div key={chapter}><span>{chapter}</span><i style={{ width: `${84 - index * 14}%` }} /></div>
-          ))}
-        </div>
+        <p>Abra cada capítulo para revisitar os acontecimentos da trama.</p>
+      </div>
+
+      <div className="chapter-list">
+        {firstChapters.map((chapter) => (
+          <details className="chapter-item" key={chapter.number}>
+            <summary>
+              <span className="chapter-number">{chapter.number}</span>
+              <span className="chapter-meta">
+                <small>Capítulo {chapter.number} · {chapter.date}</small>
+                <strong>{chapter.title}</strong>
+              </span>
+              <span className="chapter-open" aria-hidden="true">+</span>
+            </summary>
+            <div className="chapter-content">
+              <p>{chapter.summary}</p>
+              <span>Fim do capítulo {chapter.number}</span>
+            </div>
+          </details>
+        ))}
       </div>
     </section>
   );
