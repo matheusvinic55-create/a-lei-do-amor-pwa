@@ -749,6 +749,219 @@ a:focus-visible {
   border-radius: 30px;
 }
 
+.summaries-page {
+  padding-bottom: 38px;
+}
+
+.summaries-intro {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 14px;
+  padding: 22px;
+  display: grid;
+  gap: 14px;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 94% 7%, rgba(255,255,255,.82), transparent 10rem),
+    linear-gradient(145deg, rgba(255,255,255,.88), rgba(225,228,232,.68));
+}
+
+.summaries-intro::after {
+  content: "";
+  position: absolute;
+  width: 170px;
+  aspect-ratio: 1;
+  right: -75px;
+  bottom: -94px;
+  border: 1px solid rgba(45,48,55,.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 22px rgba(255,255,255,.18);
+}
+
+.summaries-intro-number {
+  position: relative;
+  z-index: 1;
+  color: #5f636c;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: .04em;
+}
+
+.summaries-intro h2 {
+  position: relative;
+  z-index: 1;
+  max-width: 470px;
+  margin: 7px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(28px, 7vw, 44px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1.02;
+}
+
+.summaries-intro > p {
+  position: relative;
+  z-index: 1;
+  max-width: 430px;
+  margin: 0;
+  color: #686c74;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.chapter-list {
+  display: grid;
+  gap: 9px;
+}
+
+.chapter-item {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.94);
+  border-radius: 20px;
+  background: rgba(255,255,255,.62);
+  box-shadow: 0 10px 26px rgba(35,38,44,.06), inset 0 1px white;
+  transition: background .25s ease, box-shadow .25s ease;
+}
+
+.chapter-item[open] {
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 16px 36px rgba(35,38,44,.1), inset 0 1px white;
+}
+
+.chapter-item summary {
+  min-height: 76px;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 30px;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.chapter-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.chapter-item summary:focus-visible {
+  outline: 2px solid #636872;
+  outline-offset: -5px;
+}
+
+.chapter-number {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(47,50,57,.16);
+  border-radius: 50%;
+  color: #656a73;
+  font-family: var(--serif);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.chapter-meta {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.chapter-meta small {
+  color: #81858d;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .11em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.chapter-meta strong {
+  overflow: hidden;
+  color: #25272d;
+  font-family: var(--serif);
+  font-size: clamp(20px, 5.3vw, 27px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chapter-open {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(38,41,47,.13);
+  border-radius: 50%;
+  color: #5d626b;
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform .26s ease, background .26s ease;
+}
+
+.chapter-item[open] .chapter-open {
+  color: white;
+  background: #30333a;
+  transform: rotate(45deg);
+}
+
+.chapter-content {
+  padding: 0 16px 17px 62px;
+  animation: chapterReveal .26s ease-out both;
+}
+
+.chapter-content p {
+  max-width: 590px;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(40,43,49,.1);
+  color: #5a5e66;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.chapter-content span {
+  display: block;
+  margin-top: 13px;
+  color: #8a8e95;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+@keyframes chapterReveal {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 700px) {
+  .summaries-intro {
+    grid-template-columns: 84px minmax(0, 1fr);
+    align-items: center;
+    padding: 30px;
+  }
+
+  .summaries-intro > p {
+    grid-column: 2;
+  }
+
+  .chapter-item summary {
+    min-height: 82px;
+    padding-inline: 22px;
+  }
+
+  .chapter-content {
+    padding: 0 22px 21px 80px;
+  }
+}
+
 .coming-card {
   padding: 24px;
   display: grid;
