@@ -3351,3 +3351,263 @@ body {
     animation: none;
   }
 }
+
+
+/* Home editorial inspirada na identidade original da novela */
+.content-stage--home .hero-section {
+  min-height: max(760px, 100svh);
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 14% 72%, rgba(194,34,70,.055), transparent 12rem),
+    linear-gradient(145deg, #fbfbfc 0%, #f1f2f4 55%, #e5e7ea 100%);
+  color: #202228;
+  isolation: isolate;
+}
+
+.content-stage--home .hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 88% 68%, rgba(255,255,255,.94), transparent 18rem),
+    linear-gradient(180deg, transparent 0 36%, rgba(248,249,250,.18) 44%, #f5f6f7 57%, rgba(233,235,238,.94) 100%);
+}
+
+.content-stage--home .hero-section::after {
+  content: "";
+  position: absolute;
+  inset: auto -22% 5% auto;
+  z-index: 1;
+  width: 82vw;
+  aspect-ratio: 1;
+  border: 1px solid rgba(37,40,46,.075);
+  border-radius: 50%;
+  pointer-events: none;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  box-shadow: 0 0 0 42px rgba(255,255,255,.12);
+}
+
+.content-stage--home .hero-visual {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  width: 100%;
+  height: 49%;
+  overflow: hidden;
+  background: #d9dce0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0,0,0,.65) 87%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0,0,0,.65) 87%, transparent 100%);
+}
+
+.content-stage--home .hero-background {
+  object-fit: cover;
+  object-position: center 48%;
+  opacity: .72;
+  filter: grayscale(.92) saturate(.35) brightness(1.08) contrast(.88);
+  transform: scale(1.012);
+}
+
+.hero-threadwork {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.hero-threadwork svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-thread {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: .7;
+}
+
+.hero-thread--crimson { stroke: #c22246; }
+.hero-thread--orange { stroke: #dc6941; stroke-width: 1.25; opacity: .62; }
+.hero-thread--wine { stroke: #8f263d; stroke-width: 1.1; opacity: .5; }
+
+.hero-threadwork circle {
+  fill: #c22246;
+  opacity: .78;
+}
+
+.content-stage--home .hero-copy {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  min-height: max(760px, 100svh);
+  padding:
+    clamp(365px, 45svh, 435px)
+    clamp(27px, 5.5vw, 82px)
+    max(46px, calc(env(safe-area-inset-bottom) + 32px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.content-stage--home .hero-copy .eyebrow {
+  color: #9c2944;
+  font-size: 8px;
+  letter-spacing: .24em;
+  text-shadow: none;
+}
+
+.content-stage--home .hero-copy .eyebrow span {
+  background: #c22246;
+  box-shadow: none;
+}
+
+.content-stage--home .hero-title {
+  margin: 22px 0 0;
+  grid-template-columns: auto 34px;
+  line-height: .72;
+}
+
+.content-stage--home .hero-title > span {
+  font-size: clamp(65px, 18.7vw, 88px);
+  background: linear-gradient(116deg, #17191e 4%, #393d45 50%, #858a93 77%, #25282e 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 10px 24px rgba(32,35,41,.09));
+}
+
+.content-stage--home .hero-title em {
+  color: #9f2b46;
+  font-size: 24px;
+  text-shadow: none;
+  transform: translateY(5px);
+}
+
+.content-stage--home .hero-intro {
+  max-width: 520px;
+  margin: 24px 0 0;
+  color: #595e67;
+  font-size: clamp(14px, 3.7vw, 18px);
+  font-weight: 430;
+  line-height: 1.58;
+  text-shadow: none;
+  text-wrap: balance;
+}
+
+.content-stage--home .hero-actions {
+  margin-top: 25px;
+}
+
+.content-stage--home .primary-action {
+  min-height: 55px;
+  padding: 0 13px 0 21px;
+  gap: 19px;
+  border: 1px solid rgba(37,40,46,.12);
+  background: rgba(255,255,255,.82);
+  color: #292c32;
+  box-shadow: 0 14px 32px rgba(34,37,43,.09), inset 0 1px white;
+  font-size: 12px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.content-stage--home .primary-action > span {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #c22246;
+  color: white;
+  font-size: 17px;
+}
+
+.content-stage--home .primary-action:hover {
+  box-shadow: 0 17px 38px rgba(34,37,43,.13), inset 0 1px white;
+}
+
+@media (min-width: 700px) {
+  .content-stage--home .hero-section {
+    min-height: 100svh;
+  }
+
+  .content-stage--home .hero-section::before {
+    background:
+      radial-gradient(circle at 34% 80%, rgba(194,34,70,.045), transparent 18rem),
+      linear-gradient(90deg, #f7f8f9 0%, #f3f4f6 42%, rgba(242,243,245,.52) 54%, transparent 72%);
+  }
+
+  .content-stage--home .hero-section::after {
+    width: 48vw;
+    right: 29%;
+    bottom: -34%;
+  }
+
+  .content-stage--home .hero-visual {
+    inset: 0 0 0 auto;
+    width: 57%;
+    height: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.58) 13%, #000 30%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.58) 13%, #000 30%);
+  }
+
+  .content-stage--home .hero-background {
+    object-position: center center;
+    opacity: .68;
+  }
+
+  .content-stage--home .hero-copy {
+    width: 54%;
+    min-height: 100svh;
+    padding: 120px clamp(45px, 6vw, 100px) max(74px, calc(env(safe-area-inset-bottom) + 52px));
+    justify-content: center;
+  }
+
+  .content-stage--home .hero-title {
+    grid-template-columns: auto 48px;
+  }
+
+  .content-stage--home .hero-title > span {
+    font-size: clamp(92px, 9.4vw, 146px);
+  }
+
+  .content-stage--home .hero-title em {
+    font-size: 31px;
+  }
+
+  .hero-thread {
+    stroke-width: 1.25;
+  }
+}
+
+@media (max-width: 380px) {
+  .content-stage--home .hero-copy {
+    padding-top: clamp(342px, 43svh, 392px);
+    padding-inline: 22px;
+  }
+
+  .content-stage--home .hero-title > span {
+    font-size: 61px;
+  }
+
+  .content-stage--home .hero-intro {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+
+  .content-stage--home .primary-action {
+    min-height: 52px;
+  }
+}

@@ -245,6 +245,15 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
           />
         </div>
 
+        <div className="hero-threadwork" aria-hidden="true">
+          <svg viewBox="0 0 430 850" preserveAspectRatio="none">
+            <path className="hero-thread hero-thread--crimson" d="M-28 296 C48 266 92 314 154 282 S275 224 462 277" />
+            <path className="hero-thread hero-thread--orange" d="M-30 354 C57 310 114 363 166 329 C222 292 273 304 461 372" />
+            <path className="hero-thread hero-thread--wine" d="M-35 406 C59 373 104 433 167 390 C221 352 244 316 297 331 C339 343 347 381 321 394 C290 409 264 374 279 349 C307 301 370 317 462 336" />
+            <circle cx="67" cy="323" r="3" />
+          </svg>
+        </div>
+
         <div className="hero-copy">
           <p className="eyebrow"><span /> Um amor atravessa o tempo</p>
           <h1 className="hero-title">
