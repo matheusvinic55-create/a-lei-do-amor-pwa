@@ -750,96 +750,122 @@ a:focus-visible {
 }
 
 .summaries-page {
-  padding-bottom: 38px;
+  padding-top: 27px;
+  padding-bottom: 30px;
 }
 
-.summaries-intro {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 14px;
-  padding: 22px;
+.summaries-heading {
+  margin-bottom: 15px;
   display: grid;
-  gap: 14px;
-  border-radius: 26px;
-  background:
-    radial-gradient(circle at 94% 7%, rgba(255,255,255,.82), transparent 10rem),
-    linear-gradient(145deg, rgba(255,255,255,.88), rgba(225,228,232,.68));
+  gap: 11px;
 }
 
-.summaries-intro::after {
-  content: "";
-  position: absolute;
-  width: 170px;
-  aspect-ratio: 1;
-  right: -75px;
-  bottom: -94px;
-  border: 1px solid rgba(45,48,55,.12);
-  border-radius: 50%;
-  box-shadow: 0 0 0 22px rgba(255,255,255,.18);
+.summaries-heading-main {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 13px;
 }
 
-.summaries-intro-number {
-  position: relative;
-  z-index: 1;
-  color: #5f636c;
+.summaries-heading .section-index {
+  width: 38px;
+  height: 38px;
+  font-size: 14px;
+}
+
+.summaries-heading h1 {
+  margin: 3px 0 0;
   font-family: var(--serif);
-  font-size: 18px;
-  font-style: italic;
-  letter-spacing: .04em;
-}
-
-.summaries-intro h2 {
-  position: relative;
-  z-index: 1;
-  max-width: 470px;
-  margin: 7px 0 0;
-  font-family: var(--serif);
-  font-size: clamp(28px, 7vw, 44px);
+  font-size: clamp(40px, 10vw, 60px);
   font-weight: 400;
-  letter-spacing: -.04em;
-  line-height: 1.02;
+  letter-spacing: -.045em;
+  line-height: .9;
 }
 
-.summaries-intro > p {
-  position: relative;
-  z-index: 1;
-  max-width: 430px;
+.summaries-heading > p {
+  max-width: 510px;
   margin: 0;
-  color: #686c74;
+  color: #696d75;
   font-size: 12px;
-  line-height: 1.65;
+  line-height: 1.55;
+}
+
+.summaries-phase {
+  margin-bottom: 12px;
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 13px;
+  border: 1px solid rgba(255,255,255,.96);
+  border-radius: 18px;
+  background:
+    linear-gradient(130deg, rgba(255,255,255,.88), rgba(228,230,233,.67));
+  box-shadow: 0 9px 24px rgba(35,38,44,.055), inset 0 1px white;
+}
+
+.summaries-phase div {
+  min-width: max-content;
+  display: grid;
+  gap: 3px;
+}
+
+.summaries-phase span {
+  color: #83878f;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .19em;
+  text-transform: uppercase;
+}
+
+.summaries-phase strong {
+  color: #33363c;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+
+.summaries-phase p {
+  max-width: 175px;
+  margin: 0;
+  color: #767a82;
+  font-size: 9px;
+  line-height: 1.45;
+  text-align: right;
 }
 
 .chapter-list {
   display: grid;
-  gap: 9px;
+  gap: 7px;
 }
 
 .chapter-item {
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.94);
-  border-radius: 20px;
+  border-radius: 18px;
   background: rgba(255,255,255,.62);
-  box-shadow: 0 10px 26px rgba(35,38,44,.06), inset 0 1px white;
+  box-shadow: 0 8px 22px rgba(35,38,44,.055), inset 0 1px white;
   transition: background .25s ease, box-shadow .25s ease;
 }
 
 .chapter-item[open] {
-  background: rgba(255,255,255,.86);
-  box-shadow: 0 16px 36px rgba(35,38,44,.1), inset 0 1px white;
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 14px 31px rgba(35,38,44,.09), inset 0 1px white;
 }
 
 .chapter-item summary {
-  min-height: 76px;
-  padding: 14px 16px;
+  min-height: 65px;
+  padding: 10px 13px;
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) 30px;
+  grid-template-columns: 31px minmax(0, 1fr) 27px;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   list-style: none;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .chapter-item summary::-webkit-details-marker {
@@ -852,54 +878,57 @@ a:focus-visible {
 }
 
 .chapter-number {
-  width: 31px;
-  height: 31px;
+  width: 29px;
+  height: 29px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(47,50,57,.16);
   border-radius: 50%;
   color: #656a73;
   font-family: var(--serif);
-  font-size: 12px;
+  font-size: 11px;
   font-style: italic;
 }
 
 .chapter-meta {
   min-width: 0;
   display: grid;
-  gap: 3px;
+  gap: 2px;
 }
 
 .chapter-meta small {
-  color: #81858d;
-  font-size: 8px;
+  overflow: hidden;
+  color: #858991;
+  font-size: 7px;
   font-weight: 800;
-  letter-spacing: .11em;
+  letter-spacing: .1em;
   line-height: 1.35;
   text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .chapter-meta strong {
   overflow: hidden;
   color: #25272d;
   font-family: var(--serif);
-  font-size: clamp(20px, 5.3vw, 27px);
+  font-size: clamp(18px, 4.8vw, 25px);
   font-weight: 400;
   letter-spacing: -.03em;
-  line-height: 1;
+  line-height: 1.02;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .chapter-open {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(38,41,47,.13);
   border-radius: 50%;
   color: #5d626b;
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 300;
   line-height: 1;
   transition: transform .26s ease, background .26s ease;
@@ -912,53 +941,117 @@ a:focus-visible {
 }
 
 .chapter-content {
-  padding: 0 16px 17px 62px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 9px 9px;
+  padding: 20px 15px 12px;
+  border: 1px solid rgba(50,53,59,.07);
+  border-radius: 14px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.93), rgba(239,239,238,.9));
+  box-shadow: inset 0 1px rgba(255,255,255,.9);
   animation: chapterReveal .26s ease-out both;
 }
 
-.chapter-content p {
-  max-width: 590px;
-  margin: 0;
-  padding-top: 14px;
-  border-top: 1px solid rgba(40,43,49,.1);
-  color: #5a5e66;
-  font-size: 13px;
-  line-height: 1.7;
+.chapter-content::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 23px;
+  height: 23px;
+  background: linear-gradient(135deg, rgba(222,224,227,.9) 0 49%, rgba(255,255,255,.95) 51%);
 }
 
-.chapter-content span {
-  display: block;
-  margin-top: 13px;
+.chapter-stitch {
+  position: absolute;
+  inset: 4px 10px auto;
+  height: 17px;
+  color: #dc5b32;
+  opacity: .8;
+}
+
+.chapter-stitch svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chapter-stitch path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 5 5;
+}
+
+.chapter-content > p {
+  max-width: 590px;
+  margin: 0;
+  color: #565a62;
+  font-size: 12px;
+  line-height: 1.68;
+}
+
+.chapter-ticket-footer {
+  margin-top: 10px;
+  padding-top: 8px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  border-top: 1px solid rgba(40,43,49,.08);
+}
+
+.chapter-ticket-footer span {
   color: #8a8e95;
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 800;
-  letter-spacing: .13em;
+  letter-spacing: .16em;
   text-transform: uppercase;
 }
 
+.chapter-ticket-footer svg {
+  width: 48px;
+  height: 19px;
+  color: #4c5058;
+  stroke: currentColor;
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .62;
+}
+
 @keyframes chapterReveal {
-  from { opacity: 0; transform: translateY(-5px); }
+  from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @media (min-width: 700px) {
-  .summaries-intro {
-    grid-template-columns: 84px minmax(0, 1fr);
-    align-items: center;
-    padding: 30px;
+  .summaries-page {
+    padding-top: 44px;
   }
 
-  .summaries-intro > p {
-    grid-column: 2;
+  .summaries-heading {
+    grid-template-columns: minmax(260px, 1fr) minmax(220px, .6fr);
+    align-items: end;
+  }
+
+  .summaries-heading > p {
+    justify-self: end;
+  }
+
+  .summaries-phase {
+    padding-inline: 19px;
   }
 
   .chapter-item summary {
-    min-height: 82px;
-    padding-inline: 22px;
+    min-height: 70px;
+    padding-inline: 18px;
   }
 
   .chapter-content {
-    padding: 0 22px 21px 80px;
+    margin-inline: 13px;
+    padding: 23px 20px 14px;
   }
 }
 

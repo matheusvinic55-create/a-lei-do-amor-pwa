@@ -417,20 +417,23 @@ const firstChapters = [
 function Resumos() {
   return (
     <section className="section-page summaries-page">
-      <SectionHeading
-        index="03"
-        kicker="Capítulo a capítulo"
-        title="Resumos"
-        description="Os primeiros capítulos de A Lei do Amor, reunidos para acompanhar a história desde o começo."
-      />
-
-      <div className="summaries-intro glass-card">
-        <span className="summaries-intro-number">01–07</span>
-        <div>
-          <p className="section-kicker">Primeira fase</p>
-          <h2>O início de uma história que atravessa o tempo.</h2>
+      <header className="summaries-heading">
+        <div className="summaries-heading-main">
+          <span className="section-index">03</span>
+          <div>
+            <p className="section-kicker">Capítulo a capítulo</p>
+            <h1>Resumos</h1>
+          </div>
         </div>
-        <p>Abra cada capítulo para revisitar os acontecimentos da trama.</p>
+        <p>Os primeiros capítulos da história, reunidos desde o começo.</p>
+      </header>
+
+      <div className="summaries-phase">
+        <div>
+          <span>Primeira fase</span>
+          <strong>Capítulos 01–07</strong>
+        </div>
+        <p>Toque em um capítulo para abrir o resumo.</p>
       </div>
 
       <div className="chapter-list">
@@ -439,14 +442,30 @@ function Resumos() {
             <summary>
               <span className="chapter-number">{chapter.number}</span>
               <span className="chapter-meta">
-                <small>Capítulo {chapter.number} · {chapter.date}</small>
+                <small>{chapter.date}</small>
                 <strong>{chapter.title}</strong>
               </span>
               <span className="chapter-open" aria-hidden="true">+</span>
             </summary>
             <div className="chapter-content">
+              <div className="chapter-stitch" aria-hidden="true">
+                <svg viewBox="0 0 360 22" preserveAspectRatio="none">
+                  <path d="M2 12 C28 2 48 20 75 12 S122 3 151 13 S202 20 230 10 S282 3 309 13 S340 18 358 9" />
+                </svg>
+              </div>
               <p>{chapter.summary}</p>
-              <span>Fim do capítulo {chapter.number}</span>
+              <div className="chapter-ticket-footer">
+                <span>Capítulo {chapter.number}</span>
+                <svg viewBox="0 0 88 34" fill="none" aria-hidden="true">
+                  <path d="M4 25h9l4-5h10V10h23v15h11l5-5h8l6 5h5" />
+                  <path d="M21 10V6h16v4M26 6V3h7v3M50 14h11v11M54 14V9h6v5" />
+                  <path d="M13 25h64M17 30h62M6 30h6M82 30h4" />
+                  <circle cx="25" cy="27" r="5" />
+                  <circle cx="66" cy="27" r="5" />
+                  <circle cx="44" cy="27" r="3" />
+                  <path d="M74 20l8-4v9M17 17h10M35 16h9M35 21h9" />
+                </svg>
+              </div>
             </div>
           </details>
         ))}
