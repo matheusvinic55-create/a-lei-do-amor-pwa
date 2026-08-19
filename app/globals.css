@@ -4107,3 +4107,16 @@ body {
     max-width: 49%;
   }
 }
+
+
+/* Ajuste do recorte da trilha no PWA iOS */
+@media (max-width: 699px) {
+  .soundtrack-cast-image {
+    width: 76%;
+    right: 1%;
+    bottom: -34%;
+    opacity: .48;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 17%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 17%, #000 100%);
+  }
+}
