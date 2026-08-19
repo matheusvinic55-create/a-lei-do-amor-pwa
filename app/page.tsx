@@ -515,27 +515,21 @@ function Resumos() {
   );
 }
 
-const nationalSoundtrack = [
-  { title: "A distância", artist: "Roberto Carlos" },
-  { title: "Blue", artist: "Bel Garcia (BluBell)" },
-  { title: "Chuva no mar", artist: "Carminho (part. Marisa Monte)" },
-  { title: "Cowboy fora da lei", artist: "Raul Seixas" },
-  { title: "É bom para o moral", artist: "Rita Cadillac" },
-  { title: "Era para ser", artist: "Maria Bethânia" },
-  { title: "Estado de poesia", artist: "Chico César" },
-  { title: "Estrela blue", artist: "Simone Mazzer" },
-  { title: "Fogueira", artist: "Ângela Rô Rô" },
-  { title: "Folgado", artist: "Marília Mendonça" },
-  { title: "Grito de alerta", artist: "Maria Rita e Gonzaguinha" },
-  { title: "Levanta", artist: "Renata Jambeiro" },
-  { title: "Maior", artist: "Dani Black (part. Milton Nascimento)" },
+const soundtrackVolumeOne = [
+  { title: "Bachianas Brasileiras nº 2 (O Trenzinho do Caipira)", artist: "Ney Matogrosso" },
+  { title: "Blue", artist: "BluBell" },
+  { title: "No meu país", artist: "Zélia Duncan (part. Xande de Pilares)" },
+  { title: "Step by Step", artist: "New Kids on the Block" },
   { title: "Meu recado", artist: "Alice Caymmi" },
-  { title: "Não demora", artist: "Adriana Calcanhotto" },
-  { title: "No meu país", artist: "Zélia Duncan" },
-  { title: "Partículas de amor", artist: "Márcia Castro" },
-  { title: "Pessoa", artist: "Marina Lima" },
+  { title: "Lovesong", artist: "Edson Cordeiro" },
+  { title: "Chuva no mar", artist: "Carminho (part. Marisa Monte)" },
+  { title: "Estado de poesia", artist: "Chico César" },
+  { title: "What's Up?", artist: "4 Non Blondes" },
+  { title: "Levanta", artist: "Renata Jambeiro" },
+  { title: "Folgado", artist: "Marília Mendonça" },
+  { title: "Partículas do amor", artist: "Márcia Castro" },
   { title: "Por enquanto", artist: "Cássia Eller" },
-  { title: "Quem leva a vida sou eu", artist: "Lenine" },
+  { title: "The Rip Tide", artist: "Beirut" },
 ] as const;
 
 function Trilha() {
@@ -549,14 +543,24 @@ function Trilha() {
             <h1>Trilha Sonora</h1>
           </div>
         </div>
-        <p>Canções brasileiras que atravessam o tempo e acompanham os sentimentos da trama.</p>
+        <p>As canções reunidas no primeiro volume da trilha oficial da novela.</p>
       </header>
 
-      <div className="soundtrack-intro">
+      <div className="soundtrack-intro soundtrack-intro--volume-one">
+        <Image
+          className="soundtrack-cast-image"
+          src="/soundtrack-cast.webp"
+          alt=""
+          width={840}
+          height={913}
+          sizes="(max-width: 699px) 78vw, 430px"
+          aria-hidden="true"
+        />
+
         <div className="soundtrack-intro-copy">
-          <p>Seleção nacional</p>
-          <h2>Canções para lembrar, sentir e reencontrar.</h2>
-          <span>20 faixas · repertório brasileiro</span>
+          <p>Trilha oficial</p>
+          <h2>Um disco para atravessar o tempo.</h2>
+          <span>14 faixas · Volume 1</span>
         </div>
 
         <svg className="soundtrack-thread-art" viewBox="0 0 620 230" fill="none" aria-hidden="true">
@@ -564,40 +568,42 @@ function Trilha() {
           <path className="soundtrack-thread soundtrack-thread--orange" d="M-34 142C68 184 140 64 251 137s173 50 248-7 118-38 165-1" />
           <path className="soundtrack-thread soundtrack-thread--rose" d="M18 202C124 120 206 215 310 158s194-35 330 36" />
         </svg>
-
-        <svg className="soundtrack-train" viewBox="0 0 190 66" fill="none" aria-hidden="true">
-          <path d="M9 48h22l10-9h24V18h51v30h24l11-9h17l13 9" />
-          <path d="M45 18V10h34v8M56 10V4h13v6M116 27h22v21M126 27V16h12v11" />
-          <path d="M18 48h158M25 58h147M4 58h13M176 58h10" />
-          <circle cx="55" cy="52" r="10" />
-          <circle cx="140" cy="52" r="10" />
-          <circle cx="96" cy="52" r="6" />
-          <path d="M162 39l17-9v18M43 31h22M82 29h21M82 39h21M68 4c7-8 15 7 22-1 7-8 16 5 22-2" />
-        </svg>
       </div>
 
       <div className="soundtrack-catalog-heading">
         <div>
-          <p className="section-kicker">Trilha nacional</p>
-          <h2>Faixas da novela</h2>
+          <p className="section-kicker">A Lei do Amor · Vol. 1</p>
+          <h2>Faixas do CD</h2>
         </div>
-        <span>{nationalSoundtrack.length} canções</span>
+        <span>{soundtrackVolumeOne.length} canções</span>
       </div>
 
       <ol className="soundtrack-list">
-        {nationalSoundtrack.map((track, index) => (
-          <li className="soundtrack-item" key={track.title}>
-            <span className="soundtrack-number">{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <h3>{track.title}</h3>
-              <p>{track.artist}</p>
-            </div>
-            <i aria-hidden="true" />
-          </li>
-        ))}
+        {soundtrackVolumeOne.map((track, index) => {
+          const youtubeQuery = encodeURIComponent(`${track.title} ${track.artist}`);
+
+          return (
+            <li key={track.title}>
+              <a
+                className="soundtrack-item"
+                href={`https://www.youtube.com/results?search_query=${youtubeQuery}`}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Ouvir ${track.title}, de ${track.artist}, no YouTube`}
+              >
+                <span className="soundtrack-number">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{track.title}</h3>
+                  <p>{track.artist}</p>
+                </div>
+                <span className="soundtrack-youtube" aria-hidden="true">▶</span>
+              </a>
+            </li>
+          );
+        })}
       </ol>
 
-      <p className="soundtrack-source">Seleção nacional conforme o acervo da Globo.</p>
+      <p className="soundtrack-source">Seleção conforme a contracapa de A Lei do Amor — Vol. 1.</p>
     </section>
   );
 }
