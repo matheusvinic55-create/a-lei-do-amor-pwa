@@ -323,15 +323,29 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
 function Sinopse() {
   return (
     <section className="section-page synopsis-page">
-      <SectionHeading
-        index="02"
-        kicker="A história"
-        title="O tempo separa. O amor reencontra."
-        description="Uma trama sobre escolhas, poder e a força de um sentimento que se recusa a desaparecer."
-      />
+      <header className="synopsis-heading">
+        <div className="synopsis-heading-main">
+          <span className="section-index">02</span>
+          <div>
+            <p className="section-kicker">A história</p>
+            <h1>Sinopse</h1>
+          </div>
+        </div>
+        <p>Uma trama sobre escolhas, poder e a força de um sentimento que se recusa a desaparecer.</p>
+      </header>
+
+      <div className="synopsis-premise">
+        <span>O ponto de partida</span>
+        <strong>O tempo separa. <em>O amor reencontra.</em></strong>
+      </div>
 
       <div className="synopsis-layout">
         <article className="story-card glass-card">
+          <div className="story-stitch" aria-hidden="true">
+            <svg viewBox="0 0 360 22" preserveAspectRatio="none">
+              <path d="M2 12 C28 2 48 20 75 12 S122 3 151 13 S202 20 230 10 S282 3 309 13 S340 18 358 9" />
+            </svg>
+          </div>
           <p className="dropcap-text">
             <span>H</span>elô e Pedro vivem um amor arrebatador na juventude,
             mas uma armação da poderosa família Leitão muda o rumo de suas vidas.
@@ -348,16 +362,21 @@ function Sinopse() {
         <aside className="quote-card">
           <span className="quote-mark">“</span>
           <blockquote>O amor muda de forma, atravessa a cidade e sempre encontra uma luz para voltar.</blockquote>
-          <div className="quote-line" />
           <small>A essência da trama</small>
         </aside>
       </div>
 
-      <div className="story-pillars">
-        <article><span>01</span><h3>Reencontro</h3><p>Um sentimento interrompido ganha uma nova chance.</p></article>
-        <article><span>02</span><h3>Segredos</h3><p>O passado retorna em reflexos que ninguém consegue esconder.</p></article>
-        <article><span>03</span><h3>Escolhas</h3><p>Cada coração precisa decidir qual caminho deseja iluminar.</p></article>
-      </div>
+      <section className="story-threads" aria-labelledby="story-threads-title">
+        <header>
+          <p className="section-kicker">Fios da história</p>
+          <h2 id="story-threads-title">O que move a trama</h2>
+        </header>
+        <div className="story-pillars">
+          <article><span>01</span><div><h3>Reencontro</h3><p>Um sentimento interrompido ganha uma nova chance.</p></div></article>
+          <article><span>02</span><div><h3>Segredos</h3><p>O passado retorna em reflexos que ninguém consegue esconder.</p></div></article>
+          <article><span>03</span><div><h3>Escolhas</h3><p>Cada coração precisa decidir qual caminho deseja iluminar.</p></div></article>
+        </div>
+      </section>
     </section>
   );
 }
