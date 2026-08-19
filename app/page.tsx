@@ -515,32 +515,89 @@ function Resumos() {
   );
 }
 
+const nationalSoundtrack = [
+  { title: "A distância", artist: "Roberto Carlos" },
+  { title: "Blue", artist: "Bel Garcia (BluBell)" },
+  { title: "Chuva no mar", artist: "Carminho (part. Marisa Monte)" },
+  { title: "Cowboy fora da lei", artist: "Raul Seixas" },
+  { title: "É bom para o moral", artist: "Rita Cadillac" },
+  { title: "Era para ser", artist: "Maria Bethânia" },
+  { title: "Estado de poesia", artist: "Chico César" },
+  { title: "Estrela blue", artist: "Simone Mazzer" },
+  { title: "Fogueira", artist: "Ângela Rô Rô" },
+  { title: "Folgado", artist: "Marília Mendonça" },
+  { title: "Grito de alerta", artist: "Maria Rita e Gonzaguinha" },
+  { title: "Levanta", artist: "Renata Jambeiro" },
+  { title: "Maior", artist: "Dani Black (part. Milton Nascimento)" },
+  { title: "Meu recado", artist: "Alice Caymmi" },
+  { title: "Não demora", artist: "Adriana Calcanhotto" },
+  { title: "No meu país", artist: "Zélia Duncan" },
+  { title: "Partículas de amor", artist: "Márcia Castro" },
+  { title: "Pessoa", artist: "Marina Lima" },
+  { title: "Por enquanto", artist: "Cássia Eller" },
+  { title: "Quem leva a vida sou eu", artist: "Lenine" },
+] as const;
+
 function Trilha() {
   return (
-    <section className="section-page">
-      <SectionHeading
-        index="04"
-        kicker="Música & emoção"
-        title="Trilha Sonora"
-        description="Canções que transformam encontros em memória e dão ritmo ao coração da cidade."
-      />
-
-      <div className="soundtrack-stage glass-card">
-        <div className="record-art" aria-hidden="true">
-          <div className="record"><span>AL</span></div>
-          <div className="record-glow" />
-        </div>
-        <div className="coming-copy soundtrack-copy">
-          <p className="section-kicker">Playlist oficial</p>
-          <h2>A trilha sonora da novela será adicionada em breve.</h2>
-          <p>A estrutura está pronta para receber músicas, intérpretes e momentos marcantes de cada faixa.</p>
-          <div className="track-list" aria-hidden="true">
-            {[1, 2, 3].map((track) => (
-              <div key={track}><span>0{track}</span><i /><button tabIndex={-1}>▷</button></div>
-            ))}
+    <section className="section-page soundtrack-page">
+      <header className="soundtrack-heading">
+        <div className="soundtrack-heading-main">
+          <span className="section-index">04</span>
+          <div>
+            <p className="section-kicker">Música & emoção</p>
+            <h1>Trilha Sonora</h1>
           </div>
         </div>
+        <p>Canções brasileiras que atravessam o tempo e acompanham os sentimentos da trama.</p>
+      </header>
+
+      <div className="soundtrack-intro">
+        <div className="soundtrack-intro-copy">
+          <p>Seleção nacional</p>
+          <h2>Canções para lembrar, sentir e reencontrar.</h2>
+          <span>20 faixas · repertório brasileiro</span>
+        </div>
+
+        <svg className="soundtrack-thread-art" viewBox="0 0 620 230" fill="none" aria-hidden="true">
+          <path className="soundtrack-thread soundtrack-thread--red" d="M-30 92C75 38 132 148 230 96S386 44 476 112s151 30 194-2" />
+          <path className="soundtrack-thread soundtrack-thread--orange" d="M-34 142C68 184 140 64 251 137s173 50 248-7 118-38 165-1" />
+          <path className="soundtrack-thread soundtrack-thread--rose" d="M18 202C124 120 206 215 310 158s194-35 330 36" />
+        </svg>
+
+        <svg className="soundtrack-train" viewBox="0 0 190 66" fill="none" aria-hidden="true">
+          <path d="M9 48h22l10-9h24V18h51v30h24l11-9h17l13 9" />
+          <path d="M45 18V10h34v8M56 10V4h13v6M116 27h22v21M126 27V16h12v11" />
+          <path d="M18 48h158M25 58h147M4 58h13M176 58h10" />
+          <circle cx="55" cy="52" r="10" />
+          <circle cx="140" cy="52" r="10" />
+          <circle cx="96" cy="52" r="6" />
+          <path d="M162 39l17-9v18M43 31h22M82 29h21M82 39h21M68 4c7-8 15 7 22-1 7-8 16 5 22-2" />
+        </svg>
       </div>
+
+      <div className="soundtrack-catalog-heading">
+        <div>
+          <p className="section-kicker">Trilha nacional</p>
+          <h2>Faixas da novela</h2>
+        </div>
+        <span>{nationalSoundtrack.length} canções</span>
+      </div>
+
+      <ol className="soundtrack-list">
+        {nationalSoundtrack.map((track, index) => (
+          <li className="soundtrack-item" key={track.title}>
+            <span className="soundtrack-number">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3>{track.title}</h3>
+              <p>{track.artist}</p>
+            </div>
+            <i aria-hidden="true" />
+          </li>
+        ))}
+      </ol>
+
+      <p className="soundtrack-source">Seleção nacional conforme o acervo da Globo.</p>
     </section>
   );
 }
