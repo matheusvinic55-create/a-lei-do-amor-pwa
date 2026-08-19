@@ -274,6 +274,19 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
 
       </section>
 
+      <div className="home-transition-stitch" aria-hidden="true">
+        <svg viewBox="0 0 430 34" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="home-stitch-gradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stopColor="#9f2942" />
+              <stop offset=".5" stopColor="#c22246" />
+              <stop offset="1" stopColor="#df7a42" />
+            </linearGradient>
+          </defs>
+          <path d="M-18 21 C38 5 82 27 137 16 S232 5 286 18 S374 28 448 10" />
+        </svg>
+      </div>
+
       <section className="home-editorial" id="historia">
         <div className="editorial-railway" aria-hidden="true">
           <svg viewBox="0 0 720 150" preserveAspectRatio="xMidYMid meet">
