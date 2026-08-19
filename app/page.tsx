@@ -230,10 +230,6 @@ export default function Home() {
 }
 
 function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
-  const continueStory = () => {
-    document.getElementById("historia")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <>
       <section className="hero-section">
@@ -261,8 +257,8 @@ function Inicio({ onNavigate }: { onNavigate: (tab: TabId) => void }) {
             que algumas histórias nunca deixam de brilhar.
           </p>
           <div className="hero-actions">
-            <button className="primary-action" onClick={continueStory}>
-              Entrar nesta história <span>↓</span>
+            <button className="primary-action" onClick={() => onNavigate("resumos")}>
+              Entrar nesta história <span>→</span>
             </button>
           </div>
         </div>

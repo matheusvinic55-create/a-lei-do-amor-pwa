@@ -1,4 +1,4 @@
-const CACHE_NAME = "a-lei-do-amor-v11";
+const CACHE_NAME = "a-lei-do-amor-v12";
 const CORE_ASSETS = [
   "/",
   "/manifest.webmanifest",
