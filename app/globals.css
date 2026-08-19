@@ -3611,3 +3611,27 @@ body {
     min-height: 52px;
   }
 }
+
+
+/* Transição compacta entre a abertura e a continuação no PWA mobile */
+@media (max-width: 699px) {
+  .content-stage--home .hero-section {
+    min-height: 0;
+  }
+
+  .content-stage--home .hero-copy {
+    min-height: 0;
+    padding-bottom: max(54px, calc(env(safe-area-inset-bottom) + 38px));
+  }
+
+  .home-editorial {
+    min-height: 0;
+    padding-top: 18px;
+  }
+
+  .editorial-railway {
+    height: 92px;
+    margin-top: -7px;
+    margin-bottom: -7px;
+  }
+}
