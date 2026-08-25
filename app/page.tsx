@@ -403,55 +403,55 @@ function Sinopse() {
   );
 }
 
-const firstChapters = [
+const chapters08to14 = [
   {
-    number: "01",
-    date: "3 de outubro de 2016",
-    title: "O primeiro encontro",
+    number: "08",
+    date: "11 de outubro de 2016",
+    title: "Depois do atentado",
     summary:
-      "Pedro socorre Helô depois de uma provocação de Hércules e Ciro, e os dois se aproximam na quermesse. Enquanto isso, Jorge, revoltado com Fausto, tenta roubar a fábrica e acaba preso. Ao defender o pai, Helô encara Fausto e amplia o conflito entre as famílias.",
+      "As consequências do atentado atingem Pedro e a família Leitão. Enquanto tenta amparar Elio, Pedro começa a reunir pistas sobre o crime. Helô permanece por perto, e a tensão em São Dimas se espalha entre os núcleos da cidade.",
   },
   {
-    number: "02",
-    date: "4 de outubro de 2016",
-    title: "Um amor em risco",
+    number: "09",
+    date: "12 de outubro de 2016",
+    title: "Suspeitas à flor da pele",
     summary:
-      "Pedro apoia Helô diante de Fausto e o romance entre os dois ganha força. Mas Magnólia e Fausto começam a movimentar Gigi para manter a jovem distante de Pedro — e Magnólia encontra em Suzana uma possível aliada para esse plano.",
+      "Tião reage à reaproximação entre Helô e Pedro, enquanto Pedro divide com Zuza suas desconfianças sobre Magnólia. Elio se aproxima de Isabela e transforma a dor em acusação, fazendo o clima na família Leitão ficar ainda mais tenso.",
   },
   {
-    number: "03",
-    date: "5 de outubro de 2016",
-    title: "A dor e a estratégia",
+    number: "10",
+    date: "13 de outubro de 2016",
+    title: "Entre ameaças e escolhas",
     summary:
-      "Helô viaja a trabalho, enquanto Suzana conhece Pedro e chama a atenção de Magnólia. A perda de Cândida abala Helô profundamente. Em paralelo, as relações de Vitória, Ciro, Hércules e Carmem começam a revelar tensões que atravessam São Dimas.",
+      "A acusação de Elio provoca uma discussão com Tiago. Magnólia recebe uma proposta que altera o cenário político de São Dimas, e Pedro percebe que está sendo seguido. Helô e Pedro se entregam ao reencontro, mas Tião não aceita perder o controle.",
   },
   {
-    number: "04",
-    date: "6 de outubro de 2016",
-    title: "A primeira armadilha",
+    number: "11",
+    date: "14 de outubro de 2016",
+    title: "Um despertar delicado",
     summary:
-      "Gigi convence Helô a assinar um contrato sem mostrar o documento a Pedro. A aproximação de Suzana desperta insegurança em Helô, enquanto Ciro se aproxima de Vitória. No fim do capítulo, uma nova armação deixa Helô diante de uma cena difícil de explicar.",
+      "Tião e Helô entram em conflito, enquanto novas suspeitas surgem em torno das relações entre Magnólia, Ciro e a família Leitão. Fausto desperta, e o estado dele mobiliza Pedro, a imprensa e todos que esperam por respostas.",
   },
   {
-    number: "05",
-    date: "7 de outubro de 2016",
-    title: "Vinte anos depois",
+    number: "12",
+    date: "15 de outubro de 2016",
+    title: "Segredos em movimento",
     summary:
-      "Depois da separação, Pedro decide deixar o Brasil. A história então avança duas décadas: Helô e Tião vivem uma relação marcada por desconfianças, e o aniversário de Fausto cria as condições para que Helô e Pedro se reencontrem.",
+      "Elio registra um encontro que pode mexer com a política local, enquanto Tião trabalha nos bastidores. Uma notícia muda a disputa pela prefeitura de São Dimas, e Pedro encontra um aposento escondido na empresa de Fausto.",
   },
   {
-    number: "06",
-    date: "8 de outubro de 2016",
-    title: "Verdades do passado",
+    number: "13",
+    date: "17 de outubro de 2016",
+    title: "A sala secreta",
     summary:
-      "O reencontro de Helô e Pedro é tenso. De volta a São Dimas, Pedro revisita pessoas e lugares que ficaram no passado, enquanto Helô questiona Tião. Fausto procura o filho e, em uma conversa decisiva, revela a Pedro sua participação na separação do casal.",
+      "Pedro examina os documentos que encontrou e passa a desconfiar ainda mais das intenções ao seu redor. Magnólia e Tião se enfrentam, enquanto Helô celebra a aproximação entre Pedro e Edu. Os conflitos de São Dimas ganham novos contornos.",
   },
   {
-    number: "07",
-    date: "10 de outubro de 2016",
-    title: "O amor volta à tona",
+    number: "14",
+    date: "18 de outubro de 2016",
+    title: "Frentes abertas",
     summary:
-      "Pedro confronta Fausto, Magnólia e Suzana pelo que aconteceu no passado. Helô começa a desconfiar das atitudes de Tião, e Pedro revela que os dois foram vítimas de uma armação. Antes que as respostas se acomodem, Fausto e Suzana sofrem um atentado.",
+      "Pedro questiona Tião sobre sua ligação com Ciro, e os dois se enfrentam. Jéssica é desmascarada, novas informações voltam a cercar o atentado e Helô coloca seu casamento em discussão diante da família.",
   },
 ] as const;
 
@@ -466,19 +466,19 @@ function Resumos() {
             <h1>Resumos</h1>
           </div>
         </div>
-        <p>Os primeiros capítulos da história, reunidos desde o começo.</p>
+        <p>Os capítulos 08 a 14, reunidos para seguir acompanhando a história.</p>
       </header>
 
       <div className="summaries-phase">
         <div>
           <span>Primeira fase</span>
-          <strong>Capítulos 01–07</strong>
+          <strong>Capítulos 08–14</strong>
         </div>
         <p>Toque em um capítulo para abrir o resumo.</p>
       </div>
 
       <div className="chapter-list">
-        {firstChapters.map((chapter) => (
+        {chapters08to14.map((chapter) => (
           <details className="chapter-item" key={chapter.number}>
             <summary>
               <span className="chapter-number">{chapter.number}</span>
