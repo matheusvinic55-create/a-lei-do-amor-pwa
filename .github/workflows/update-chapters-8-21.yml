@@ -1,0 +1,162 @@
+name: Update chapters 08-21 once
+
+on:
+  push:
+    branches:
+      - update-chapters-8-21
+    paths:
+      - .github/workflows/update-chapters-8-21.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: update-chapters-8-21
+          fetch-depth: 0
+
+      - name: Update chapter range
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path("app/page.tsx")
+          text = path.read_text(encoding="utf-8")
+
+          chapter_block = '''const chapters08to21 = [
+            {
+              number: "08",
+              date: "11 de outubro de 2016",
+              title: "Depois do atentado",
+              summary:
+                "As consequências do atentado atingem Pedro e a família Leitão. Enquanto tenta amparar Elio, Pedro começa a reunir pistas sobre o crime. Helô permanece por perto, e a tensão em São Dimas se espalha entre os núcleos da cidade.",
+            },
+            {
+              number: "09",
+              date: "12 de outubro de 2016",
+              title: "Suspeitas à flor da pele",
+              summary:
+                "Tião reage à reaproximação entre Helô e Pedro, enquanto Pedro divide com Zuza suas desconfianças sobre Magnólia. Elio se aproxima de Isabela e transforma a dor em acusação, fazendo o clima na família Leitão ficar ainda mais tenso.",
+            },
+            {
+              number: "10",
+              date: "13 de outubro de 2016",
+              title: "Entre ameaças e escolhas",
+              summary:
+                "A acusação de Elio provoca uma discussão com Tiago. Magnólia recebe uma proposta que altera o cenário político de São Dimas, e Pedro percebe que está sendo seguido. Helô e Pedro se entregam ao reencontro, mas Tião não aceita perder o controle.",
+            },
+            {
+              number: "11",
+              date: "14 de outubro de 2016",
+              title: "Um despertar delicado",
+              summary:
+                "Tião e Helô entram em conflito, enquanto novas suspeitas surgem em torno das relações entre Magnólia, Ciro e a família Leitão. Fausto desperta, e o estado dele mobiliza Pedro, a imprensa e todos que esperam por respostas.",
+            },
+            {
+              number: "12",
+              date: "15 de outubro de 2016",
+              title: "Segredos em movimento",
+              summary:
+                "Elio registra um encontro que pode mexer com a política local, enquanto Tião trabalha nos bastidores. Uma notícia muda a disputa pela prefeitura de São Dimas, e Pedro encontra um aposento escondido na empresa de Fausto.",
+            },
+            {
+              number: "13",
+              date: "17 de outubro de 2016",
+              title: "A sala secreta",
+              summary:
+                "Pedro examina os documentos que encontrou e passa a desconfiar ainda mais das intenções ao seu redor. Magnólia e Tião se enfrentam, enquanto Helô celebra a aproximação entre Pedro e Edu. Os conflitos de São Dimas ganham novos contornos.",
+            },
+            {
+              number: "14",
+              date: "18 de outubro de 2016",
+              title: "Frentes abertas",
+              summary:
+                "Pedro questiona Tião sobre sua ligação com Ciro, e os dois se enfrentam. Jéssica é desmascarada, novas informações voltam a cercar o atentado e Helô coloca seu casamento em discussão diante da família.",
+            },
+            {
+              number: "15",
+              date: "19 de outubro de 2016",
+              title: "Novos rastros",
+              summary:
+                "Helô confronta Tião e procura Pedro, enquanto Magnólia nega conhecer o empresário. Ana Luiza ajuda Elio a criar um blog jornalístico, e Isabela ouve uma conversa de Venturini e Arlindo que pode trazer novas pistas sobre o atentado.",
+            },
+            {
+              number: "16",
+              date: "20 de outubro de 2016",
+              title: "Ciro sob pressão",
+              summary:
+                "Tião mente para Helô e usa o estado de Letícia para tentar afastá-la de Pedro. Enquanto isso, Pedro mostra a Ciro o dossiê que encontrou, descobre celulares descartáveis em sua gaveta e o expulsa de casa.",
+            },
+            {
+              number: "17",
+              date: "21 de outubro de 2016",
+              title: "Um anúncio indesejado",
+              summary:
+                "Helô decide se afastar de Pedro, e Tião pressiona Tiago para que se case com Letícia. Isabela conta a Elio o que ouviu sobre o atentado, Pedro passa a suspeitar de Ciro e Tião anuncia o casamento de Letícia e Tiago à imprensa.",
+            },
+            {
+              number: "18",
+              date: "22 de outubro de 2016",
+              title: "O noivado em jogo",
+              summary:
+                "Tiago se revolta com os planos para o casamento, enquanto Isabela fica abalada e se aproxima de Elio. Helô afirma que Tiago não será obrigado a se casar, mas Tião e Letícia seguem acertando os detalhes da festa de noivado.",
+            },
+            {
+              number: "19",
+              date: "24 de outubro de 2016",
+              title: "Encontros sob vigilância",
+              summary:
+                "Pedro questiona Tião sobre o noivado. Zelito envia uma mensagem do celular de Isabela para Tiago, que se encontra com ela sob a vigilância de Valdir. Magnólia acerta o retorno de Ciro, e Isabela decide trabalhar na festa de noivado.",
+            },
+            {
+              number: "20",
+              date: "25 de outubro de 2016",
+              title: "A festa desanda",
+              summary:
+                "Tiago entrega a aliança a Letícia, mas a presença de Isabela abala a festa. Ana Luiza filma Venturini e Luciane, Tiago se embriaga e Helô segue Jéssica ao vê-la levar o rapaz embora, até que ela e Pedro flagram os dois juntos.",
+            },
+            {
+              number: "21",
+              date: "26 de outubro de 2016",
+              title: "Quem é Isabela?",
+              summary:
+                "Helô se preocupa com os sentimentos de Tiago e enfrenta Tião para proteger Edu. Pedro tenta descobrir quem é Isabela, Letícia acusa Jéssica de roubo, os auditores chegam à tecelagem e Helô questiona Tiago sobre seu envolvimento com a jovem.",
+            },
+          ] as const;
+
+          function Resumos()'''
+
+          pattern = r'const chapters08to14 = \[.*?\] as const;\n\nfunction Resumos\(\)'
+          updated, count = re.subn(pattern, chapter_block, text, count=1, flags=re.S)
+          if count != 1:
+              raise SystemExit(f"Expected one chapter block, found {count}")
+
+          replacements = {
+              "Os capítulos 08 a 14, reunidos para seguir acompanhando a história.": "Os capítulos 08 a 21, reunidos para seguir acompanhando a história.",
+              "Capítulos 08–14": "Capítulos 08–21",
+              "chapters08to14.map": "chapters08to21.map",
+          }
+          for old, new in replacements.items():
+              if old not in updated:
+                  raise SystemExit(f"Expected text not found: {old}")
+              updated = updated.replace(old, new, 1)
+
+          path.write_text(updated, encoding="utf-8")
+          PY
+
+      - name: Commit update and remove one-off workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/update-chapters-8-21.yml
+          git add app/page.tsx
+          git commit -m "feat: extend summaries through chapter 21"
+          git push origin HEAD:update-chapters-8-21
