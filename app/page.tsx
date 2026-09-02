@@ -403,56 +403,7 @@ function Sinopse() {
   );
 }
 
-const chapters08to21 = [
-  {
-    number: "08",
-    date: "11 de outubro de 2016",
-    title: "Depois do atentado",
-    summary:
-      "As consequências do atentado atingem Pedro e a família Leitão. Enquanto tenta amparar Elio, Pedro começa a reunir pistas sobre o crime. Helô permanece por perto, e a tensão em São Dimas se espalha entre os núcleos da cidade.",
-  },
-  {
-    number: "09",
-    date: "12 de outubro de 2016",
-    title: "Suspeitas à flor da pele",
-    summary:
-      "Tião reage à reaproximação entre Helô e Pedro, enquanto Pedro divide com Zuza suas desconfianças sobre Magnólia. Elio se aproxima de Isabela e transforma a dor em acusação, fazendo o clima na família Leitão ficar ainda mais tenso.",
-  },
-  {
-    number: "10",
-    date: "13 de outubro de 2016",
-    title: "Entre ameaças e escolhas",
-    summary:
-      "A acusação de Elio provoca uma discussão com Tiago. Magnólia recebe uma proposta que altera o cenário político de São Dimas, e Pedro percebe que está sendo seguido. Helô e Pedro se entregam ao reencontro, mas Tião não aceita perder o controle.",
-  },
-  {
-    number: "11",
-    date: "14 de outubro de 2016",
-    title: "Um despertar delicado",
-    summary:
-      "Tião e Helô entram em conflito, enquanto novas suspeitas surgem em torno das relações entre Magnólia, Ciro e a família Leitão. Fausto desperta, e o estado dele mobiliza Pedro, a imprensa e todos que esperam por respostas.",
-  },
-  {
-    number: "12",
-    date: "15 de outubro de 2016",
-    title: "Segredos em movimento",
-    summary:
-      "Elio registra um encontro que pode mexer com a política local, enquanto Tião trabalha nos bastidores. Uma notícia muda a disputa pela prefeitura de São Dimas, e Pedro encontra um aposento escondido na empresa de Fausto.",
-  },
-  {
-    number: "13",
-    date: "17 de outubro de 2016",
-    title: "A sala secreta",
-    summary:
-      "Pedro examina os documentos que encontrou e passa a desconfiar ainda mais das intenções ao seu redor. Magnólia e Tião se enfrentam, enquanto Helô celebra a aproximação entre Pedro e Edu. Os conflitos de São Dimas ganham novos contornos.",
-  },
-  {
-    number: "14",
-    date: "18 de outubro de 2016",
-    title: "Frentes abertas",
-    summary:
-      "Pedro questiona Tião sobre sua ligação com Ciro, e os dois se enfrentam. Jéssica é desmascarada, novas informações voltam a cercar o atentado e Helô coloca seu casamento em discussão diante da família.",
-  },
+const chapters15to21 = [
   {
     number: "15",
     date: "19 de outubro de 2016",
@@ -515,19 +466,19 @@ function Resumos() {
             <h1>Resumos</h1>
           </div>
         </div>
-        <p>Os capítulos 08 a 21, reunidos para seguir acompanhando a história.</p>
+        <p>Os capítulos 15 a 21, reunidos para seguir acompanhando a história.</p>
       </header>
 
       <div className="summaries-phase">
         <div>
           <span>Primeira fase</span>
-          <strong>Capítulos 08–21</strong>
+          <strong>Capítulos 15–21</strong>
         </div>
         <p>Toque em um capítulo para abrir o resumo.</p>
       </div>
 
       <div className="chapter-list">
-        {chapters08to21.map((chapter) => (
+        {chapters15to21.map((chapter) => (
           <details className="chapter-item" key={chapter.number}>
             <summary>
               <span className="chapter-number">{chapter.number}</span>
