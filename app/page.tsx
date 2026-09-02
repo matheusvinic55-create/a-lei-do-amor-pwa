@@ -403,7 +403,7 @@ function Sinopse() {
   );
 }
 
-const chapters08to14 = [
+const chapters08to21 = [
   {
     number: "08",
     date: "11 de outubro de 2016",
@@ -453,6 +453,55 @@ const chapters08to14 = [
     summary:
       "Pedro questiona Tião sobre sua ligação com Ciro, e os dois se enfrentam. Jéssica é desmascarada, novas informações voltam a cercar o atentado e Helô coloca seu casamento em discussão diante da família.",
   },
+  {
+    number: "15",
+    date: "19 de outubro de 2016",
+    title: "Novos rastros",
+    summary:
+      "Helô confronta Tião e procura Pedro, enquanto Magnólia nega conhecer o empresário. Ana Luiza ajuda Elio a criar um blog jornalístico, e Isabela ouve uma conversa de Venturini e Arlindo que pode trazer novas pistas sobre o atentado.",
+  },
+  {
+    number: "16",
+    date: "20 de outubro de 2016",
+    title: "Ciro sob pressão",
+    summary:
+      "Tião mente para Helô e usa o estado de Letícia para tentar afastá-la de Pedro. Enquanto isso, Pedro mostra a Ciro o dossiê que encontrou, descobre celulares descartáveis em sua gaveta e o expulsa de casa.",
+  },
+  {
+    number: "17",
+    date: "21 de outubro de 2016",
+    title: "Um anúncio indesejado",
+    summary:
+      "Helô decide se afastar de Pedro, e Tião pressiona Tiago para que se case com Letícia. Isabela conta a Elio o que ouviu sobre o atentado, Pedro passa a suspeitar de Ciro e Tião anuncia o casamento de Letícia e Tiago à imprensa.",
+  },
+  {
+    number: "18",
+    date: "22 de outubro de 2016",
+    title: "O noivado em jogo",
+    summary:
+      "Tiago se revolta com os planos para o casamento, enquanto Isabela fica abalada e se aproxima de Elio. Helô afirma que Tiago não será obrigado a se casar, mas Tião e Letícia seguem acertando os detalhes da festa de noivado.",
+  },
+  {
+    number: "19",
+    date: "24 de outubro de 2016",
+    title: "Encontros sob vigilância",
+    summary:
+      "Pedro questiona Tião sobre o noivado. Zelito envia uma mensagem do celular de Isabela para Tiago, que se encontra com ela sob a vigilância de Valdir. Magnólia acerta o retorno de Ciro, e Isabela decide trabalhar na festa de noivado.",
+  },
+  {
+    number: "20",
+    date: "25 de outubro de 2016",
+    title: "A festa desanda",
+    summary:
+      "Tiago entrega a aliança a Letícia, mas a presença de Isabela abala a festa. Ana Luiza filma Venturini e Luciane, Tiago se embriaga e Helô segue Jéssica ao vê-la levar o rapaz embora, até que ela e Pedro flagram os dois juntos.",
+  },
+  {
+    number: "21",
+    date: "26 de outubro de 2016",
+    title: "Quem é Isabela?",
+    summary:
+      "Helô se preocupa com os sentimentos de Tiago e enfrenta Tião para proteger Edu. Pedro tenta descobrir quem é Isabela, Letícia acusa Jéssica de roubo, os auditores chegam à tecelagem e Helô questiona Tiago sobre seu envolvimento com a jovem.",
+  },
 ] as const;
 
 function Resumos() {
@@ -466,19 +515,19 @@ function Resumos() {
             <h1>Resumos</h1>
           </div>
         </div>
-        <p>Os capítulos 08 a 14, reunidos para seguir acompanhando a história.</p>
+        <p>Os capítulos 08 a 21, reunidos para seguir acompanhando a história.</p>
       </header>
 
       <div className="summaries-phase">
         <div>
           <span>Primeira fase</span>
-          <strong>Capítulos 08–14</strong>
+          <strong>Capítulos 08–21</strong>
         </div>
         <p>Toque em um capítulo para abrir o resumo.</p>
       </div>
 
       <div className="chapter-list">
-        {chapters08to14.map((chapter) => (
+        {chapters08to21.map((chapter) => (
           <details className="chapter-item" key={chapter.number}>
             <summary>
               <span className="chapter-number">{chapter.number}</span>
