@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 440" fill="none">
+<defs><linearGradient id="b" x2="1" y2="1"><stop stop-color="#30172c"/><stop offset=".5" stop-color="#141b30"/><stop offset="1" stop-color="#352039"/></linearGradient><pattern id="p" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M12 9v6m-3-3h6" stroke="#c6a269" stroke-opacity=".16" stroke-width=".8"/></pattern><linearGradient id="g"><stop stop-color="#80603d"/><stop offset=".5" stop-color="#e0c48b"/><stop offset="1" stop-color="#977445"/></linearGradient></defs>
+<rect x="1" y="1" width="238" height="438" rx="10" fill="url(#b)" stroke="#a48a64" stroke-width="2"/><rect x="11" y="11" width="218" height="418" rx="5" fill="url(#p)" stroke="url(#g)"/><rect x="18" y="18" width="204" height="404" rx="3" stroke="#b9975f" stroke-opacity=".5"/>
+<g stroke="url(#g)" stroke-width="1.2"><path d="M30 71V30h41M169 30h41v41M30 369v41h41m98 0h41v-41"/><path d="M35 57q36-8 22-22-7 22-22 22Zm170 0q-36-8-22-22 7 22 22 22ZM35 383q36 8 22 22-7-22-22-22Zm170 0q-36 8-22 22 7-22 22-22Z"/>
+<path d="m120 89 75 131-75 131-75-131Z"/><path d="m120 108 64 112-64 112-64-112Z" stroke-opacity=".45"/><circle cx="120" cy="220" r="50"/><circle cx="120" cy="220" r="57" stroke-dasharray="1 6"/>
+<path d="M130 192a30 30 0 1 0 17 45 34 34 0 0 1-17-45Z" fill="#bfa16c" fill-opacity=".2"/><path d="m148 194 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z" fill="#d8bb83"/>
+<path d="M120 41v29m-9-14 9-15 9 15-9 14Zm0 343v-29m-9 14 9 15 9-15-9-14Z"/>
+<path d="M71 127q-14 44-29 70m127-70q14 44 29 70M71 313q-14-44-29-70m127 70q14-44 29-70"/><path d="M59 156q-22-9-10-21 14 6 10 21Zm122 0q22-9 10-21-14 6-10 21ZM59 284q-22 9-10 21 14-6 10-21Zm122 0q22 9 10 21-14-6-10-21Z"/></g>
+<g fill="#d5b67a"><circle cx="120" cy="79" r="2"/><circle cx="120" cy="361" r="2"/><circle cx="35" cy="220" r="2"/><circle cx="205" cy="220" r="2"/></g></svg>

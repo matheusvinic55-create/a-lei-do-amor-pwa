@@ -1,11 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { mainCast, supportingCast, type CastMember } from "./cast";
 
-type TabId = "inicio" | "sinopse" | "resumos" | "trilha" | "elenco";
+const CasaMileide = dynamic(() => import("./casa-mileide/CasaMileide"), {
+  loading: () => <p role="status" style={{ color: "#e5c992", textAlign: "center", padding: "120px 24px" }}>Abrindo a Casa da Mileide…</p>,
+});
+
+type TabId = "inicio" | "sinopse" | "resumos" | "trilha" | "elenco" | "mileide";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -18,6 +23,7 @@ const tabs: Array<{ id: TabId; label: string; index: string }> = [
   { id: "resumos", label: "Resumos", index: "03" },
   { id: "trilha", label: "Trilha sonora", index: "04" },
   { id: "elenco", label: "Elenco", index: "05" },
+  { id: "mileide", label: "Casa da Mileide", index: "06" },
 ];
 
 export default function Home() {
@@ -87,7 +93,7 @@ export default function Home() {
   };
 
   return (
-    <div className="app-shell">
+    <div className={activeTab === "mileide" ? "app-shell app-shell--mileide" : "app-shell"}>
       <div className="ambient-lights" aria-hidden="true" />
 
       <header className={activeTab === "inicio" ? "site-header" : "site-header site-header--inner"}>
@@ -149,7 +155,7 @@ export default function Home() {
                   aria-current={activeTab === tab.id ? "page" : undefined}
                   onClick={() => selectTab(tab.id)}
                 >
-                  <span className="drawer-dot" aria-hidden="true" />
+                  {tab.id === "mileide" ? <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M19.5 15.2A8 8 0 0 1 8.8 4.5 8 8 0 1 0 19.5 15.2Z" /></svg> : <span className="drawer-dot" aria-hidden="true" />}
                   <span>{tab.label}</span>
                   <small>{tab.index}</small>
                   <i aria-hidden="true">→</i>
@@ -219,6 +225,7 @@ export default function Home() {
         {activeTab === "resumos" && <Resumos />}
         {activeTab === "trilha" && <Trilha />}
         {activeTab === "elenco" && <Elenco />}
+        {activeTab === "mileide" && <CasaMileide />}
       </main>
 
       <footer className="site-footer">
