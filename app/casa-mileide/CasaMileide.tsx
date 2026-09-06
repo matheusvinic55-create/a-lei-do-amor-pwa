@@ -169,7 +169,7 @@ export default function CasaMileide() {
     {journey !== "inside" && <div className="mileide-threshold" inert={journey === "crossing"}>
       <p>Deixe o mundo lá fora.<br/><em>Este instante é seu.</em></p>
       <button ref={enterRef} className="mileide-enter" type="button" disabled={!ready || journey === "crossing"} onClick={() => setJourney("crossing")}>
-        <span>{!ready ? "Abrindo o portal…" : "Entrar na Casa"}</span><span aria-hidden="true">↗</span>
+        <span>{!ready ? "Abrindo o portal…" : "Entrar na Casa"}</span>
       </button>
       <span className="mileide-threshold-note">Um encontro com as cartas</span>
     </div>}

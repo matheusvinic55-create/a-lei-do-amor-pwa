@@ -4,7 +4,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 // All scenery is local geometry and small procedural textures. No model/HDR downloads.
 export function createPortalScene(host, onArrive, onError) {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color("#080711");
+  scene.background = new THREE.Color("#080b18");
   scene.fog = new THREE.FogExp2("#100b1b", 0.046);
   const camera = new THREE.PerspectiveCamera(58, 1, 0.08, 35);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "low-power" });
@@ -135,6 +135,30 @@ export function createPortalScene(host, onArrive, onError) {
     materials.add(velvet);
     const midnightVelvet = material({ color: "#28132c", roughness: 0.97, side: THREE.DoubleSide });
     const glowGold = basic({ color: "#edc88b" });
+
+    // A restrained night sky sits behind the portal geometry, so its stars are
+    // naturally occluded by the arch and curtains instead of floating over them.
+    function stars(count, seed, size, opacity) {
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count; i++) {
+        const angle = (i + seed) * 12.9898;
+        const drift = Math.sin(angle) * 43758.5453;
+        const driftTwo = Math.sin(angle * 1.73 + 8.4) * 19341.713;
+        positions[i * 3] = (drift - Math.floor(drift) - 0.5) * 8.4;
+        positions[i * 3 + 1] = 3.48 + (driftTwo - Math.floor(driftTwo)) * 3.15;
+        positions[i * 3 + 2] = 2.15;
+      }
+      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      geometries.add(geometry);
+      const surface = new THREE.PointsMaterial({ color: "#dce5ff", size, sizeAttenuation: false, transparent: true, opacity, depthWrite: false });
+      materials.add(surface);
+      const field = new THREE.Points(geometry, surface);
+      scene.add(field);
+      return field;
+    }
+    const quietStars = stars(30, 2, 1.15, 0.54);
+    const brightStars = stars(9, 29, 1.7, 0.7);
 
     // A stone threshold has real depth; the camera passes through it into the room.
     const portal = new THREE.Group(); portal.position.z = 3.1; scene.add(portal);
@@ -347,6 +371,8 @@ export function createPortalScene(host, onArrive, onError) {
       orbLight.intensity=active?2.1:1.2;
       particles.position.y=Math.sin(elapsed*.08)*.15;
       particles.rotation.y=Math.sin(elapsed*.02)*.018;
+      quietStars.material.opacity=.51+Math.sin(elapsed*.34)*.035;
+      brightStars.material.opacity=.66+Math.sin(elapsed*.47+1.8)*.07;
       for(let i=0;i<flames.length;i++){const flicker=1+Math.sin(elapsed*3.7+i*2)*.065+Math.sin(elapsed*7.3+i)*.035;flames[i].scale.y=.07*flicker;flames[i].rotation.z=Math.sin(elapsed*2.3+i)*.07;glows[i].material.opacity=.44+flicker*.07;}
       warm.intensity=14+Math.sin(elapsed*3.1)*.5;
       warmRight.intensity=12+Math.sin(elapsed*2.7+1)*.4;
