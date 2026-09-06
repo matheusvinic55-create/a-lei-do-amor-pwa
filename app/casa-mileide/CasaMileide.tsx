@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useReducer, useRef } from "react";
-import CrystalBall from "./CrystalBall";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import PortalScene, { type Journey } from "./PortalScene";
 import { deck, interpret, mileideAdvice, shuffleDeck, spreads, type SpreadId, type TarotCardData } from "./deck";
 import "./mileide.css";
+import "./portal.css";
 
 type Phase = "welcome" | "prepare" | "shuffling" | "choosing" | "selected" | "loading" | "revealing" | "result" | "error";
 type State = { phase: Phase; spread: SpreadId; shuffled: TarotCardData[]; selected: TarotCardData[]; revealed: number };
@@ -41,11 +42,11 @@ function Moon({ triple = false }: { triple?: boolean }) {
 }
 
 function SpreadSelector({ onSelect }: { onSelect: (spread: SpreadId) => void }) {
-  return <div className="mileide-spreads">
-    {spreads.map((spread, index) => <button className="mileide-spread" type="button" key={spread.id} onClick={() => onSelect(spread.id)}>
-      <span className="mileide-spread-symbol"><Moon triple={index !== 0}/></span>
-      <span><small>{spread.positions.length === 1 ? "UMA CARTA" : "TRÊS CARTAS"}</small><strong>{spread.name}</strong><span>{spread.subtitle}</span></span>
-      <span className="mileide-spread-arrow" aria-hidden="true">→</span>
+  return <div className="mileide-table-choices" role="group" aria-label="Escolha sua tiragem">
+    {spreads.map((spread, index) => <button className="mileide-table-choice" type="button" key={spread.id} onClick={() => onSelect(spread.id)} aria-label={`${spread.name}. ${spread.subtitle}`}>
+      <span className="mileide-choice-deck" aria-hidden="true"><i/><i/><span><Moon triple={index !== 0}/></span></span>
+      <span className="mileide-choice-name">{spread.name}</span>
+      <small>{spread.positions.length === 1 ? "UMA CARTA" : "TRÊS CARTAS"}</small>
     </button>)}
   </div>;
 }
@@ -79,19 +80,55 @@ function ReadingResult({ state }: { state: State }) {
 
 export default function CasaMileide() {
   const [state, dispatch] = useReducer(reducer, initial);
+  const [journey, setJourney] = useState<Journey>("outside");
+  const [ready, setReady] = useState(false);
+  const [about, setAbout] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const roomHeadingRef = useRef<HTMLHeadingElement>(null);
+  const enterRef = useRef<HTMLButtonElement>(null);
+  const aboutRef = useRef<HTMLHeadingElement>(null);
+  const readingRef = useRef<HTMLElement>(null);
+  const roomRef = useRef<HTMLElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
   const firstRender = useRef(true);
   const spread = spreads.find(item => item.id === state.spread)!;
   const busy = ["shuffling", "loading", "revealing"].includes(state.phase);
   const hasReading = ["selected", "loading", "revealing", "result", "error"].includes(state.phase);
   const remaining = spread.positions.length - state.selected.length;
+  const panelOpen = state.phase !== "welcome" || about;
+  const onReady = useCallback(() => setReady(true), []);
+  const onArrive = useCallback(() => setJourney(current => current === "crossing" ? "inside" : current), []);
+  const closePanel = useCallback(() => { setAbout(false); dispatch({ type: "reset" }); }, []);
+
+  useEffect(() => {
+    if (journey === "inside") roomHeadingRef.current?.focus({ preventScroll: true });
+  }, [journey]);
+
+  useEffect(() => {
+    if (about) aboutRef.current?.focus({ preventScroll: true });
+  }, [about]);
+
+  useEffect(() => {
+    if (panelOpen) return;
+    openerRef.current?.focus({ preventScroll: true });
+  }, [panelOpen]);
+
+  useEffect(() => {
+    if (!panelOpen) return;
+    const escape = (event: KeyboardEvent) => {
+      // The app menu owns Escape while its existing drawer is open.
+      if (event.key === "Escape" && !document.querySelector('.menu-trigger[aria-expanded="true"]')) closePanel();
+    };
+    window.addEventListener("keydown", escape);
+    return () => window.removeEventListener("keydown", escape);
+  }, [panelOpen, closePanel]);
 
   useEffect(() => {
     if (firstRender.current) { firstRender.current = false; return; }
     if (!["welcome", "prepare", "choosing", "selected"].includes(state.phase)) return;
     const timer = window.setTimeout(() => {
       headingRef.current?.focus({ preventScroll: true });
-      headingRef.current?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+      readingRef.current?.scrollTo({ top: 0, behavior: "instant" });
     }, 30);
     return () => window.clearTimeout(timer);
   }, [state.phase]);
@@ -119,24 +156,45 @@ export default function CasaMileide() {
   }, [state.phase, state.selected]);
 
   const shuffle = () => dispatch({ type: "shuffle", cards: shuffleDeck() });
-  const title = state.phase === "welcome" ? "A mesa está à sua espera" : spread.name;
+  const title = spread.name;
   const status = state.phase === "choosing" ? `Escolha ${remaining} ${remaining === 1 ? "carta" : "cartas"}.` : state.phase === "shuffling" ? "Embaralhando… Respire e concentre-se." : state.phase === "loading" ? "Preparando suas cartas…" : state.phase === "revealing" ? `Revelando carta ${state.revealed + 1} de ${state.selected.length}…` : state.phase === "selected" ? "Suas cartas estão sobre a mesa." : state.phase === "result" ? "Sua leitura está completa." : "";
 
-  return <section className="mileide-house" aria-labelledby="mileide-title">
-    <div className="mileide-dust" aria-hidden="true">{Array.from({ length: 9 }, (_, i) => <i key={i} style={{ left: `${9 + i * 10}%`, top: `${110 + (i * 71) % 460}px`, animationDelay: `${i * -.8}s` }}/>)}</div>
-    <header className="mileide-welcome">
-      <p className="mileide-kicker">Uma porta se abre em São Dimas</p>
+  return <section ref={roomRef} className="mileide-house mileide-portal-house" data-journey={journey} data-panel={panelOpen || undefined} aria-labelledby="mileide-title">
+    <PortalScene journey={journey} paused={panelOpen} active={busy || state.phase === "selected"} onReady={onReady} onArrive={onArrive}/>
+    <header className="mileide-portal-heading">
+      <p className="mileide-kicker">{journey === "inside" ? "São Dimas · Tarô de Marselha" : "Há lugares que a gente sente"}</p>
       <h1 id="mileide-title"><span>Casa da</span> Mileide</h1>
-      <p>Entre, concentre-se e escolha sua tiragem.</p>
     </header>
-    <CrystalBall active={busy || state.phase === "selected"}/>
-    <div className="mileide-host"><Image src="/cast/mileide-rocha.jpg" alt="Mileide" width={40} height={40} unoptimized/><p>“Sente-se, meu bem.<br/><em>Vamos ouvir o que as cartas têm a dizer.”</em></p></div>
 
-    <section className={`mileide-table${busy ? " mileide-table--active" : ""}`} aria-labelledby="mileide-table-title">
+    {journey !== "inside" && <div className="mileide-threshold" inert={journey === "crossing"}>
+      <p>Deixe o mundo lá fora.<br/><em>Este instante é seu.</em></p>
+      <button ref={enterRef} className="mileide-enter" type="button" disabled={!ready || journey === "crossing"} onClick={() => setJourney("crossing")}>
+        <span>{!ready ? "Abrindo o portal…" : "Entrar na Casa"}</span><span aria-hidden="true">↗</span>
+      </button>
+      <span className="mileide-threshold-note">Um encontro com as cartas</span>
+    </div>}
+    <p className="mileide-journey-status" role="status" aria-live="polite">{journey === "crossing" ? "Atravessando o portal…" : journey === "inside" ? "Você chegou à Casa da Mileide." : ready ? "O portal está à sua espera." : "Preparando a Casa da Mileide…"}</p>
+
+    {journey === "inside" && <>
+      <div className="mileide-room-welcome" hidden={panelOpen}>
+        <h2 ref={roomHeadingRef} tabIndex={-1}>Sente-se, meu bem.</h2>
+        <p>Vamos ouvir o que as cartas têm a dizer.</p>
+      </div>
+      <div className="mileide-room-options" hidden={panelOpen}>
+        <p className="mileide-kicker">Toque em uma tiragem</p>
+        <SpreadSelector onSelect={spread => { openerRef.current = document.activeElement as HTMLElement; dispatch({ type: "spread", spread }); }}/>
+      </div>
+      <nav className="mileide-room-tools" aria-label="Casa da Mileide" hidden={panelOpen}>
+        <button type="button" onClick={() => { openerRef.current = null; setJourney("outside"); window.requestAnimationFrame(() => enterRef.current?.focus({ preventScroll: true })); }}><span aria-hidden="true">↶</span> Voltar ao portal</button>
+        <button type="button" onClick={() => { openerRef.current = document.activeElement as HTMLElement; setAbout(true); }}><span aria-hidden="true">✧</span> Sobre este baralho</button>
+      </nav>
+    </>}
+
+    {journey === "inside" && state.phase !== "welcome" && <section ref={readingRef} className={`mileide-table mileide-reading-surface${busy ? " mileide-table--active" : ""}`} aria-labelledby="mileide-table-title">
+      <button className="mileide-close-reading" type="button" onClick={closePanel} aria-label="Fechar tiragem e voltar à mesa">×</button>
       <div className="mileide-table-ornament" aria-hidden="true"><span/><Moon/><span/></div>
       <p className="mileide-kicker">Tarô de Marselha</p>
       <h2 id="mileide-table-title" ref={headingRef} tabIndex={-1}>{title}</h2>
-      {state.phase === "welcome" && <><p className="mileide-table-intro">Um instante de silêncio. Um espaço para você.</p><SpreadSelector onSelect={spread => dispatch({ type: "spread", spread })}/></>}
 
       {["prepare", "shuffling"].includes(state.phase) && <div className="mileide-ritual">
         <p>Pense no que deseja acolher nesta consulta.</p>
@@ -170,9 +228,14 @@ export default function CasaMileide() {
       </>}
 
       {state.phase === "result" && <div className="mileide-finish"><p>As cartas oferecem símbolos.<br/>Seu caminho permanece aberto.</p><button className="mileide-button" type="button" onClick={() => dispatch({ type: "reset" })}>Nova tiragem<span aria-hidden="true">↺</span></button></div>}
-      {state.phase !== "welcome" && state.phase !== "result" && <button className="mileide-text-button" type="button" onClick={() => dispatch({ type: "reset" })}>Escolher outra tiragem</button>}
+      {state.phase !== "result" && <button className="mileide-text-button" type="button" onClick={closePanel}>Escolher outra tiragem</button>}
       <p className="mileide-table-footnote">{deck.length} Arcanos Maiores · Uma leitura simbólica</p>
-    </section>
-    <details className="mileide-credits"><summary>Sobre este baralho</summary><p>Tarô de Marselha de Nicolas Conver (1760), reprodução de Tarot World Project / Reality Publishing (2020). Ilustrações preservadas com seus nomes originais; leitura em português. O Louco não tem número e o arcano XIII é apresentado como Arcano sem Nome. Nesta mesa, as cartas são lidas na posição normal.</p><p>Imagens de Tarot World Project, disponíveis no <a href="https://commons.wikimedia.org/wiki/Category:Tarot_de_Marseille_-_Nicolas_Conver_1760" target="_blank" rel="noreferrer">Wikimedia Commons</a>, sob <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>. Redimensionadas e convertidas para WebP, mantidas sob a mesma licença. <a href="/mileide/cards/sources.json" target="_blank" rel="noreferrer">Fontes de cada carta</a>. Textos de reflexão e verso criados para a Casa da Mileide.</p></details>
+    </section>}
+    {journey === "inside" && about && <section className="mileide-credits mileide-reading-surface mileide-about-surface" aria-labelledby="mileide-about-title">
+      <button className="mileide-close-reading" type="button" onClick={closePanel} aria-label="Fechar informações e voltar à mesa">×</button>
+      <p className="mileide-kicker">As cartas desta casa</p><h2 id="mileide-about-title" ref={aboutRef} tabIndex={-1}>Sobre este baralho</h2>
+      <p>Tarô de Marselha de Nicolas Conver (1760), reprodução de Tarot World Project / Reality Publishing (2020). Ilustrações preservadas com seus nomes originais; leitura em português. O Louco não tem número e o arcano XIII é apresentado como Arcano sem Nome. Nesta mesa, as cartas são lidas na posição normal.</p><p>Imagens de Tarot World Project, disponíveis no <a href="https://commons.wikimedia.org/wiki/Category:Tarot_de_Marseille_-_Nicolas_Conver_1760" target="_blank" rel="noreferrer">Wikimedia Commons</a>, sob <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>. Redimensionadas e convertidas para WebP, mantidas sob a mesma licença. <a href="/mileide/cards/sources.json" target="_blank" rel="noreferrer">Fontes de cada carta</a>. Textos de reflexão e verso criados para a Casa da Mileide.</p>
+      <button className="mileide-text-button" type="button" onClick={closePanel}>Voltar à mesa</button>
+    </section>}
   </section>;
 }

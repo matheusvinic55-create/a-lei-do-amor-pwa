@@ -1,0 +1,163 @@
+/* Full-viewport scenery, scoped exclusively to Casa da Mileide. */
+body:has(.mileide-portal-house) { overflow: hidden; overscroll-behavior: none; }
+.app-shell--mileide { height: 100svh; height: 100dvh; min-height: 0; }
+.app-shell--mileide > .site-footer { display: none; }
+.app-shell--mileide > .site-header { position: fixed; pointer-events: none; }
+.app-shell--mileide > .site-header .header-menu-brand { pointer-events: auto; }
+.app-shell--mileide .site-header .menu-trigger { background: #19141ed9; border-color: #d9b77c40; }
+.app-shell--mileide .site-header .header-menu-label { font-size: 10px; letter-spacing: .2em; }
+.mileide-portal-house {
+  position: fixed; inset: 0; width: 100%; height: 100svh; height: 100dvh;
+  padding: 0; overflow: hidden; background: #080711; isolation: isolate;
+  --portal-bottom: max(16px, calc(env(safe-area-inset-bottom) + 8px));
+  --portal-side: max(20px, env(safe-area-inset-left), env(safe-area-inset-right));
+}
+.mileide-portal-house [hidden] { display: none !important; }
+.mileide-world, .mileide-webgl, .mileide-world-vignette, .mileide-crossing-light { position: absolute; inset: 0; }
+.mileide-world { z-index: 0; }
+.mileide-webgl canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
+.mileide-world-vignette {
+  pointer-events: none;
+  background: linear-gradient(#080710b8, transparent 32%, transparent 70%, #080710c9), radial-gradient(ellipse at 50% 48%, transparent 35%, #08071055 85%, #0807109e);
+}
+.mileide-crossing-light { pointer-events: none; opacity: 0; background: radial-gradient(ellipse at 50% 49%, #f8e1c470, #bba0cb28 38%, transparent 70%); }
+.mileide-portal-house[data-journey="crossing"] .mileide-crossing-light { animation: mileide-crossing 3.2s ease-in-out both; }
+.mileide-portal-heading {
+  position: absolute; top: max(95px, calc(env(safe-area-inset-top) + 78px));
+  left: var(--portal-side); right: var(--portal-side); z-index: 2; text-align: center;
+  pointer-events: none; transition: opacity .7s, transform 1s;
+}
+.mileide-portal-heading h1 { font-family: var(--serif, Georgia, serif); color: #efdfbf; font-weight: 400; font-size: clamp(50px, 12vw, 80px); line-height: .98; letter-spacing: -.035em; text-shadow: 0 4px 30px #000; margin-top: 16px; }
+.mileide-portal-heading h1 > span { display: block; margin-bottom: 7px; font-size: 15px; font-weight: 400; letter-spacing: .25em; text-transform: uppercase; color: #ceb583; }
+.mileide-portal-heading .mileide-kicker { color: #c0aa88; font-size: 9px; letter-spacing: .21em; }
+.mileide-portal-house[data-journey="crossing"] .mileide-portal-heading { opacity: 0; transform: translateY(-18px); }
+.mileide-portal-house[data-journey="inside"] .mileide-portal-heading h1 { font-size: 33px; margin-top: 10px; }
+.mileide-portal-house[data-journey="inside"] .mileide-portal-heading h1 > span { display: inline; font-size: .67em; letter-spacing: -.01em; text-transform: none; margin-right: 3px; }
+.mileide-portal-house[data-panel] .mileide-portal-heading { opacity: 0; }
+.mileide-threshold { position: absolute; bottom: calc(var(--portal-bottom) + 20px); left: var(--portal-side); right: var(--portal-side); z-index: 3; text-align: center; transition: opacity .4s, transform .6s; }
+.mileide-threshold > p { font-family: var(--serif, Georgia, serif); font-size: clamp(17px, 4.3vw, 23px); color: #e8d9c3; line-height: 1.45; text-shadow: 0 2px 15px #000; }
+.mileide-threshold > p em { font-size: .85em; color: #baa998; }
+.mileide-portal-house .mileide-enter {
+  display: flex; justify-content: space-between; align-items: center; gap: 28px; width: min(100%, 280px);
+  margin: 23px auto 15px; min-height: 56px; padding: 14px 25px;
+  border: 1px solid #c7a668aa; border-radius: 3px; background: linear-gradient(110deg, #553e29e8, #a67f4ded 55%, #513923e8);
+  box-shadow: 0 8px 32px #0007, inset 0 1px #efd29a55, 0 0 22px #c49a5022;
+  color: #fff0d4; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  transition: transform .25s, box-shadow .25s;
+}
+.mileide-enter > span:last-child { font-size: 21px; font-weight: 400; }
+.mileide-enter:active { transform: scale(.975); }
+.mileide-threshold-note { display: block; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #a79581; }
+.mileide-portal-house[data-journey="crossing"] .mileide-threshold { opacity: 0; transform: translateY(15px); pointer-events: none; }
+.mileide-journey-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.mileide-room-welcome { position: absolute; top: 26%; left: var(--portal-side); right: var(--portal-side); z-index: 2; text-align: center; pointer-events: none; animation: mileide-room-arrival 1s ease both; }
+.mileide-room-welcome h2 { font: italic 26px/1.2 var(--serif, Georgia, serif); color: #e5d4b9; text-shadow: 0 3px 16px #090613; }
+.mileide-room-welcome h2:focus { outline: none; }
+.mileide-room-welcome p { color: #bfb0b8; font-size: 11px; margin-top: 9px; text-shadow: 0 2px 8px #000; }
+.mileide-room-options {
+  position: absolute; bottom: calc(var(--portal-bottom) + 65px); left: var(--portal-side); right: var(--portal-side); max-width: 590px;
+  margin-inline: auto; z-index: 3; text-align: center; animation: mileide-room-arrival .9s .1s ease both;
+}
+.mileide-room-options > .mileide-kicker { font-size: 9px; color: #d4c0a1; letter-spacing: .16em; text-shadow: 0 2px 12px #000; margin-bottom: 15px; }
+.mileide-table-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(5px, 2vw, 20px); perspective: 950px; }
+.mileide-table-choice { position: relative; min-width: 0; padding: 0 0 10px; min-height: 150px; border: 0; color: #efe2cc; background: transparent; text-align: center; -webkit-tap-highlight-color: transparent; }
+.mileide-choice-deck { display: block; position: relative; width: 58px; height: 86px; margin: 0 auto 15px; transform: rotateX(25deg) rotateZ(-7deg); transform-style: preserve-3d; transition: transform .3s; }
+.mileide-table-choice:nth-child(2) .mileide-choice-deck { transform: rotateX(25deg); }
+.mileide-table-choice:nth-child(3) .mileide-choice-deck { transform: rotateX(25deg) rotateZ(7deg); }
+.mileide-choice-deck > i, .mileide-choice-deck > span { position: absolute; inset: 0; border: 1px solid #ba975f; border-radius: 3px; background: linear-gradient(130deg, #33213a, #161426 60%, #312337); box-shadow: 0 5px 7px #0006; }
+.mileide-choice-deck > i:first-child { transform: translate3d(-4px, 1px, -3px) rotate(-8deg); }
+.mileide-choice-deck > i:nth-child(2) { transform: translate3d(4px, 0, -1px) rotate(6deg); }
+.mileide-choice-deck > span { display: grid; place-items: center; outline: 1px solid #ba975f55; outline-offset: -5px; background: radial-gradient(ellipse at 50% 40%, #b9976620, transparent 70%), linear-gradient(130deg, #3a283e, #1b182a); color: #dfbd80; }
+.mileide-choice-deck > span::after { content: ""; position: absolute; inset: 12px 10px; border: 1px solid #ba975f44; border-radius: 50%; }
+.mileide-choice-name { display: block; font-family: var(--serif, Georgia, serif); font-size: clamp(15px, 4vw, 21px); font-weight: 400; line-height: 1.17; text-wrap: balance; text-shadow: 0 2px 8px #000, 0 0 15px #000; }
+.mileide-table-choice small { display: block; color: #b79d79; font-size: 8px; letter-spacing: .13em; margin-top: 8px; text-shadow: 0 1px 6px #000; }
+.mileide-table-choice:active .mileide-choice-deck { transform: translateY(-6px) rotateX(5deg); }
+@media (hover: hover) { .mileide-table-choice:hover .mileide-choice-deck { transform: translateY(-8px) rotateX(5deg); } }
+.mileide-room-tools { position: absolute; bottom: var(--portal-bottom); left: var(--portal-side); right: var(--portal-side); z-index: 3; max-width: 590px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.mileide-room-tools button { border: 0; background: transparent; padding: 10px 0; min-height: 44px; color: #bca98c; font-size: 11px; }
+.mileide-room-tools button > span { margin-right: 5px; color: #d6b778; font-size: 16px; }
+
+/* Only the reading scrolls. The house, its camera and the app menu stay in place. */
+.mileide-portal-house .mileide-reading-surface {
+  position: absolute; inset: max(98px, calc(env(safe-area-inset-top) + 82px)) var(--portal-side) calc(var(--portal-bottom) + 3px);
+  z-index: 5; width: auto; max-width: 620px; margin: 0 auto; padding: 26px 23px 28px;
+  overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  border: 1px solid #a382555e; border-radius: 24px 24px 9px 9px;
+  background: radial-gradient(ellipse at 50% 0, #62405136, transparent 500px), #1a1321f5;
+  box-shadow: 0 30px 100px #0009, inset 0 0 0 5px #d9b77c06; animation: mileide-reading-arrival .35s ease both;
+  scrollbar-width: thin; scrollbar-color: #82664e #1b1522;
+}
+.mileide-close-reading { position: sticky; top: 0; z-index: 3; display: grid; place-items: center; float: right; width: 44px; height: 44px; margin: -14px -12px 0 0; border: 1px solid #bca16c44; border-radius: 50%; background: #251c2af5; color: #e8cda0; font-size: 27px !important; line-height: 1; }
+.mileide-reading-surface .mileide-table-ornament { padding-left: 44px; margin-top: 4px; }
+.mileide-reading-surface .mileide-deck { width: 106px; height: 194px; margin: 30px auto; }
+.mileide-reading-surface .mileide-deck img { width: 106px; height: 194px; }
+.mileide-reading-surface .mileide-card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px 10px; }
+.mileide-reading-surface .mileide-card { max-width: 195px; }
+.mileide-about-surface { font-size: 15px; line-height: 1.85; color: #cbbec8; }
+.mileide-about-surface h2 { font: 34px/1.15 var(--serif, Georgia, serif); font-weight: 400; color: #e7d3b1; margin: 14px 0 28px; }
+.mileide-about-surface > p { margin-top: 20px; }
+.mileide-about-surface > .mileide-kicker { margin-top: 10px; }
+
+/* Spatial fallback remains usable if Safari cannot create or retain a WebGL context. */
+.mileide-fallback-room { display: none; position: absolute; inset: 0; overflow: hidden; perspective: 700px; background: radial-gradient(ellipse at 50% 45%, #423557, #100b1b 68%); }
+.mileide-world--fallback .mileide-fallback-room { display: block; }
+.mileide-fallback-arch { position: absolute; top: 28%; bottom: 25%; left: 16%; right: 16%; border: 15px solid #28212f; border-radius: 50% 50% 0 0 / 34% 34% 0 0; box-shadow: inset 0 0 0 2px #b89a65, 0 0 0 1px #967741, inset 12px 0 22px #0009, 16px 20px 50px #000; background: radial-gradient(ellipse at 50% 40%, #c8aac96b, #171022 70%); transform-style: preserve-3d; transition: transform .7s, opacity .6s; overflow: hidden; }
+.mileide-fallback-arch > i { position: absolute; top: 0; bottom: 0; width: 45%; background: repeating-linear-gradient(92deg, #251020, #6a304b 14%, #321225 27%); box-shadow: 5px 0 15px #000a; transition: transform .7s; }
+.mileide-fallback-arch > i:first-child { left: 0; transform-origin: left; }
+.mileide-fallback-arch > i:last-child { right: 0; transform-origin: right; }
+.mileide-fallback-table { position: absolute; left: -5%; right: -5%; height: 35%; top: 58%; border-radius: 50% 50% 8% 8%; background: radial-gradient(ellipse at 50% 0, #562c4b, #281324 60%, #24120e 61%, #0d0910 68%); box-shadow: 0 -2px 0 #a17b4b66, 0 35px 55px #000; transform: translateZ(-150px); opacity: 0; transition: opacity .8s, transform .8s; }
+.mileide-fallback-orb { position: absolute; width: 110px; height: 110px; left: calc(50% - 55px); top: -88px; border: 1px solid #ded6f7bb; border-radius: 50%; background: radial-gradient(ellipse at 31% 23%, #fffdffbb 0, #dadcf966 11%, transparent 20%), radial-gradient(ellipse at 50% 65%, #b5a1d7bb, #353253 50%, #d1ccea99 94%, #2e253b); box-shadow: inset -12px -8px 18px #12112499, 0 0 42px #b7a4ec40, 0 12px 0 -4px #8d744c, 0 18px 5px -7px #2c231a; }
+.mileide-fallback-table > i { position: absolute; width: 15px; height: 57px; top: -34px; left: 20%; background: linear-gradient(90deg, #7e624a, #e1caa0, #81664c); border-radius: 3px; }
+.mileide-fallback-table > i:last-child { left: auto; right: 20%; height: 72px; top: -49px; }
+.mileide-fallback-table > i::before { content: ""; position: absolute; width: 9px; height: 23px; bottom: 100%; left: 3px; border-radius: 80% 20% 60% 40%; background: #ffe1a2; box-shadow: 0 0 22px 8px #e3ac4c77; }
+[data-journey="crossing"] .mileide-fallback-arch { transform: translateZ(500px); opacity: 0; }
+[data-journey="crossing"] .mileide-fallback-arch > i { transform: scaleX(.15); }
+[data-journey="inside"] .mileide-fallback-arch { transform: translateZ(600px); opacity: 0; }
+[data-journey="inside"] .mileide-fallback-table { opacity: 1; transform: translateZ(0); }
+
+@keyframes mileide-crossing { 0%, 100% { opacity: 0; } 50% { opacity: .85; } }
+@keyframes mileide-room-arrival { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mileide-reading-arrival { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (min-width: 700px) {
+  .mileide-portal-heading { top: max(76px, calc(env(safe-area-inset-top) + 60px)); }
+  .mileide-room-options { bottom: calc(var(--portal-bottom) + 72px); }
+  .mileide-choice-deck { width: 67px; height: 99px; }
+  .mileide-table-choice { min-height: 165px; }
+  .mileide-room-welcome { top: 24%; }
+}
+@media (max-height: 720px) and (orientation: portrait) {
+  .mileide-portal-heading { top: max(77px, calc(env(safe-area-inset-top) + 63px)); }
+  .mileide-portal-heading h1 { font-size: 45px; margin-top: 10px; }
+  .mileide-threshold > p { font-size: 16px; }
+  .mileide-enter { margin-top: 13px !important; }
+  .mileide-threshold { bottom: calc(var(--portal-bottom) + 6px); }
+  .mileide-choice-deck { width: 44px; height: 64px; margin-bottom: 9px; }
+  .mileide-table-choice { min-height: 124px; }
+  .mileide-room-options { bottom: calc(var(--portal-bottom) + 48px); }
+  .mileide-room-welcome h2 { font-size: 22px; }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  .mileide-portal-heading { top: 20%; left: 4%; right: 69%; }
+  .mileide-portal-heading .mileide-kicker { font-size: 8px; }
+  .mileide-portal-heading h1 { font-size: 42px; }
+  .mileide-threshold { left: 72%; right: var(--portal-side); bottom: 17%; }
+  .mileide-threshold p { font-size: 15px; }
+  .mileide-enter { padding: 9px 13px !important; font-size: 10px !important; gap: 5px !important; }
+  .mileide-threshold-note { font-size: 7px; }
+  .mileide-room-welcome { top: 51%; left: 4%; right: 70%; }
+  .mileide-room-welcome h2 { font-size: 20px; }
+  .mileide-room-welcome p { font-size: 10px; }
+  .mileide-room-options { left: 69%; right: var(--portal-side); bottom: 65px; }
+  .mileide-table-choices { gap: 7px; }
+  .mileide-choice-deck { width: 37px; height: 55px; margin-bottom: 12px; }
+  .mileide-choice-deck svg { width: 23px; }
+  .mileide-choice-name { font-size: 12px; }
+  .mileide-table-choice { min-height: 116px; }
+  .mileide-table-choice small { font-size: 6px; }
+  .mileide-room-tools { max-width: none; }
+  .mileide-portal-house .mileide-reading-surface { inset-inline: max(110px, env(safe-area-inset-left), env(safe-area-inset-right)); top: max(80px, calc(env(safe-area-inset-top) + 66px)); padding-top: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mileide-portal-house *, .mileide-portal-house *::before, .mileide-portal-house *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
