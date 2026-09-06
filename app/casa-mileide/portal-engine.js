@@ -136,8 +136,47 @@ export function createPortalScene(host, onArrive, onError) {
     const midnightVelvet = material({ color: "#28132c", roughness: 0.97, side: THREE.DoubleSide });
     const glowGold = basic({ color: "#edc88b" });
 
-    // A restrained night sky sits behind the portal geometry, so its stars are
-    // naturally occluded by the arch and curtains instead of floating over them.
+    // Paint the night directly into the scene background. It remains visibly
+    // starry above the arch while all architecture and curtains occlude it.
+    const skyMap = texture(512, (ctx, size) => {
+      const night = ctx.createLinearGradient(0, 0, 0, size);
+      night.addColorStop(0, "#050817");
+      night.addColorStop(0.46, "#0a1125");
+      night.addColorStop(1, "#151225");
+      ctx.fillStyle = night;
+      ctx.fillRect(0, 0, size, size);
+
+      const depth = ctx.createRadialGradient(size * .5, size * .24, 0, size * .5, size * .24, size * .55);
+      depth.addColorStop(0, "rgba(47, 58, 100, .25)");
+      depth.addColorStop(.48, "rgba(20, 28, 59, .11)");
+      depth.addColorStop(1, "rgba(2, 4, 13, 0)");
+      ctx.fillStyle = depth;
+      ctx.fillRect(0, 0, size, size);
+
+      for (let i = 0; i < 112; i++) {
+        const source = Math.sin((i + 7) * 91.73) * 43758.5453;
+        const sourceTwo = Math.sin((i + 19) * 47.19) * 21637.293;
+        const x = (source - Math.floor(source)) * size;
+        const y = (sourceTwo - Math.floor(sourceTwo)) * size * .84;
+        const strong = i % 13 === 0;
+        const radius = strong ? 1.15 : .35 + (i % 5) * .13;
+        const alpha = strong ? .88 : .34 + (i % 7) * .065;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${i % 9 === 0 ? "215, 224, 255" : "241, 235, 218"}, ${alpha})`;
+        ctx.fill();
+        if (strong) {
+          const glow = ctx.createRadialGradient(x, y, 0, x, y, 5.5);
+          glow.addColorStop(0, "rgba(228, 232, 255, .25)");
+          glow.addColorStop(1, "rgba(190, 204, 255, 0)");
+          ctx.fillStyle = glow;
+          ctx.fillRect(x - 6, y - 6, 12, 12);
+        }
+      }
+    });
+    scene.background = skyMap;
+
+    // Two sparse 3D layers add only a restrained, slow shimmer.
     function stars(count, seed, size, opacity) {
       const geometry = new THREE.BufferGeometry();
       const positions = new Float32Array(count * 3);
