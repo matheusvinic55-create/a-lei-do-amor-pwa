@@ -162,7 +162,7 @@ export default function CasaMileide() {
   return <section ref={roomRef} className="mileide-house mileide-portal-house" data-journey={journey} data-panel={panelOpen || undefined} aria-labelledby="mileide-title">
     <PortalScene journey={journey} paused={panelOpen} active={busy || state.phase === "selected"} onReady={onReady} onArrive={onArrive}/>
     <header className="mileide-portal-heading">
-      <p className="mileide-kicker">{journey === "inside" ? "São Dimas · Tarô de Marselha" : "Há lugares que a gente sente"}</p>
+      {journey === "inside" && <p className="mileide-kicker">São Dimas · Tarô de Marselha</p>}
       <h1 id="mileide-title"><span>Casa da</span> Mileide</h1>
     </header>
 
