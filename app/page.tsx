@@ -410,55 +410,55 @@ function Sinopse() {
   );
 }
 
-const chapters15to21 = [
+const chapters22to28 = [
   {
-    number: "15",
-    date: "19 de outubro de 2016",
-    title: "Novos rastros",
+    number: "22",
+    date: "27 de outubro de 2016",
+    title: "Pedro enfrenta Tião",
     summary:
-      "Helô confronta Tião e procura Pedro, enquanto Magnólia nega conhecer o empresário. Ana Luiza ajuda Elio a criar um blog jornalístico, e Isabela ouve uma conversa de Venturini e Arlindo que pode trazer novas pistas sobre o atentado.",
+      "Helô pede que Tiago resolva seus problemas antes de se casar com Letícia. Pedro revela a Magnólia que descobriu uma conta no exterior em seu nome, Edu rompe com Tião e sai de casa, e Pedro enfrenta o empresário quando ele exige que o filho volte.",
   },
   {
-    number: "16",
-    date: "20 de outubro de 2016",
-    title: "Ciro sob pressão",
+    number: "23",
+    date: "28 de outubro de 2016",
+    title: "Um beijo proibido",
     summary:
-      "Tião mente para Helô e usa o estado de Letícia para tentar afastá-la de Pedro. Enquanto isso, Pedro mostra a Ciro o dossiê que encontrou, descobre celulares descartáveis em sua gaveta e o expulsa de casa.",
+      "Tiago vai ao teatro com Isabela e os dois se beijam, enquanto Ciro manipula Vitória e segue armando contra Pedro. Isabela vê uma foto do noivado de Tiago e fica abalada, e a arma usada no atentado contra Fausto é plantada no barco de Pedro.",
   },
   {
-    number: "17",
-    date: "21 de outubro de 2016",
-    title: "Um anúncio indesejado",
+    number: "24",
+    date: "29 de outubro de 2016",
+    title: "Pedro se entrega",
     summary:
-      "Helô decide se afastar de Pedro, e Tião pressiona Tiago para que se case com Letícia. Isabela conta a Elio o que ouviu sobre o atentado, Pedro passa a suspeitar de Ciro e Tião anuncia o casamento de Letícia e Tiago à imprensa.",
+      "Ana Luiza avisa Pedro de que estão tentando incriminá-lo, enquanto a Polícia passa a procurá-lo e Vitória depõe contra ele. Pedro entrega a Helô a chave do aposento secreto da sala de Fausto, apresenta-se na delegacia e descobre que pode ser preso.",
   },
   {
-    number: "18",
-    date: "22 de outubro de 2016",
-    title: "O noivado em jogo",
+    number: "25",
+    date: "31 de outubro de 2016",
+    title: "Pedro atrás das grades",
     summary:
-      "Tiago se revolta com os planos para o casamento, enquanto Isabela fica abalada e se aproxima de Elio. Helô afirma que Tiago não será obrigado a se casar, mas Tião e Letícia seguem acertando os detalhes da festa de noivado.",
+      "Pedro conversa com o delegado e acaba preso. Tião manda Valdir investigar Isabela, Elio divulga a denúncia da jovem contra Venturini e Nacib, e Isabela quase é atropelada depois de se envolver ainda mais na investigação.",
   },
   {
-    number: "19",
-    date: "24 de outubro de 2016",
-    title: "Encontros sob vigilância",
+    number: "26",
+    date: "1 de novembro de 2016",
+    title: "Atentado contra Isabela",
     summary:
-      "Pedro questiona Tião sobre o noivado. Zelito envia uma mensagem do celular de Isabela para Tiago, que se encontra com ela sob a vigilância de Valdir. Magnólia acerta o retorno de Ciro, e Isabela decide trabalhar na festa de noivado.",
+      "Zelito salva Isabela e acredita que ela foi vítima de um atentado. Helô enfrenta Tião, Ana Luiza percebe uma reação de Fausto, Olavo diz ter provas para libertar Pedro e Letícia ouve Tião afirmar que não quer o rival fora da cadeia.",
   },
   {
-    number: "20",
-    date: "25 de outubro de 2016",
-    title: "A festa desanda",
+    number: "27",
+    date: "2 de novembro de 2016",
+    title: "Pedro em liberdade",
     summary:
-      "Tiago entrega a aliança a Letícia, mas a presença de Isabela abala a festa. Ana Luiza filma Venturini e Luciane, Tiago se embriaga e Helô segue Jéssica ao vê-la levar o rapaz embora, até que ela e Pedro flagram os dois juntos.",
+      "Tião tenta manipular Letícia e exige que Isabela trabalhe no bufê de sua festa. A chegada da polícia à tecelagem apavora Ciro, Helô e Olavo recebem a notícia da libertação de Pedro e, no fim, ele deixa a cadeia.",
   },
   {
-    number: "21",
-    date: "26 de outubro de 2016",
-    title: "Quem é Isabela?",
+    number: "28",
+    date: "3 de novembro de 2016",
+    title: "O flagrante de Valdir",
     summary:
-      "Helô se preocupa com os sentimentos de Tiago e enfrenta Tião para proteger Edu. Pedro tenta descobrir quem é Isabela, Letícia acusa Jéssica de roubo, os auditores chegam à tecelagem e Helô questiona Tiago sobre seu envolvimento com a jovem.",
+      "Helô viaja com Pedro, Ana Luiza ouve Vitória admitir que foi obrigada por Ciro a depor contra ele e publica o vídeo com o depoimento de Isabela. Valdir filma Tiago e Isabela se beijando e avisa Tião de que os dois foram para um hotel.",
   },
 ] as const;
 
@@ -473,19 +473,19 @@ function Resumos() {
             <h1>Resumos</h1>
           </div>
         </div>
-        <p>Os capítulos 15 a 21, reunidos para seguir acompanhando a história.</p>
+        <p>Os capítulos 22 a 28, reunidos para seguir acompanhando a história.</p>
       </header>
 
       <div className="summaries-phase">
         <div>
           <span>Primeira fase</span>
-          <strong>Capítulos 15–21</strong>
+          <strong>Capítulos 22–28</strong>
         </div>
         <p>Toque em um capítulo para abrir o resumo.</p>
       </div>
 
       <div className="chapter-list">
-        {chapters15to21.map((chapter) => (
+        {chapters22to28.map((chapter) => (
           <details className="chapter-item" key={chapter.number}>
             <summary>
               <span className="chapter-number">{chapter.number}</span>
