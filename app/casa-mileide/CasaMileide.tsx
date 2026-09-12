@@ -155,6 +155,12 @@ function CardSwiper({ cards, selected, count, onPick, onReshuffle }: { cards: Ta
   </div>;
 }
 
+function SelectedDeck({ cards }: { cards: TarotCardData[] }) {
+  return <div className={`mileide-selected-deck mileide-selected-deck--${cards.length}`} aria-hidden="true">
+    {cards.map((card, index) => <Image key={card.id} src="/mileide/card-back.svg" width={240} height={440} alt="" unoptimized draggable={false} style={{ zIndex: index + 1 }}/>) }
+  </div>;
+}
+
 function ReadingResult({ state }: { state: State }) {
   const spread = spreads.find(item => item.id === state.spread)!;
   const [page, setPage] = useState(0);
@@ -318,13 +324,16 @@ export default function CasaMileide() {
       </>}
 
       {hasReading && <>
-        {state.phase === "selected" && <button className="mileide-button" type="button" onClick={() => dispatch({ type: "load" })}>Revelar {state.selected.length === 1 ? "minha carta" : "minhas cartas"}<span aria-hidden="true">✧</span></button>}
+        {state.phase === "selected" && <div className="mileide-selected-state">
+          <SelectedDeck cards={state.selected}/>
+          <button className="mileide-button" type="button" onClick={() => dispatch({ type: "load" })}>Revelar {state.selected.length === 1 ? "minha carta" : "minhas cartas"}<span aria-hidden="true">✧</span></button>
+        </div>}
         {state.phase === "error" && <div className="mileide-error" role="alert"><p>Não consegui abrir as imagens agora. Suas escolhas continuam guardadas nesta mesa.</p><button className="mileide-button" type="button" onClick={() => dispatch({ type: "load" })}>Tentar novamente</button></div>}
         {["loading", "revealing", "result"].includes(state.phase) && <ReadingResult state={state}/>}
       </>}
 
       {state.phase === "result" && <div className="mileide-finish mileide-finish--compact"><button className="mileide-button" type="button" onClick={() => dispatch({ type: "reset" })}>Nova tiragem<span aria-hidden="true">↺</span></button></div>}
-      {!['result', 'choosing'].includes(state.phase) && <button className="mileide-text-button" type="button" onClick={closePanel}>Escolher outra tiragem</button>}
+      {!['result', 'choosing', 'selected'].includes(state.phase) && <button className="mileide-text-button" type="button" onClick={closePanel}>Escolher outra tiragem</button>}
       <p className="mileide-table-footnote">{deck.length} Arcanos Maiores · Uma leitura simbólica</p>
     </section>}
     {journey === "inside" && about && <section className="mileide-credits mileide-reading-surface mileide-about-surface" aria-labelledby="mileide-about-title">
