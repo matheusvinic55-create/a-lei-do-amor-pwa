@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { type CSSProperties, type PointerEvent as ReactPointerEvent, useCallback, useEffect, useReducer, useRef, useState } from "react";
 import PortalScene, { type Journey } from "./PortalScene";
 import { deck, interpret, mileideAdvice, shuffleDeck, spreads, type SpreadId, type TarotCardData } from "./deck";
 import "./mileide.css";
@@ -54,6 +54,103 @@ function SpreadSelector({ onSelect }: { onSelect: (spread: SpreadId) => void }) 
 function TarotCard({ card, revealed }: { card: TarotCardData; revealed: boolean }) {
   return <div className={`mileide-card${revealed ? " mileide-card--revealed" : ""}`}>
     {revealed ? <Image key="front" className="mileide-card-front" src={card.image} width={480} height={855} alt={`${card.numeral} — ${card.name}, Tarô de Marselha`} unoptimized /> : <Image key="back" src="/mileide/card-back.svg" width={240} height={440} alt="Carta ainda fechada" unoptimized />}
+  </div>;
+}
+
+function CardSwiper({ cards, selected, count, onPick, onReshuffle }: { cards: TarotCardData[]; selected: number; count: number; onPick: (card: TarotCardData) => void; onReshuffle: () => void }) {
+  const [queue, setQueue] = useState(cards);
+  const [drag, setDrag] = useState({ x: 0, y: 0 });
+  const [dragging, setDragging] = useState(false);
+  const [leaving, setLeaving] = useState<"left" | "right" | null>(null);
+  const origin = useRef<{ x: number; y: number } | null>(null);
+  const timer = useRef<number | null>(null);
+  const active = queue[0];
+
+  useEffect(() => () => {
+    if (timer.current !== null) window.clearTimeout(timer.current);
+  }, []);
+
+  const finish = useCallback((direction: "left" | "right") => {
+    if (!active || leaving) return;
+    setLeaving(direction);
+    timer.current = window.setTimeout(() => {
+      if (direction === "right") {
+        onPick(active);
+        setQueue(current => current.slice(1));
+      } else {
+        setQueue(current => current.length > 1 ? [...current.slice(1), current[0]] : current);
+      }
+      setDrag({ x: 0, y: 0 });
+      setLeaving(null);
+      timer.current = null;
+    }, 240);
+  }, [active, leaving, onPick]);
+
+  const pointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (leaving) return;
+    origin.current = { x: event.clientX, y: event.clientY };
+    setDragging(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const pointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!origin.current || leaving) return;
+    setDrag({ x: event.clientX - origin.current.x, y: event.clientY - origin.current.y });
+  };
+
+  const pointerEnd = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!origin.current) return;
+    origin.current = null;
+    setDragging(false);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    if (drag.x >= 72) finish("right");
+    else if (drag.x <= -72) finish("left");
+    else setDrag({ x: 0, y: 0 });
+  };
+
+  if (!active) return null;
+  const style = {
+    "--swipe-x": `${drag.x}px`,
+    "--swipe-y": `${drag.y * .22}px`,
+    "--swipe-rotate": `${drag.x / 24}deg`,
+    "--choose-opacity": Math.min(Math.max(drag.x / 85, 0), 1),
+    "--pass-opacity": Math.min(Math.max(-drag.x / 85, 0), 1),
+  } as CSSProperties;
+
+  return <div className="mileide-swipe-picker">
+    <div className="mileide-choice-progress" aria-label={`${selected} cartas escolhidas`}>
+      {Array.from({ length: count }, (_, index) => <span key={index} className={index < selected ? "is-filled" : index === selected ? "is-current" : ""} aria-hidden="true">{index < selected ? "✓" : index + 1}</span>)}
+    </div>
+    <div className="mileide-swipe-stage" aria-live="polite">
+      {queue.slice(1, 3).reverse().map((card, index) => <div className={`mileide-swipe-card mileide-swipe-card--behind mileide-swipe-card--${2 - index}`} key={card.id} aria-hidden="true">
+        <Image src="/mileide/card-back.svg" width={240} height={440} alt="" unoptimized draggable={false}/>
+      </div>)}
+      <div
+        className={`mileide-swipe-card mileide-swipe-card--active${dragging ? " is-dragging" : ""}${leaving ? ` is-leaving-${leaving}` : ""}`}
+        style={style}
+        role="button"
+        tabIndex={0}
+        aria-label="Carta fechada. Arraste para a direita para escolher ou para a esquerda para passar."
+        onPointerDown={pointerDown}
+        onPointerMove={pointerMove}
+        onPointerUp={pointerEnd}
+        onPointerCancel={pointerEnd}
+        onKeyDown={event => {
+          if (event.key === "ArrowLeft") finish("left");
+          if (["ArrowRight", "Enter", " "].includes(event.key)) { event.preventDefault(); finish("right"); }
+        }}
+      >
+        <Image src="/mileide/card-back.svg" width={240} height={440} alt="" unoptimized draggable={false}/>
+        <span className="mileide-swipe-stamp mileide-swipe-stamp--pass" aria-hidden="true">PASSAR</span>
+        <span className="mileide-swipe-stamp mileide-swipe-stamp--choose" aria-hidden="true">ESCOLHER</span>
+      </div>
+    </div>
+    <div className="mileide-swipe-actions">
+      <button type="button" className="mileide-swipe-action mileide-swipe-action--pass" onClick={() => finish("left")} aria-label="Passar esta carta"><span aria-hidden="true">←</span> Passar</button>
+      <button type="button" className="mileide-swipe-action mileide-swipe-action--choose" onClick={() => finish("right")} aria-label="Escolher esta carta">Escolher <span aria-hidden="true">✦</span></button>
+    </div>
+    <p className="mileide-swipe-guide"><span>← passe</span><span>arraste a carta</span><span>escolha →</span></p>
+    <button className="mileide-text-button" type="button" onClick={onReshuffle}>Embaralhar novamente</button>
   </div>;
 }
 
@@ -205,18 +302,8 @@ export default function CasaMileide() {
       <p className="mileide-status" role="status" aria-live="polite" aria-atomic="true">{status}</p>
 
       {state.phase === "choosing" && <>
-        <p className="mileide-pick-hint">Toque nas cartas que chamarem sua atenção.</p>
-        <div className="mileide-card-grid" role="group" aria-label={`Escolha ${spread.positions.length} cartas fechadas`}>
-          {state.shuffled.map((card, index) => {
-            const selectedIndex = state.selected.findIndex(item => item.id === card.id);
-            const selected = selectedIndex >= 0;
-            return <button key={card.id} type="button" className={`mileide-pick${selected ? " mileide-pick--selected" : ""}`} aria-label={selected ? `Carta ${index + 1} selecionada para ${spread.positions[selectedIndex]}` : `Escolher carta fechada ${index + 1}`} aria-pressed={selected} aria-disabled={selected} onClick={() => dispatch({ type: "pick", card })}>
-              <Image src="/mileide/card-back.svg" width={240} height={440} alt="" unoptimized/>
-              {selected && <span className="mileide-pick-order" aria-hidden="true">{selectedIndex + 1}</span>}
-            </button>;
-          })}
-        </div>
-        <button className="mileide-text-button" type="button" onClick={shuffle}>Embaralhar novamente</button>
+        <p className="mileide-pick-hint">Passe pelas cartas até sentir qual deseja escolher.</p>
+        <CardSwiper key={state.shuffled.map(card => card.id).join("-")} cards={state.shuffled} selected={state.selected.length} count={spread.positions.length} onPick={card => dispatch({ type: "pick", card })} onReshuffle={shuffle}/>
       </>}
 
       {hasReading && <>
