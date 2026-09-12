@@ -118,8 +118,11 @@ function CardSwiper({ cards, selected, count, onPick, onReshuffle }: { cards: Ta
   } as CSSProperties;
 
   return <div className="mileide-swipe-picker">
-    <div className="mileide-choice-progress" aria-label={`${selected} cartas escolhidas`}>
-      {Array.from({ length: count }, (_, index) => <span key={index} className={index < selected ? "is-filled" : index === selected ? "is-current" : ""} aria-hidden="true">{index < selected ? "✓" : index + 1}</span>)}
+    <div className="mileide-swipe-toolbar">
+      <div className="mileide-choice-progress" aria-label={`${selected} cartas escolhidas`}>
+        {Array.from({ length: count }, (_, index) => <span key={index} className={index < selected ? "is-filled" : index === selected ? "is-current" : ""} aria-hidden="true">{index < selected ? "✓" : index + 1}</span>)}
+      </div>
+      <button className="mileide-reshuffle" type="button" onClick={onReshuffle} aria-label="Embaralhar novamente"><span aria-hidden="true">↻</span></button>
     </div>
     <div className="mileide-swipe-stage" aria-live="polite">
       {queue.slice(1, 3).reverse().map((card, index) => <div className={`mileide-swipe-card mileide-swipe-card--behind mileide-swipe-card--${2 - index}`} key={card.id} aria-hidden="true">
@@ -149,29 +152,37 @@ function CardSwiper({ cards, selected, count, onPick, onReshuffle }: { cards: Ta
       <button type="button" className="mileide-swipe-action mileide-swipe-action--pass" onClick={() => finish("left")} aria-label="Passar esta carta"><span aria-hidden="true">←</span> Passar</button>
       <button type="button" className="mileide-swipe-action mileide-swipe-action--choose" onClick={() => finish("right")} aria-label="Escolher esta carta">Escolher <span aria-hidden="true">✦</span></button>
     </div>
-    <p className="mileide-swipe-guide"><span>← passe</span><span>arraste a carta</span><span>escolha →</span></p>
-    <button className="mileide-text-button" type="button" onClick={onReshuffle}>Embaralhar novamente</button>
   </div>;
 }
 
 function ReadingResult({ state }: { state: State }) {
   const spread = spreads.find(item => item.id === state.spread)!;
-  return <div className="mileide-reading">
-    {state.selected.map((card, index) => {
-      const revealed = index < state.revealed;
-      return <article className={`mileide-reading-card${revealed ? " mileide-reading-card--open" : ""}`} key={card.id}>
-        <p className="mileide-position">{spread.positions[index]}</p>
-        <TarotCard card={card} revealed={revealed}/>
-        {revealed && <div className="mileide-card-copy">
-          <span className="mileide-card-number">{card.number === null ? "Arcano sem número" : `Arcano ${card.numeral}`}</span>
-          <h3>{card.name}</h3><p className="mileide-meaning">{card.meaning}</p>
-          <p>{interpret(card, state.spread, index)}</p>
-        </div>}
-      </article>;
-    })}
-    {state.phase === "result" && state.spread === "advice" && <aside className="mileide-advice">
+  const [page, setPage] = useState(0);
+  const hasAdvice = state.spread === "advice";
+  const pages = state.selected.length + (hasAdvice ? 1 : 0);
+  const current = state.phase === "result" ? Math.min(page, pages - 1) : Math.max(0, state.revealed - 1);
+  const adviceOpen = hasAdvice && current === state.selected.length;
+  const card = state.selected[Math.min(current, state.selected.length - 1)];
+  const revealed = current < state.revealed;
+
+  return <div className="mileide-reading mileide-reading--compact">
+    {state.phase === "result" && pages > 1 && <nav className="mileide-reading-tabs" aria-label="Partes da leitura">
+      {state.selected.map((_, index) => <button key={spread.positions[index]} type="button" className={current === index ? "is-active" : ""} onClick={() => setPage(index)} aria-label={`Ver ${spread.positions[index]}`}>{index + 1}</button>)}
+      {hasAdvice && <button type="button" className={adviceOpen ? "is-active" : ""} onClick={() => setPage(state.selected.length)} aria-label="Ver conselho da Mileide">✦</button>}
+    </nav>}
+    {adviceOpen ? <aside className="mileide-compact-advice">
       <Moon/><p className="mileide-kicker">As cartas conversam</p><h3>Conselho da Mileide</h3><p>{mileideAdvice(state.selected)}</p><span className="mileide-signature">Com carinho, Mileide</span>
-    </aside>}
+    </aside> : card && <article className={`mileide-compact-reading${revealed ? " is-open" : ""}`}>
+      <div className="mileide-compact-card">
+        <p className="mileide-position">{spread.positions[current]}</p>
+        <TarotCard card={card} revealed={revealed}/>
+      </div>
+      {revealed && <div className="mileide-card-copy">
+        <span className="mileide-card-number">{card.number === null ? "Arcano sem número" : `Arcano ${card.numeral}`}</span>
+        <h3>{card.name}</h3><p className="mileide-meaning">{card.meaning}</p>
+        <p>{interpret(card, state.spread, current)}</p>
+      </div>}
+    </article>}
   </div>;
 }
 
@@ -302,18 +313,18 @@ export default function CasaMileide() {
       <p className="mileide-status" role="status" aria-live="polite" aria-atomic="true">{status}</p>
 
       {state.phase === "choosing" && <>
-        <p className="mileide-pick-hint">Passe pelas cartas até sentir qual deseja escolher.</p>
+        <p className="mileide-pick-hint">Arraste: esquerda para passar, direita para escolher.</p>
         <CardSwiper key={state.shuffled.map(card => card.id).join("-")} cards={state.shuffled} selected={state.selected.length} count={spread.positions.length} onPick={card => dispatch({ type: "pick", card })} onReshuffle={shuffle}/>
       </>}
 
       {hasReading && <>
         {state.phase === "selected" && <button className="mileide-button" type="button" onClick={() => dispatch({ type: "load" })}>Revelar {state.selected.length === 1 ? "minha carta" : "minhas cartas"}<span aria-hidden="true">✧</span></button>}
         {state.phase === "error" && <div className="mileide-error" role="alert"><p>Não consegui abrir as imagens agora. Suas escolhas continuam guardadas nesta mesa.</p><button className="mileide-button" type="button" onClick={() => dispatch({ type: "load" })}>Tentar novamente</button></div>}
-        <ReadingResult state={state}/>
+        {["loading", "revealing", "result"].includes(state.phase) && <ReadingResult state={state}/>}
       </>}
 
-      {state.phase === "result" && <div className="mileide-finish"><p>As cartas oferecem símbolos.<br/>Seu caminho permanece aberto.</p><button className="mileide-button" type="button" onClick={() => dispatch({ type: "reset" })}>Nova tiragem<span aria-hidden="true">↺</span></button></div>}
-      {state.phase !== "result" && <button className="mileide-text-button" type="button" onClick={closePanel}>Escolher outra tiragem</button>}
+      {state.phase === "result" && <div className="mileide-finish mileide-finish--compact"><button className="mileide-button" type="button" onClick={() => dispatch({ type: "reset" })}>Nova tiragem<span aria-hidden="true">↺</span></button></div>}
+      {!['result', 'choosing'].includes(state.phase) && <button className="mileide-text-button" type="button" onClick={closePanel}>Escolher outra tiragem</button>}
       <p className="mileide-table-footnote">{deck.length} Arcanos Maiores · Uma leitura simbólica</p>
     </section>}
     {journey === "inside" && about && <section className="mileide-credits mileide-reading-surface mileide-about-surface" aria-labelledby="mileide-about-title">
