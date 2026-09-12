@@ -35,7 +35,7 @@ body:has(.mileide-portal-house) { overflow: hidden; overscroll-behavior: none; }
   line-height: 1.25; letter-spacing: .045em; text-transform: none; color: #d1c3ad; text-shadow: 0 2px 15px #03040b;
 }
 .mileide-portal-house[data-journey="crossing"] .mileide-portal-heading { opacity: 0; transform: translateY(-18px); }
-.mileide-portal-house[data-journey="inside"] .mileide-portal-heading h1 { font-size: 33px; margin-top: 10px; }
+.mileide-portal-house[data-journey="inside"] .mileide-portal-heading h1 { font-size: 33px; margin-top: 0; }
 .mileide-portal-house[data-journey="inside"] .mileide-portal-heading h1 > span { display: inline; font-size: .67em; letter-spacing: -.01em; text-transform: none; margin-right: 3px; }
 .mileide-portal-house[data-panel] .mileide-portal-heading { opacity: 0; }
 .mileide-threshold { position: absolute; bottom: calc(var(--portal-bottom) + 20px); left: var(--portal-side); right: var(--portal-side); z-index: 3; text-align: center; transition: opacity .4s, transform .6s; }
