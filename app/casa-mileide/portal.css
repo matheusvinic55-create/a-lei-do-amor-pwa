@@ -151,6 +151,15 @@ body:has(.mileide-portal-house) { overflow: hidden; overscroll-behavior: none; }
 .mileide-compact-advice .mileide-signature { margin-top: 10px; font-size: 17px; }
 .mileide-finish--compact { flex: 0 0 auto; border-top: 0; padding-top: 2px; }
 .mileide-finish--compact .mileide-button { min-height: 44px; padding-block: 9px; }
+.mileide-selected-state { flex: 1 1 auto; min-height: 0; display: grid; place-content: center; justify-items: center; gap: 23px; }
+.mileide-selected-deck { position: relative; width: min(43vw, 168px); aspect-ratio: 6 / 11; transform-style: preserve-3d; }
+.mileide-selected-deck img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 7px; box-shadow: 0 15px 28px #0008; }
+.mileide-selected-deck--2 img:first-child { transform: translateX(-10px) rotate(-6deg); }
+.mileide-selected-deck--2 img:last-child { transform: translateX(9px) rotate(5deg); }
+.mileide-selected-deck--3 img:first-child { transform: translateX(-14px) rotate(-8deg); }
+.mileide-selected-deck--3 img:nth-child(2) { transform: translateY(2px); }
+.mileide-selected-deck--3 img:last-child { transform: translateX(13px) rotate(7deg); }
+.mileide-selected-state .mileide-button { min-height: 49px; }
 .mileide-about-surface { font-size: 15px; line-height: 1.85; color: #cbbec8; }
 .mileide-about-surface h2 { font: 34px/1.15 var(--serif, Georgia, serif); font-weight: 400; color: #e7d3b1; margin: 14px 0 28px; }
 .mileide-about-surface > p { margin-top: 20px; }
@@ -199,6 +208,8 @@ body:has(.mileide-portal-house) { overflow: hidden; overscroll-behavior: none; }
   .mileide-swipe-stage { width: min(34vw, 140px); }
   .mileide-swipe-action { min-height: 40px; padding: 7px 13px; }
   .mileide-compact-card .mileide-card { width: min(100%, 108px); }
+  .mileide-selected-deck { width: min(37vw, 142px); }
+  .mileide-selected-state { gap: 15px; }
 }
 @media (orientation: landscape) and (max-height: 600px) {
   .mileide-portal-heading { top: 20%; left: 4%; right: 69%; }
