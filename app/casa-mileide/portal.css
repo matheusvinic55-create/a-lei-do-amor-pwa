@@ -92,18 +92,27 @@ body:has(.mileide-portal-house) { overflow: hidden; overscroll-behavior: none; }
   box-shadow: 0 30px 100px #0009, inset 0 0 0 5px #d9b77c06; animation: mileide-reading-arrival .35s ease both;
   scrollbar-width: thin; scrollbar-color: #82664e #1b1522;
 }
+.mileide-portal-house .mileide-reading-surface:not(.mileide-about-surface) { overflow: hidden; display: flex; flex-direction: column; }
+.mileide-reading-surface:not(.mileide-about-surface) .mileide-table-ornament { flex: 0 0 auto; margin-bottom: 7px; }
+.mileide-reading-surface:not(.mileide-about-surface) > .mileide-kicker { flex: 0 0 auto; }
+.mileide-reading-surface:not(.mileide-about-surface) > h2 { flex: 0 0 auto; margin: 5px 0 7px; font-size: clamp(27px, 7vw, 34px); }
+.mileide-reading-surface:not(.mileide-about-surface) > .mileide-status { flex: 0 0 auto; min-height: 22px; margin: 4px 0 !important; font-size: 13px; }
+.mileide-reading-surface:not(.mileide-about-surface) > .mileide-pick-hint { flex: 0 0 auto; margin: 0 0 3px !important; font-size: 10px; line-height: 1.35; }
+.mileide-reading-surface:not(.mileide-about-surface) > .mileide-table-footnote { flex: 0 0 auto; margin-top: auto !important; padding-top: 5px; font-size: 8px; line-height: 1.2; }
 .mileide-close-reading { position: sticky; top: 0; z-index: 3; display: grid; place-items: center; float: right; width: 44px; height: 44px; margin: -14px -12px 0 0; border: 1px solid #bca16c44; border-radius: 50%; background: #251c2af5; color: #e8cda0; font-size: 27px !important; line-height: 1; }
 .mileide-reading-surface .mileide-table-ornament { padding-left: 44px; margin-top: 4px; }
 .mileide-reading-surface .mileide-deck { width: 106px; height: 194px; margin: 30px auto; }
 .mileide-reading-surface .mileide-deck img { width: 106px; height: 194px; }
 .mileide-reading-surface .mileide-card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px 10px; }
 .mileide-reading-surface .mileide-card { max-width: 195px; }
-.mileide-swipe-picker { width: 100%; margin: 13px auto 0; text-align: center; }
-.mileide-choice-progress { display: flex; justify-content: center; gap: 8px; min-height: 24px; margin-bottom: 9px; }
+.mileide-swipe-picker { display: flex; flex: 1 1 auto; min-height: 0; width: 100%; margin: 5px auto 0; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.mileide-swipe-toolbar { display: grid; grid-template-columns: 32px auto 32px; align-items: center; width: min(100%, 230px); min-height: 30px; margin-bottom: 4px; }
+.mileide-choice-progress { grid-column: 2; display: flex; justify-content: center; gap: 8px; min-height: 24px; }
 .mileide-choice-progress > span { display: grid; place-items: center; width: 23px; height: 23px; border: 1px solid #af8b5955; border-radius: 50%; color: #8f7b83; font-size: 10px; line-height: 1; }
 .mileide-choice-progress > .is-filled { border-color: #d8b878; background: #d8b878; color: #211625; }
 .mileide-choice-progress > .is-current { border-color: #d8b87899; color: #e2c58f; box-shadow: 0 0 12px #d8b87822; }
-.mileide-swipe-stage { position: relative; width: min(45vw, 182px); aspect-ratio: 6 / 11; margin: 0 auto 14px; perspective: 900px; }
+.mileide-reshuffle { grid-column: 3; display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid #a8875b55; border-radius: 50%; background: #251a29b8; color: #d8b878; font-size: 18px; line-height: 1; }
+.mileide-swipe-stage { position: relative; width: min(40vw, 160px); aspect-ratio: 6 / 11; margin: 0 auto 9px; perspective: 900px; }
 .mileide-swipe-card { position: absolute; inset: 0; border-radius: 7px; transform-origin: 50% 88%; }
 .mileide-swipe-card img { display: block; width: 100%; height: 100%; border-radius: inherit; box-shadow: 0 14px 30px #0008; pointer-events: none; user-select: none; -webkit-user-drag: none; }
 .mileide-swipe-card--behind { pointer-events: none; }
@@ -122,9 +131,26 @@ body:has(.mileide-portal-house) { overflow: hidden; overscroll-behavior: none; }
 .mileide-swipe-action:active { transform: scale(.96); }
 .mileide-swipe-action span { color: #d8b878; font-size: 16px; }
 .mileide-swipe-action--choose { border-color: #cba96d99; background: linear-gradient(110deg, #5b422aea, #936d40ed); color: #fff0d4; }
-.mileide-swipe-guide { display: flex; justify-content: center; gap: 13px; margin: 11px 0 0; color: #8e7d88; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
-.mileide-swipe-guide span:nth-child(2) { color: #bba9b3; }
-.mileide-swipe-picker > .mileide-text-button { margin-top: 5px; }
+.mileide-reading--compact { flex: 1 1 auto; min-height: 0; margin: 2px 0 5px; display: flex; flex-direction: column; justify-content: center; }
+.mileide-reading-tabs { display: flex; flex: 0 0 auto; justify-content: center; gap: 8px; margin-bottom: 8px; }
+.mileide-reading-tabs button { display: grid; place-items: center; width: 29px; height: 29px; padding: 0; border: 1px solid #a9895d55; border-radius: 50%; background: transparent; color: #a8959e; font-size: 10px; }
+.mileide-reading-tabs button.is-active { border-color: #d7b576; background: #d7b576; color: #211625; box-shadow: 0 0 14px #d7b57625; }
+.mileide-compact-reading { display: grid; grid-template-columns: minmax(92px, 36%) minmax(0, 1fr); gap: 15px; align-items: center; width: 100%; max-width: 480px; min-height: 0; margin: auto; text-align: left; }
+.mileide-compact-card { min-width: 0; text-align: center; }
+.mileide-compact-card .mileide-position { min-height: 16px; margin: 0 0 6px !important; font-size: 8px; line-height: 1.2; letter-spacing: .12em; }
+.mileide-compact-card .mileide-card { width: min(100%, 132px); max-height: 238px; margin: 0 auto; }
+.mileide-compact-reading .mileide-card-copy { min-width: 0; margin-top: 0; }
+.mileide-compact-reading .mileide-card-number { font-size: 8px; }
+.mileide-compact-reading .mileide-card-copy h3 { margin: 3px 0 0; font-size: clamp(22px, 6.5vw, 30px); line-height: 1.05; }
+.mileide-compact-reading .mileide-meaning { margin: 7px 0 8px; font-size: 9px; line-height: 1.35; }
+.mileide-compact-reading .mileide-card-copy > p:last-child { font-size: clamp(12px, 3.4vw, 14px); line-height: 1.5; }
+.mileide-compact-advice { max-width: 420px; margin: auto; padding: 12px 4px; text-align: center; }
+.mileide-compact-advice > svg { width: 26px; height: 26px; color: #d7b77c; }
+.mileide-compact-advice h3 { margin: 5px 0 12px; font-family: var(--serif, Georgia, serif); font-size: 27px; font-weight: 400; line-height: 1.1; color: #f4dfbd; }
+.mileide-compact-advice > p:last-of-type { font-size: 13px; line-height: 1.6; color: #e0cfd6; text-align: left; }
+.mileide-compact-advice .mileide-signature { margin-top: 10px; font-size: 17px; }
+.mileide-finish--compact { flex: 0 0 auto; border-top: 0; padding-top: 2px; }
+.mileide-finish--compact .mileide-button { min-height: 44px; padding-block: 9px; }
 .mileide-about-surface { font-size: 15px; line-height: 1.85; color: #cbbec8; }
 .mileide-about-surface h2 { font: 34px/1.15 var(--serif, Georgia, serif); font-weight: 400; color: #e7d3b1; margin: 14px 0 28px; }
 .mileide-about-surface > p { margin-top: 20px; }
@@ -167,6 +193,12 @@ body:has(.mileide-portal-house) { overflow: hidden; overscroll-behavior: none; }
   .mileide-table-choice { min-height: 124px; }
   .mileide-room-options { bottom: calc(var(--portal-bottom) + 48px); }
   .mileide-room-welcome h2 { font-size: 22px; }
+  .mileide-portal-house .mileide-reading-surface:not(.mileide-about-surface) { padding-block: 18px 14px; }
+  .mileide-reading-surface:not(.mileide-about-surface) .mileide-table-ornament { margin-bottom: 2px; }
+  .mileide-reading-surface:not(.mileide-about-surface) > h2 { margin-block: 3px 5px; font-size: 25px; }
+  .mileide-swipe-stage { width: min(34vw, 140px); }
+  .mileide-swipe-action { min-height: 40px; padding: 7px 13px; }
+  .mileide-compact-card .mileide-card { width: min(100%, 108px); }
 }
 @media (orientation: landscape) and (max-height: 600px) {
   .mileide-portal-heading { top: 20%; left: 4%; right: 69%; }
