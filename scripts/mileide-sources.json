@@ -1,90 +1,24 @@
 [
-  {
-    "id": "00",
-    "file": "LE MAT Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "01",
-    "file": "I LE BATELEUR Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "02",
-    "file": "II LA PAPESSE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "03",
-    "file": "II L'IMPÉRATRICE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "04",
-    "file": "IIII-L'EMPEREUR Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "05",
-    "file": "V LE PAPE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "06",
-    "file": "VI L'AMOUREUX Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "07",
-    "file": "VII LE CHARIOT Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "08",
-    "file": "VIII LA JUSTICE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "09",
-    "file": "VIIII L'HERMITE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "10",
-    "file": "X LA ROUE DE FORTUNE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "11",
-    "file": "XI LA FORCE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "12",
-    "file": "XII LE PENDU Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "13",
-    "file": "13 XIII Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "14",
-    "file": "XIIII TEMPERANCE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "15",
-    "file": "XV LE DIABLE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "16",
-    "file": "XVI LA MAISON DE DIEU Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "17",
-    "file": "XVII L'ETOILE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "18",
-    "file": "XVIII LA LUNE Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "19",
-    "file": "XVIIII LE SOLEIL Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "20",
-    "file": "XX LE JUGEMENT Nicolas Conver Tarot 1760.jpg"
-  },
-  {
-    "id": "21",
-    "file": "XXI LE MONDE Nicolas Conver Tarot 1760.jpg"
-  }
+  { "id": "rws-00", "file": "RWS Tarot 00 Fool.jpg" },
+  { "id": "rws-01", "file": "RWS Tarot 01 Magician.jpg" },
+  { "id": "rws-02", "file": "RWS Tarot 02 High Priestess.jpg" },
+  { "id": "rws-03", "file": "RWS Tarot 03 Empress.jpg" },
+  { "id": "rws-04", "file": "RWS Tarot 04 Emperor.jpg" },
+  { "id": "rws-05", "file": "RWS Tarot 05 Hierophant.jpg" },
+  { "id": "rws-06", "file": "RWS Tarot 06 Lovers.jpg" },
+  { "id": "rws-07", "file": "RWS Tarot 07 Chariot.jpg" },
+  { "id": "rws-08", "file": "RWS Tarot 08 Strength.jpg" },
+  { "id": "rws-09", "file": "RWS Tarot 09 Hermit.jpg" },
+  { "id": "rws-10", "file": "RWS Tarot 10 Wheel of Fortune.jpg" },
+  { "id": "rws-11", "file": "RWS Tarot 11 Justice.jpg" },
+  { "id": "rws-12", "file": "RWS Tarot 12 Hanged Man.jpg" },
+  { "id": "rws-13", "file": "RWS Tarot 13 Death.jpg" },
+  { "id": "rws-14", "file": "RWS Tarot 14 Temperance.jpg" },
+  { "id": "rws-15", "file": "RWS Tarot 15 Devil.jpg" },
+  { "id": "rws-16", "file": "RWS Tarot 16 Tower.jpg" },
+  { "id": "rws-17", "file": "RWS Tarot 17 Star.jpg" },
+  { "id": "rws-18", "file": "RWS Tarot 18 Moon.jpg" },
+  { "id": "rws-19", "file": "RWS Tarot 19 Sun.jpg" },
+  { "id": "rws-20", "file": "RWS Tarot 20 Judgement.jpg" },
+  { "id": "rws-21", "file": "RWS Tarot 21 World.jpg" }
 ]

@@ -1,4 +1,4 @@
-// Materialize and optimize the licensed deck at build time. Browsers receive only
+// Materialize and optimize the public-domain deck at build time. Browsers receive only
 // local WebP assets; no runtime third-party requests or image service is needed.
 import { mkdir, readFile, writeFile, stat } from "node:fs/promises";
 import { createHash } from "node:crypto";
@@ -40,9 +40,10 @@ async function prepare(source) {
 // Keep Wikimedia requests bounded and respectful.
 for (let i = 0; i < sources.length; i += 2) await Promise.all(sources.slice(i, i + 2).map(prepare));
 await writeFile(new URL("sources.json", directory), JSON.stringify({
-  artist: "Nicolas Conver (1760)",
-  reproduction: "Tarot World Project / Reality Publishing (2020)",
-  license: "https://creativecommons.org/licenses/by-sa/4.0/",
+  artist: "Pamela Colman Smith (1910)",
+  design: "Arthur Edward Waite",
+  deck: "Waite–Smith Tarot",
+  license: "https://creativecommons.org/publicdomain/mark/1.0/",
   modifications: "Resized to 600px wide and converted to WebP. Artwork preserved.",
   cards: sources.map(source => ({ image: `${source.id}.webp`, source: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(source.file.replaceAll(" ", "_"))}` })),
 }, null, 2));

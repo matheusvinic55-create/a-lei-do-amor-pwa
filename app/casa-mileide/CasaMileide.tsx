@@ -53,7 +53,7 @@ function SpreadSelector({ onSelect }: { onSelect: (spread: SpreadId) => void }) 
 
 function TarotCard({ card, revealed }: { card: TarotCardData; revealed: boolean }) {
   return <div className={`mileide-card${revealed ? " mileide-card--revealed" : ""}`}>
-    {revealed ? <Image key="front" className="mileide-card-front" src={card.image} width={480} height={855} alt={`${card.numeral} — ${card.name}, Tarô de Marselha`} unoptimized /> : <Image key="back" src="/mileide/card-back.svg" width={240} height={440} alt="Carta ainda fechada" unoptimized />}
+    {revealed ? <Image key="front" className="mileide-card-front" src={card.image} width={480} height={855} alt={`${card.numeral} — ${card.name}, Tarô de Waite-Smith`} unoptimized /> : <Image key="back" src="/mileide/card-back.svg" width={240} height={440} alt="Carta ainda fechada" unoptimized />}
   </div>;
 }
 
@@ -305,7 +305,7 @@ export default function CasaMileide() {
     {journey === "inside" && state.phase !== "welcome" && <section ref={readingRef} className={`mileide-table mileide-reading-surface${busy ? " mileide-table--active" : ""}`} aria-labelledby="mileide-table-title">
       <button className="mileide-close-reading" type="button" onClick={closePanel} aria-label="Fechar tiragem e voltar à mesa">×</button>
       <div className="mileide-table-ornament" aria-hidden="true"><span/><Moon/><span/></div>
-      <p className="mileide-kicker">Tarô de Marselha</p>
+      <p className="mileide-kicker">Tarô de Waite-Smith</p>
       <h2 id="mileide-table-title" ref={headingRef} tabIndex={-1}>{title}</h2>
 
       {["prepare", "shuffling"].includes(state.phase) && <div className="mileide-ritual">
@@ -339,7 +339,7 @@ export default function CasaMileide() {
     {journey === "inside" && about && <section className="mileide-credits mileide-reading-surface mileide-about-surface" aria-labelledby="mileide-about-title">
       <button className="mileide-close-reading" type="button" onClick={closePanel} aria-label="Fechar informações e voltar à mesa">×</button>
       <p className="mileide-kicker">As cartas desta casa</p><h2 id="mileide-about-title" ref={aboutRef} tabIndex={-1}>Sobre este baralho</h2>
-      <p>Tarô de Marselha de Nicolas Conver (1760), reprodução de Tarot World Project / Reality Publishing (2020). Ilustrações preservadas com seus nomes originais; leitura em português. O Louco não tem número e o arcano XIII é apresentado como Arcano sem Nome. Nesta mesa, as cartas são lidas na posição normal.</p><p>Imagens de Tarot World Project, disponíveis no <a href="https://commons.wikimedia.org/wiki/Category:Tarot_de_Marseille_-_Nicolas_Conver_1760" target="_blank" rel="noreferrer">Wikimedia Commons</a>, sob <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>. Redimensionadas e convertidas para WebP, mantidas sob a mesma licença. <a href="/mileide/cards/sources.json" target="_blank" rel="noreferrer">Fontes de cada carta</a>. Textos de reflexão e verso criados para a Casa da Mileide.</p>
+      <p>Tarô de Waite-Smith (1910), com ilustrações de Pamela Colman Smith e concepção de Arthur Edward Waite. Os títulos aparecem em português e as cartas são lidas na posição normal.</p><p>Imagens disponíveis no <a href="https://commons.wikimedia.org/wiki/Category:Rider-Waite-Smith_tarot_deck_(TaionWC)" target="_blank" rel="noreferrer">Wikimedia Commons</a>, em <a href="https://creativecommons.org/publicdomain/mark/1.0/" target="_blank" rel="noreferrer">domínio público</a>. Redimensionadas e convertidas para WebP. <a href="/mileide/cards/sources.json" target="_blank" rel="noreferrer">Fontes de cada carta</a>. Textos de reflexão e verso criados para a Casa da Mileide.</p>
       <button className="mileide-text-button" type="button" onClick={closePanel}>Voltar à mesa</button>
     </section>}
   </section>;
