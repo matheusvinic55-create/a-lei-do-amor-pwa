@@ -410,55 +410,55 @@ function Sinopse() {
   );
 }
 
-const chapters22to28 = [
+const chapters29to35 = [
   {
-    number: "22",
-    date: "27 de outubro de 2016",
-    title: "Pedro enfrenta Tião",
+    number: "29",
+    date: "4 de novembro de 2016",
+    title: "Letícia enfrenta Tião",
     summary:
-      "Helô pede que Tiago resolva seus problemas antes de se casar com Letícia. Pedro revela a Magnólia que descobriu uma conta no exterior em seu nome, Edu rompe com Tião e sai de casa, e Pedro enfrenta o empresário quando ele exige que o filho volte.",
+      "Pedro conta a Helô que recebeu uma carta ameaçadora na cadeia, enquanto Letícia enfrenta o pai e acaba acusando a mãe de rejeitá-lo. Augusto demite Amaro pelo vídeo contra Salete, e Tião briga com Helô ao perceber que ela pode se afastar dele.",
   },
   {
-    number: "23",
-    date: "28 de outubro de 2016",
-    title: "Um beijo proibido",
+    number: "30",
+    date: "5 de novembro de 2016",
+    title: "O fim do noivado",
     summary:
-      "Tiago vai ao teatro com Isabela e os dois se beijam, enquanto Ciro manipula Vitória e segue armando contra Pedro. Isabela vê uma foto do noivado de Tiago e fica abalada, e a arma usada no atentado contra Fausto é plantada no barco de Pedro.",
+      "Tião sabota a bebida de Letícia, que passa mal e é internada; Helô desconfia do marido. Tiago decide contar a Isabela que vai se separar da noiva e, no hospital, termina o noivado com Letícia. Ana Luiza consegue se comunicar com Fausto.",
   },
   {
-    number: "24",
-    date: "29 de outubro de 2016",
-    title: "Pedro se entrega",
+    number: "31",
+    date: "7 de novembro de 2016",
+    title: "Tiago revela a verdade",
     summary:
-      "Ana Luiza avisa Pedro de que estão tentando incriminá-lo, enquanto a Polícia passa a procurá-lo e Vitória depõe contra ele. Pedro entrega a Helô a chave do aposento secreto da sala de Fausto, apresenta-se na delegacia e descobre que pode ser preso.",
+      "Letícia pergunta a Tiago se ele está apaixonado por outra pessoa, e ele revela a Isabela que terminou o noivado. Helô acusa Tião de intoxicar a filha, enquanto Isabela, Elio e Ana Luiza se organizam para levá-la à polícia.",
   },
   {
-    number: "25",
-    date: "31 de outubro de 2016",
-    title: "Pedro atrás das grades",
+    number: "32",
+    date: "8 de novembro de 2016",
+    title: "Helô pede o divórcio",
     summary:
-      "Pedro conversa com o delegado e acaba preso. Tião manda Valdir investigar Isabela, Elio divulga a denúncia da jovem contra Venturini e Nacib, e Isabela quase é atropelada depois de se envolver ainda mais na investigação.",
+      "Tião se recusa a conceder o divórcio para Helô, enquanto Aline pressiona Vitória a interceder por sua volta ao emprego. Flávia ameaça expor o furto de Jéssica, e a mobilização de solidariedade a Salete vira o jogo diante dos jornalistas.",
   },
   {
-    number: "26",
-    date: "1 de novembro de 2016",
-    title: "Atentado contra Isabela",
+    number: "33",
+    date: "9 de novembro de 2016",
+    title: "O segredo de Helô",
     summary:
-      "Zelito salva Isabela e acredita que ela foi vítima de um atentado. Helô enfrenta Tião, Ana Luiza percebe uma reação de Fausto, Olavo diz ter provas para libertar Pedro e Letícia ouve Tião afirmar que não quer o rival fora da cadeia.",
+      "Bruno avisa a Helô que Tião precisa fazer exames, mas ela desconfia de sua cena de arrependimento diante de Letícia. Pedro percebe que Helô ainda esconde algo importante, enquanto Fininho passa a pressionar Jéssica por dinheiro.",
   },
   {
-    number: "27",
-    date: "2 de novembro de 2016",
-    title: "Pedro em liberdade",
+    number: "34",
+    date: "10 de novembro de 2016",
+    title: "Tião procura Pedro",
     summary:
-      "Tião tenta manipular Letícia e exige que Isabela trabalhe no bufê de sua festa. A chegada da polícia à tecelagem apavora Ciro, Helô e Olavo recebem a notícia da libertação de Pedro e, no fim, ele deixa a cadeia.",
+      "Helô diz a Pedro que precisa lhe contar algo, mas Tião se adianta e vai procurá-lo para insinuar que ela esconde informações. Fininho ameaça incendiar o posto de Salete, e Letícia volta a ceder à chantagem emocional do pai.",
   },
   {
-    number: "28",
-    date: "3 de novembro de 2016",
-    title: "O flagrante de Valdir",
+    number: "35",
+    date: "11 de novembro de 2016",
+    title: "Pedro volta para ficar",
     summary:
-      "Helô viaja com Pedro, Ana Luiza ouve Vitória admitir que foi obrigada por Ciro a depor contra ele e publica o vídeo com o depoimento de Isabela. Valdir filma Tiago e Isabela se beijando e avisa Tião de que os dois foram para um hotel.",
+      "Tião alimenta as dúvidas de Pedro sobre Helô, e Tiago assume para Magnólia que está apaixonado. Vitória confessa a Padre Paulo que Ciro atentou contra sua vida; Aline se declara para Tiago, e Pedro entra na mansão avisando que voltou para ficar.",
   },
 ] as const;
 
@@ -473,19 +473,19 @@ function Resumos() {
             <h1>Resumos</h1>
           </div>
         </div>
-        <p>Os capítulos 22 a 28, reunidos para seguir acompanhando a história.</p>
+        <p>Os capítulos 29 a 35, reunidos para seguir acompanhando a história.</p>
       </header>
 
       <div className="summaries-phase">
         <div>
           <span>Primeira fase</span>
-          <strong>Capítulos 22–28</strong>
+          <strong>Capítulos 29–35</strong>
         </div>
         <p>Toque em um capítulo para abrir o resumo.</p>
       </div>
 
       <div className="chapter-list">
-        {chapters22to28.map((chapter) => (
+        {chapters29to35.map((chapter) => (
           <details className="chapter-item" key={chapter.number}>
             <summary>
               <span className="chapter-number">{chapter.number}</span>
