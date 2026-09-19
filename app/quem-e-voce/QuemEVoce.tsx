@@ -121,7 +121,7 @@ export default function QuemEVoce() {
     : null;
 
   return (
-    <section className="section-page quiz-page" aria-labelledby="quiz-title">
+    <section className={`section-page quiz-page quiz-page--${phase}`} aria-labelledby="quiz-title">
       <header className="section-heading quiz-heading">
         <div className="section-index">07</div>
         <div>
