@@ -1,4 +1,4 @@
-const CACHE_NAME = "a-lei-do-amor-v27-mileide-selected";
+const CACHE_NAME = "a-lei-do-amor-v28-quiz";
 const CORE_ASSETS = [
   "/",
   "/manifest.webmanifest",
@@ -9,6 +9,21 @@ const CORE_ASSETS = [
   "/apple-touch-icon.png",
   "/icon-192.png",
   "/icon-512.png",
+  "/cast/ana-luiza-leitao.jpg",
+  "/cast/tiago-leitao.jpg",
+  "/cast/isabela-dias.jpg",
+  "/cast/pedro-guedes-leitao.jpg",
+  "/cast/heloisa-martins.jpg",
+  "/cast/magnolia-costa-leitao.jpg",
+  "/cast/sebastiao-bezerra-tiao.jpg",
+  "/cast/salete.jpg",
+  "/cast/jessica.jpg",
+  "/cast/vitoria-costa-leitao.jpg",
+  "/cast/luciane-leitao.jpg",
+  "/cast/elio-bataglia.jpg",
+  "/cast/antonio-ferrari.jpg",
+  "/cast/flavia-cardoso.jpg",
+  "/cast/camila-costa-leitao.jpg",
 ];
 
 self.addEventListener("install", (event) => {

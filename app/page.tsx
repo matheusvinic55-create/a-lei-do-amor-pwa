@@ -5,12 +5,13 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { mainCast, supportingCast, type CastMember } from "./cast";
+import QuemEVoce from "./quem-e-voce/QuemEVoce";
 
 const CasaMileide = dynamic(() => import("./casa-mileide/CasaMileide"), {
   loading: () => <p role="status" style={{ color: "#e5c992", textAlign: "center", padding: "120px 24px" }}>Abrindo a Casa da Mileide…</p>,
 });
 
-type TabId = "inicio" | "sinopse" | "resumos" | "trilha" | "elenco" | "mileide";
+type TabId = "inicio" | "sinopse" | "resumos" | "trilha" | "elenco" | "mileide" | "quiz";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -24,6 +25,7 @@ const tabs: Array<{ id: TabId; label: string; index: string }> = [
   { id: "trilha", label: "Trilha sonora", index: "04" },
   { id: "elenco", label: "Elenco", index: "05" },
   { id: "mileide", label: "Casa da Mileide", index: "06" },
+  { id: "quiz", label: "Quem é você?", index: "07" },
 ];
 
 export default function Home() {
@@ -226,6 +228,7 @@ export default function Home() {
         {activeTab === "trilha" && <Trilha />}
         {activeTab === "elenco" && <Elenco />}
         {activeTab === "mileide" && <CasaMileide />}
+        {activeTab === "quiz" && <QuemEVoce />}
       </main>
 
       <footer className="site-footer">
