@@ -67,7 +67,7 @@ export default function QuemEVoce() {
     setSelected(null);
     setShareMessage("");
     setPhase("questions");
-    window.scrollTo({ top: 0, behavior: "auto" });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
 
   function answer(option: number) {
@@ -86,7 +86,7 @@ export default function QuemEVoce() {
         setPhase("revealing");
         revealTimer.current = setTimeout(() => setPhase("result"), 850);
       }
-      window.scrollTo({ top: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, behavior: "instant" });
     }, 320);
   }
 
@@ -94,7 +94,7 @@ export default function QuemEVoce() {
     if (advanceTimer.current) clearTimeout(advanceTimer.current);
     setSelected(null);
     setStep((current) => Math.max(0, current - 1));
-    window.scrollTo({ top: 0, behavior: "auto" });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
 
   async function share(name: string) {
