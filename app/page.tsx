@@ -413,56 +413,14 @@ function Sinopse() {
   );
 }
 
-const chapters29to35 = [
-  {
-    number: "29",
-    date: "4 de novembro de 2016",
-    title: "Letícia enfrenta Tião",
-    summary:
-      "Pedro conta a Helô que recebeu uma carta ameaçadora na cadeia, enquanto Letícia enfrenta o pai e acaba acusando a mãe de rejeitá-lo. Augusto demite Amaro pelo vídeo contra Salete, e Tião briga com Helô ao perceber que ela pode se afastar dele.",
-  },
-  {
-    number: "30",
-    date: "5 de novembro de 2016",
-    title: "O fim do noivado",
-    summary:
-      "Tião sabota a bebida de Letícia, que passa mal e é internada; Helô desconfia do marido. Tiago decide contar a Isabela que vai se separar da noiva e, no hospital, termina o noivado com Letícia. Ana Luiza consegue se comunicar com Fausto.",
-  },
-  {
-    number: "31",
-    date: "7 de novembro de 2016",
-    title: "Tiago revela a verdade",
-    summary:
-      "Letícia pergunta a Tiago se ele está apaixonado por outra pessoa, e ele revela a Isabela que terminou o noivado. Helô acusa Tião de intoxicar a filha, enquanto Isabela, Elio e Ana Luiza se organizam para levá-la à polícia.",
-  },
-  {
-    number: "32",
-    date: "8 de novembro de 2016",
-    title: "Helô pede o divórcio",
-    summary:
-      "Tião se recusa a conceder o divórcio para Helô, enquanto Aline pressiona Vitória a interceder por sua volta ao emprego. Flávia ameaça expor o furto de Jéssica, e a mobilização de solidariedade a Salete vira o jogo diante dos jornalistas.",
-  },
-  {
-    number: "33",
-    date: "9 de novembro de 2016",
-    title: "O segredo de Helô",
-    summary:
-      "Bruno avisa a Helô que Tião precisa fazer exames, mas ela desconfia de sua cena de arrependimento diante de Letícia. Pedro percebe que Helô ainda esconde algo importante, enquanto Fininho passa a pressionar Jéssica por dinheiro.",
-  },
-  {
-    number: "34",
-    date: "10 de novembro de 2016",
-    title: "Tião procura Pedro",
-    summary:
-      "Helô diz a Pedro que precisa lhe contar algo, mas Tião se adianta e vai procurá-lo para insinuar que ela esconde informações. Fininho ameaça incendiar o posto de Salete, e Letícia volta a ceder à chantagem emocional do pai.",
-  },
-  {
-    number: "35",
-    date: "11 de novembro de 2016",
-    title: "Pedro volta para ficar",
-    summary:
-      "Tião alimenta as dúvidas de Pedro sobre Helô, e Tiago assume para Magnólia que está apaixonado. Vitória confessa a Padre Paulo que Ciro atentou contra sua vida; Aline se declara para Tiago, e Pedro entra na mansão avisando que voltou para ficar.",
-  },
+const chapters40to46 = [
+  { number: "40", date: "17 de novembro de 2016", title: "A verdade sobre Letícia", summary: "Tião aposta que Pedro ficará contra Helô ao descobrir que é pai de Letícia e chega a ameaçá-la. Bruno confirma que Tião não tem nada grave, enquanto Pedro decide que vai morar com Helô e Edu." },
+  { number: "41", date: "18 de novembro de 2016", title: "Helô recua por Letícia", summary: "Letícia acusa Pedro de ter provocado a separação dos pais. Com medo de deixá-la com Tião, Helô desiste de morar com Pedro; Isabela viaja sem esperar Tiago, e Ciro cogita tirar Fausto do caminho." },
+  { number: "42", date: "19 de novembro de 2016", title: "Pedro se afasta de Helô", summary: "Ciro age para impedir que Fausto se comunique com Pedro. Letícia ouve Tiago se desculpar com Isabela, Helô revela a Yara uma ameaça de Tião contra a filha e, abalado com a situação, Pedro decide se separar de Helô." },
+  { number: "43", date: "21 de novembro de 2016", title: "Letícia rejeita Pedro", summary: "Tião distorce a história para Letícia, que descobre que Pedro é seu pai. Depois de ver Tiago e Isabela se beijando, ela invade a casa de Magnólia e afirma a Pedro que jamais o aceitará como pai." },
+  { number: "44", date: "22 de novembro de 2016", title: "Vitória descobre a armação", summary: "Letícia volta a atacar Pedro, enquanto Tiago tenta impedir Isabela de depor. Vitória confronta Ciro e descobre que ele foi pago para se casar com ela; abalada, deixa a casa e pede abrigo a Augusto." },
+  { number: "45", date: "23 de novembro de 2016", title: "Tião expulsa Helô", summary: "Augusto acolhe Vitória, mas Mileide alerta que a presença dela pode prejudicá-lo na eleição. Letícia pede desculpas a Antônio, Tiago pressiona Isabela sobre o dinheiro que recebeu e Tião diz a Helô que não a quer mais em casa." },
+  { number: "46", date: "24 de novembro de 2016", title: "Isabela é atirada ao mar", summary: "Helô deixa a casa de Tião e ele mente para Letícia dizendo que a mãe os abandonou. Pedro e Helô se beijam; Tiago discute com Isabela por causa de um depósito e, após um acidente, Fininho agride Tiago e atira Isabela ao mar." },
 ] as const;
 
 function Resumos() {
@@ -476,19 +434,19 @@ function Resumos() {
             <h1>Resumos</h1>
           </div>
         </div>
-        <p>Os capítulos 29 a 35, reunidos para seguir acompanhando a história.</p>
+        <p>Os capítulos 40 a 46, reunidos para seguir acompanhando a história.</p>
       </header>
 
       <div className="summaries-phase">
         <div>
           <span>Primeira fase</span>
-          <strong>Capítulos 29–35</strong>
+          <strong>Capítulos 40–46</strong>
         </div>
         <p>Toque em um capítulo para abrir o resumo.</p>
       </div>
 
       <div className="chapter-list">
-        {chapters29to35.map((chapter) => (
+        {chapters40to46.map((chapter) => (
           <details className="chapter-item" key={chapter.number}>
             <summary>
               <span className="chapter-number">{chapter.number}</span>
